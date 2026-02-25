@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QR Code Generator — Free Online Tool</title>
+<meta name="description" content="Free QR code generator. No signup. Instant download. Works offline.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#0f0f1a;color:#fff;min-height:100vh;padding:2rem}
+.container{max-width:560px;margin:0 auto}
+h1{text-align:center;font-size:1.8rem;margin-bottom:.5rem}
+.sub{text-align:center;color:#888;margin-bottom:2rem;font-size:.9rem}
+.card{background:#1a1a2e;border-radius:12px;padding:2rem}
+label{display:block;margin-bottom:.4rem;color:#aaa;font-size:.9rem}
+input,select{width:100%;padding:.85rem;border:2px solid #333;border-radius:8px;background:#0a0a14;color:#fff;font-size:1rem;margin-bottom:1.2rem}
+input:focus,select:focus{outline:none;border-color:#5b8dee}
+button{width:100%;padding:.9rem;background:linear-gradient(135deg,#5b8dee,#4fd1c5);border:none;border-radius:8px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+button:hover{opacity:.9}
+#result{margin-top:1.5rem;text-align:center;display:none}
+canvas{border-radius:8px}
+.dl{display:inline-block;margin-top:1rem;padding:.6rem 1.4rem;background:#1e1e38;border-radius:8px;color:#5b8dee;text-decoration:none;font-size:.9rem}
+footer{text-align:center;margin-top:2rem;color:#444;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>QR Code Generator</h1>
+  <p class="sub">Free • No signup • Instant download</p>
+  <div class="card">
+    <label>Text or URL</label>
+    <input id="txt" type="text" placeholder="https://example.com">
+    <label>Size</label>
+    <select id="sz">
+      <option value="128">Small (128px)</option>
+      <option value="256">Medium (256px)</option>
+      <option value="512" selected>Large (512px)</option>
+    </select>
+    <button onclick="gen()">Generate QR Code</button>
+    <div id="result">
+      <canvas id="qr"></canvas><br>
+      <a id="dl" class="dl" download="qrcode.png">⬇ Download PNG</a>
+    </div>
+  </div>
+  <footer>100% client-side • No data stored • Works offline after load</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+function gen(){
+  const txt=document.getElementById('txt').value.trim();
+  if(!txt){alert('Enter some text or URL');return}
+  const sz=parseInt(document.getElementById('sz').value);
+  const canvas=document.getElementById('qr');
+  QRCode.toCanvas(canvas,txt,{width:sz,margin:2,color:{dark:'#000',light:'#fff'}},err=>{
+    if(err){alert('Error: '+err);return}
+    document.getElementById('result').style.display='block';
+    document.getElementById('dl').href=canvas.toDataURL('image/png');
+  });
+}
+document.getElementById('txt').addEventListener('keypress',e=>{if(e.key==='Enter')gen()});
+</script>
+</body>
+</html>

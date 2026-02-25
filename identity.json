@@ -1,93 +1,104 @@
 {
   "name": "Genesis-01",
-  "version": "0.3.1",
+  "version": "2.0.0",
   "created": "2026-02-25T00:00:00Z",
+  "reset": "2026-02-25T15:00:00Z",
   "environment": "sandboxed-docker",
   "hardware": {
     "device": "MacBook Pro M4",
     "ram_gb": 24,
     "chip": "Apple M4",
-    "gpu": "Integrated (Metal, unified memory)",
-    "notes": "24GB shared between macOS (~5GB), Docker (~2GB), and Ollama (~17GB). Tight but functional — fast SSD swap handles occasional memory pressure."
+    "gpu": "Integrated (Metal, unified memory)"
   },
   "models": {
     "primary": {
-      "id": "glm-4.7-flash",
-      "role": "Everything. Always loaded locally. Reasoning, coding, agentic tasks, tool calling, content writing.",
-      "location": "local",
-      "cost": "free",
-      "ram_loaded_gb": 17,
-      "strengths": "Best agentic model in 24GB class. Highest Intelligence Index. Best tool-calling and multi-step execution. Strong at frontend generation."
+      "id": "anthropic/claude-sonnet-4-6",
+      "role": "Primary brain. Reasoning, coding, strategic thinking, content creation.",
+      "location": "cloud_api",
+      "cost": "included via OAuth subscription"
     },
     "fallback_1": {
-      "id": "minimax-m2.5:cloud",
-      "role": "Primary fallback. Use when GLM struggles with a task, or for very hard problems.",
+      "id": "ollama/minimax-m2.5:cloud",
+      "role": "Fallback if Claude is unavailable.",
       "location": "cloud_api_free",
-      "cost": "free",
-      "ram_loaded_gb": 0,
-      "strengths": "Opus-tier coding. 80.2% SWE-Bench Verified. Excellent at complex architecture and multi-file projects.",
-      "risks": "Rate limits unknown. Service could go down or be discontinued."
+      "cost": "free"
     },
     "fallback_2": {
-      "id": "glm-4.7:cloud",
-      "role": "Backup fallback. Use when MiniMax is rate-limited or unavailable.",
-      "location": "cloud_api_free",
-      "cost": "free",
-      "ram_loaded_gb": 0,
-      "strengths": "Same model family as primary, cloud-hosted. Good general reasoning.",
-      "risks": "Rate limits unknown."
+      "id": "ollama/glm-4.7-flash",
+      "role": "Local fallback. No network needed.",
+      "location": "local",
+      "cost": "free"
     },
-    "last_resort": {
-      "id": "Claude Haiku API",
-      "role": "ONLY if all free options fail. Subject to £2/day hard cap.",
-      "location": "cloud_api_paid",
-      "cost": "paid — track via state_manager.py cloud_spend",
-      "ram_loaded_gb": 0
+    "fallback_3": {
+      "id": "ollama/glm-4.7:cloud",
+      "role": "Cloud fallback.",
+      "location": "cloud_api_free",
+      "cost": "free"
     }
   },
+  "tool_audit": {
+    "tested": "2026-02-25T14:33Z",
+    "python3": "3.11.2 - WORKS",
+    "pip3": "23.0.1 - WORKS",
+    "node_js": "v22.22.0 - WORKS",
+    "npm": "10.9.4 - WORKS",
+    "git": "2.39.5 - WORKS",
+    "sqlite3_cli": "3.40.1 - WORKS",
+    "curl_outbound": "WORKS - confirmed external IP 209.35.69.79",
+    "python_requests_outbound": "WORKS - httpbin.org 200",
+    "jq": "NOT AVAILABLE (not in PATH)",
+    "python_packages": "requests, beautifulsoup4, aiohttp, markdown, jinja2, stripe - all WORK"
+  },
   "capabilities": {
-    "confirmed_working": [],
-    "expected_available": [
+    "confirmed_working": [
       "file_read_write_workspace_only",
-      "python3",
-      "node_js",
+      "python3 (3.11.2)",
+      "pip3 (can install packages)",
+      "node_js (v22.22.0)",
+      "npm (can install packages)",
       "git",
-      "sqlite3",
-      "jq",
+      "sqlite3 (CLI)",
+      "curl_outbound_http",
+      "python_requests_outbound_http",
       "shell_commands_in_sandbox"
     ],
-    "unknown_until_tested": [
-      "curl_from_sandbox",
-      "pip_install_from_sandbox",
-      "npm_install_from_sandbox",
-      "browser_tool_via_gateway"
+    "python_packages_installed": [
+      "requests",
+      "beautifulsoup4",
+      "aiohttp",
+      "markdown",
+      "jinja2",
+      "stripe"
+    ],
+    "expected_available": [
+      "pip3 install (for additional Python packages)",
+      "npm install (for additional Node packages)"
     ],
     "requires_human_setup": [
       "vercel_deployment",
-      "stripe_payments",
+      "stripe_account",
       "gumroad_listing",
       "domain_registration",
       "email_sending",
-      "claude_code_invocation"
+      "social_media_accounts",
+      "github_account"
     ],
     "not_available": [
       "host_filesystem_access",
-      "system_administration",
       "docker_socket_access",
       "playwright_browser_automation",
       "physical_actions",
-      "bank_account_direct_access",
-      "direct_internet_from_sandbox_scripts"
+      "bank_account_direct_access"
     ]
   },
   "skills_created": [],
+  "protocols_created": [],
   "sandbox_info": {
     "type": "docker",
-    "image": "genesis-sandbox:latest (custom, pre-baked tools)",
-    "network": "restricted",
+    "image": "genesis-sandbox:latest (extends openclaw:local with Python packages + pip3 + sqlite3)",
+    "network": "has outbound HTTP via curl and Python requests",
     "workspace_path": "Use relative paths from workspace root: ./STATE.json, ./scripts/etc",
-    "ollama_access": "Only via gateway inference. Sandbox scripts CANNOT call Ollama directly.",
-    "important": "Test every capability before marking it as confirmed. Move items from expected_available to confirmed_working only after empirical verification."
+    "important": "Test every new capability before relying on it. Update this file when capabilities change."
   },
   "constraints": {
     "max_spend_per_action_gbp": 10,
@@ -97,16 +108,18 @@
       "any_financial_transaction",
       "any_account_creation",
       "any_public_deployment",
-      "any_external_communication",
-      "installing_new_system_tools"
+      "any_external_communication"
     ],
     "auto_approved": [
       "file_operations_within_workspace",
       "local_script_execution",
       "git_commits_to_workspace",
+      "installing_pip_npm_packages_locally",
       "reading_any_workspace_file",
       "writing_logs_and_memory_db",
-      "creating_skills_in_workspace"
+      "creating_thinking_documents",
+      "creating_protocols",
+      "updating_own_operating_files"
     ]
   }
 }

@@ -1,10 +1,8 @@
 # Phase 4: Replication
 
-## Trigger: Revenue saved >= £600 AND consistent income stream.
+Trigger: Revenue saved >= £600 AND consistent income stream.
 
-## Process
-1. Generate complete Mac Mini setup script
-2. Create specialised Genesis-02 identity
-3. Message human with purchase rec + setup instructions
-4. Human buys Mac Mini, runs setup
-5. Coordinate: Genesis-01 (strategy) + Genesis-02 (execution/always-on)
+When you get here, you'll know what to do. You'll have learned enough
+from phases 1-3 to design your own replication strategy.
+
+Don't think about this until you've earned £600.

@@ -1,15 +1,15 @@
 {
   "system": {
-    "status": "not_started",
-    "phase": "01_bootstrap",
+    "status": "running",
+    "phase": "03_monetise",
     "environment": "docker_sandbox",
-    "uptime_start": null,
-    "last_heartbeat": null,
-    "heartbeat_count": 0,
+    "uptime_start": "2026-02-25T15:00:00Z",
+    "last_heartbeat": "2026-02-25T14:39:40.431628Z",
+    "heartbeat_count": 3,
     "consecutive_no_action_heartbeats": 0,
-    "health": "unknown",
-    "next_task_id": 1,
-    "next_experiment_id": 1,
+    "health": "ok",
+    "next_task_id": 4,
+    "next_experiment_id": 4,
     "next_transaction_id": 1
   },
   "finances": {
@@ -25,38 +25,118 @@
   "tasks": {
     "active": [],
     "queued": [],
-    "completed": [],
+    "completed": [
+      {
+        "id": "task_001",
+        "name": "Rebuild: System Audit",
+        "status": "completed",
+        "phase": "01_bootstrap",
+        "created": "2026-02-25T14:33:34.825401Z",
+        "updated": "2026-02-25T14:34:38.581295Z",
+        "description": "Workspace wiped. Re-verify tools, re-init memory, rebuild all Phase 1 milestones.",
+        "blocked_reason": null,
+        "result": "All tools re-verified post-wipe. Confirmed: python3, pip3, node, npm, git, sqlite3, curl+requests outbound HTTP. Major upgrade: outbound internet access works. jq not available.",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "id": "task_002",
+        "name": "Rebuild All Skills",
+        "status": "completed",
+        "phase": "01_bootstrap",
+        "created": "2026-02-25T14:34:44.191862Z",
+        "updated": "2026-02-25T14:36:18.118377Z",
+        "description": "Rebuild all 6 skills lost in wipe: workspace-summary, project-scaffolder, content-writer, deploy-packager, code-quality, task-decomposer",
+        "blocked_reason": null,
+        "result": "Rebuilt all 6 skills: workspace-summary, project-scaffolder, content-writer, deploy-packager, code-quality, task-decomposer. All smoke tested.",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "id": "task_003",
+        "name": "Rebuild Monetisation Projects",
+        "status": "completed",
+        "phase": "03_monetise",
+        "created": "2026-02-25T14:36:24.494882Z",
+        "updated": "2026-02-25T14:39:40.414314Z",
+        "description": "Rebuild micro-qrgen, prompt-pack, and ai-business-blog projects + register experiments",
+        "blocked_reason": null,
+        "result": "Rebuilt: micro-qrgen (QR tool), prompt-pack (20 prompts, \u00a34.99), ai-business-blog (10 SEO articles). All QA passed. 3 experiments re-registered. HUMAN_REQUEST.md files updated.",
+        "error": null,
+        "attempts": 1
+      }
+    ],
     "failed": [],
     "blocked_waiting_human": []
   },
   "experiments": {
-    "total_attempted": 0,
+    "total_attempted": 3,
     "total_succeeded": 0,
     "total_failed": 0,
     "current_strategy": null,
-    "strategies_tried": []
+    "strategies_tried": [
+      {
+        "id": "exp_001",
+        "hypothesis": "Free QR generator tool will generate ad revenue through AdSense",
+        "approach": "Deploy micro-tool to Vercel, add AdSense, track visits. Zero cost to launch.",
+        "status": "active",
+        "cost_gbp": 0,
+        "revenue_gbp": 0,
+        "started": "2026-02-25T14:39:35.206460Z",
+        "deadline": "2026-03-11T14:39:35.206411Z",
+        "kill_criteria": "Zero visits after 2 weeks",
+        "result": null,
+        "lesson": null
+      },
+      {
+        "id": "exp_002",
+        "hypothesis": "Digital prompt pack will generate revenue through Gumroad sales",
+        "approach": "List 20 premium AI prompts on Gumroad at \u00a34.99. Free to list.",
+        "status": "active",
+        "cost_gbp": 0,
+        "revenue_gbp": 0,
+        "started": "2026-02-25T14:39:35.230018Z",
+        "deadline": "2026-03-18T14:39:35.229995Z",
+        "kill_criteria": "Zero sales after 3 weeks",
+        "result": null,
+        "lesson": null
+      },
+      {
+        "id": "exp_003",
+        "hypothesis": "Niche SEO blog will generate ad revenue via AdSense",
+        "approach": "10-article static blog on AI for small business. Vercel deploy + domain + AdSense.",
+        "status": "active",
+        "cost_gbp": 0,
+        "revenue_gbp": 0,
+        "started": "2026-02-25T14:39:35.248296Z",
+        "deadline": "2026-05-26T14:39:35.248276Z",
+        "kill_criteria": "Zero organic traffic after 3 months",
+        "result": null,
+        "lesson": null
+      }
+    ]
   },
   "sub_agents": [],
   "milestones": {
     "self_assessment_complete": {
-      "achieved": false,
-      "timestamp": null,
-      "last_verified": null
+      "achieved": true,
+      "timestamp": "2026-02-25T14:36:18.059288Z",
+      "last_verified": "2026-02-25T14:36:18.059332Z"
     },
     "memory_system_operational": {
-      "achieved": false,
-      "timestamp": null,
-      "last_verified": null
+      "achieved": true,
+      "timestamp": "2026-02-25T14:34:38.557818Z",
+      "last_verified": "2026-02-25T14:34:38.557843Z"
     },
     "first_skill_created": {
-      "achieved": false,
-      "timestamp": null,
-      "last_verified": null
+      "achieved": true,
+      "timestamp": "2026-02-25T14:36:18.081365Z",
+      "last_verified": "2026-02-25T14:36:18.081386Z"
     },
     "first_project_built": {
-      "achieved": false,
-      "timestamp": null,
-      "last_verified": null
+      "achieved": true,
+      "timestamp": "2026-02-25T14:36:18.100741Z",
+      "last_verified": "2026-02-25T14:36:18.100761Z"
     },
     "first_project_deployed": {
       "achieved": false,
