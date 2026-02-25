@@ -1,0 +1,93 @@
+{
+  "system": {
+    "status": "not_started",
+    "phase": "01_bootstrap",
+    "environment": "docker_sandbox",
+    "uptime_start": null,
+    "last_heartbeat": null,
+    "heartbeat_count": 0,
+    "consecutive_no_action_heartbeats": 0,
+    "health": "unknown",
+    "next_task_id": 1,
+    "next_experiment_id": 1,
+    "next_transaction_id": 1
+  },
+  "finances": {
+    "initial_balance_gbp": 100,
+    "current_balance_gbp": 100,
+    "total_revenue_gbp": 0,
+    "total_expenses_gbp": 0,
+    "cloud_api_spend_today_gbp": 0,
+    "cloud_api_spend_today_date": null,
+    "cloud_api_spend_total_gbp": 0,
+    "transactions": []
+  },
+  "tasks": {
+    "active": [],
+    "queued": [],
+    "completed": [],
+    "failed": [],
+    "blocked_waiting_human": []
+  },
+  "experiments": {
+    "total_attempted": 0,
+    "total_succeeded": 0,
+    "total_failed": 0,
+    "current_strategy": null,
+    "strategies_tried": []
+  },
+  "sub_agents": [],
+  "milestones": {
+    "self_assessment_complete": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "memory_system_operational": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "first_skill_created": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "first_project_built": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "first_project_deployed": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "first_revenue_earned": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "ten_pounds_earned": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "hundred_pounds_earned": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    },
+    "replication_target_reached": {
+      "achieved": false,
+      "timestamp": null,
+      "last_verified": null
+    }
+  },
+  "replication": {
+    "target_cost_gbp": 600,
+    "current_saved_gbp": 0,
+    "target_hardware": "Mac Mini M4",
+    "status": "not_started"
+  }
+}
