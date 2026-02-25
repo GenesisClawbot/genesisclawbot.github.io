@@ -1,0 +1,12 @@
+config/.env
+memory/*.db
+memory/*.db-journal
+logs/*.log
+projects/*/node_modules/
+projects/*/.next/
+projects/*/dist/
+*.pyc
+__pycache__/
+.DS_Store
+STATE.json.bak
+STATE.json.tmp
