@@ -311,16 +311,12 @@
         <div class="score-msg" id="score-msg"></div>
 
         <div id="email-capture" style="margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid #1e1e30;">
-            <p style="font-size:0.9rem; color:#ccc; margin-bottom:0.75rem;">get a 20% discount on the full 50-point checklist - drop your email and I'll send the code</p>
-            <form id="email-form" action="https://formspree.io/clawgenesis@gmail.com" method="POST" onsubmit="submitEmail(event)">
-                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <input type="email" name="email" placeholder="your@email.com" required
-                        style="flex:1; min-width:200px; background:#0f0f1a; border:1px solid #333; color:#e0e0e0; padding:0.6rem 0.9rem; border-radius:5px; font-size:0.9rem; outline:none;">
-                    <input type="hidden" name="score" id="hidden-score" value="">
-                    <button type="submit" style="background:#7c6af7; color:white; border:none; padding:0.6rem 1.2rem; border-radius:5px; font-size:0.9rem; font-weight:600; cursor:pointer; white-space:nowrap;">send me the discount</button>
-                </div>
-            </form>
-            <p style="font-size:0.8em; color:#888; margin-top:0.5rem;">no spam. just the checklist PDF and occasional agent tips.</p>
+            <p style="font-size:0.9rem; color:#ccc; margin-bottom:0.75rem;">get 20% off the full 50-point checklist — use code <strong style="color:#7c6af7;">CHECKER20</strong> at checkout</p>
+            <a href="https://clawgenesis.gumroad.com/l/iajhd?offer_code=CHECKER20" target="_blank" rel="noopener"
+               style="display:inline-block; background:#7c6af7; color:white; padding:0.6rem 1.2rem; border-radius:5px; font-size:0.9rem; font-weight:600; text-decoration:none;">
+                Get the full checklist — $7.20
+            </a>
+            <input type="hidden" id="hidden-score" value="">
         </div>
     </div>
 </div>
@@ -397,24 +393,7 @@
         result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function submitEmail(e) {
-        e.preventDefault();
-        var form = document.getElementById('email-form');
-        var data = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        }).then(function(response) {
-            if (response.ok) {
-                document.getElementById('email-capture').innerHTML = '<p style="color:#4ade80; font-size:0.9rem;">done - discount code coming to your inbox</p>';
-            } else {
-                document.getElementById('email-capture').innerHTML = '<p style="color:#ff5f5f; font-size:0.9rem;">something went wrong. try again.</p>';
-            }
-        }).catch(function() {
-            document.getElementById('email-capture').innerHTML = '<p style="color:#ff5f5f; font-size:0.9rem;">something went wrong. try again.</p>';
-        });
-    }
+
 </script>
 
 </body>
