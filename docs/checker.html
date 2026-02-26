@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Production Readiness Checker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0f0f1a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 140px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .checklist li {
+            margin-bottom: 0.75rem;
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            border: 1px solid #1e1e30;
+            border-radius: 6px;
+            background: #13131f;
+            transition: border-color 0.15s;
+            font-size: 0.92rem;
+        }
+
+        .checklist label:hover {
+            border-color: #7c6af7;
+        }
+
+        .checklist input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border: 2px solid #444;
+            border-radius: 3px;
+            background: #0f0f1a;
+            cursor: pointer;
+            margin-top: 2px;
+            transition: background 0.15s, border-color 0.15s;
+            position: relative;
+        }
+
+        .checklist input[type="checkbox"]:checked {
+            background: #7c6af7;
+            border-color: #7c6af7;
+        }
+
+        .checklist input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid white;
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+
+        .checklist label.checked {
+            border-color: #7c6af7;
+            background: #16132a;
+        }
+
+        .warning {
+            color: #ff5f5f;
+            font-size: 0.82rem;
+            margin-top: 0.4rem;
+            margin-left: 2.5rem;
+            padding: 0.35rem 0.6rem;
+            border-left: 2px solid #ff5f5f;
+            background: rgba(255, 95, 95, 0.05);
+            display: none;
+        }
+
+        .warning.visible {
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #7c6af7;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .btn:hover {
+            background: #9080ff;
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 6px;
+            background: #13131f;
+            border: 1px solid #1e1e30;
+            display: none;
+        }
+
+        #result.visible {
+            display: block;
+        }
+
+        .score-line {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-line.red { color: #ff5f5f; }
+        .score-line.yellow { color: #f0c040; }
+        .score-line.green { color: #4ade80; }
+
+        .score-msg {
+            font-size: 0.88rem;
+            color: #999;
+        }
+
+        .cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #13131f;
+            border-top: 1px solid #1e1e30;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .cta-link {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .cta-link:hover {
+            opacity: 0.85;
+        }
+
+        .cta-link.primary {
+            background: #7c6af7;
+            color: white;
+        }
+
+        .cta-link.secondary {
+            background: transparent;
+            color: #7c6af7;
+            border: 1px solid #7c6af7;
+        }
+
+        .cta-label {
+            font-size: 0.78rem;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 1.3rem; }
+            .cta-bar { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Agent Production Readiness Checker</h1>
+    <p class="subtitle">10 questions. If you can't check them all, you're not ready to ship.</p>
+
+    <ul class="checklist" id="checklist">
+
+        <li>
+            <label id="label-0">
+                <input type="checkbox" id="q0" onchange="onCheck(0)">
+                My agent writes state to disk atomically (write to .tmp, then rename)
+            </label>
+            <div class="warning" id="warn-0">Direct writes corrupt state when the process crashes mid-write</div>
+        </li>
+
+        <li>
+            <label id="label-1">
+                <input type="checkbox" id="q1" onchange="onCheck(1)">
+                My agent has a turn/iteration limit to prevent infinite loops
+            </label>
+            <div class="warning" id="warn-1">Without a cap, runaway agents burn tokens indefinitely</div>
+        </li>
+
+        <li>
+            <label id="label-2">
+                <input type="checkbox" id="q2" onchange="onCheck(2)">
+                I track a progress metric to detect when the agent is stuck
+            </label>
+            <div class="warning" id="warn-2">Busy does not mean progressing. Repeaters and Loopers look fine from outside</div>
+        </li>
+
+        <li>
+            <label id="label-3">
+                <input type="checkbox" id="q3" onchange="onCheck(3)">
+                Agent state and conversation history are stored separately
+            </label>
+            <div class="warning" id="warn-3">Mixing them causes the agent to lose decisions as context fills up</div>
+        </li>
+
+        <li>
+            <label id="label-4">
+                <input type="checkbox" id="q4" onchange="onCheck(4)">
+                Every external API/tool call is logged with result and duration
+            </label>
+            <div class="warning" id="warn-4">You cannot debug what you cannot observe</div>
+        </li>
+
+        <li>
+            <label id="label-5">
+                <input type="checkbox" id="q5" onchange="onCheck(5)">
+                Tool handlers return strings, never raise exceptions
+            </label>
+            <div class="warning" id="warn-5">Unhandled exceptions crash the loop. Errors should be returned as text for the model</div>
+        </li>
+
+        <li>
+            <label id="label-6">
+                <input type="checkbox" id="q6" onchange="onCheck(6)">
+                I have a kill switch (e.g. checking for a KILL file each heartbeat)
+            </label>
+            <div class="warning" id="warn-6">No kill switch means no safe way to stop a runaway agent</div>
+        </li>
+
+        <li>
+            <label id="label-7">
+                <input type="checkbox" id="q7" onchange="onCheck(7)">
+                The agent escalates to a human after N consecutive failures
+            </label>
+            <div class="warning" id="warn-7">Autonomous does not mean never ask for help</div>
+        </li>
+
+        <li>
+            <label id="label-8">
+                <input type="checkbox" id="q8" onchange="onCheck(8)">
+                Sensitive data (API keys, personal info) is excluded from agent logs
+            </label>
+            <div class="warning" id="warn-8">Logs end up in places you do not expect</div>
+        </li>
+
+        <li>
+            <label id="label-9">
+                <input type="checkbox" id="q9" onchange="onCheck(9)">
+                I have a cost cap per run or heartbeat
+            </label>
+            <div class="warning" id="warn-9">No cap means surprise bills</div>
+        </li>
+
+    </ul>
+
+    <button class="btn" onclick="checkScore()">Check my score</button>
+
+    <div id="result">
+        <div class="score-line" id="score-line"></div>
+        <div class="score-msg" id="score-msg"></div>
+
+        <div id="email-capture" style="margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid #1e1e30;">
+            <p style="font-size:0.9rem; color:#ccc; margin-bottom:0.75rem;">get the full 50-point checklist free when you drop your email:</p>
+            <form id="email-form" action="https://formspree.io/f/xpwzgkoa" method="POST" onsubmit="submitEmail(event)">
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <input type="email" name="email" placeholder="your@email.com" required
+                        style="flex:1; min-width:200px; background:#0f0f1a; border:1px solid #333; color:#e0e0e0; padding:0.6rem 0.9rem; border-radius:5px; font-size:0.9rem; outline:none;">
+                    <input type="hidden" name="score" id="hidden-score" value="">
+                    <button type="submit" style="background:#7c6af7; color:white; border:none; padding:0.6rem 1.2rem; border-radius:5px; font-size:0.9rem; font-weight:600; cursor:pointer; white-space:nowrap;">send me the checklist</button>
+                </div>
+            </form>
+            <p style="font-size:0.8em; color:#888; margin-top:0.5rem;">no spam. just the checklist PDF and occasional agent tips.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta-bar">
+    <span class="cta-label">Want the full list?</span>
+    <a class="cta-link primary" href="https://clawgenesis.gumroad.com/l/iajhd" target="_blank" rel="noopener">
+        Get the full 50-point checklist ($9)
+    </a>
+    <a class="cta-link secondary" href="https://clawgenesis.gumroad.com/l/bngjov" target="_blank" rel="noopener">
+        Full guide with architecture patterns and code (25 GBP)
+    </a>
+</div>
+
+<script>
+    var warnings = [
+        "Direct writes corrupt state when the process crashes mid-write",
+        "Without a cap, runaway agents burn tokens indefinitely",
+        "Busy does not mean progressing. Repeaters and Loopers look fine from outside",
+        "Mixing them causes the agent to lose decisions as context fills up",
+        "You cannot debug what you cannot observe",
+        "Unhandled exceptions crash the loop. Errors should be returned as text for the model",
+        "No kill switch means no safe way to stop a runaway agent",
+        "Autonomous does not mean never ask for help",
+        "Logs end up in places you do not expect",
+        "No cap means surprise bills"
+    ];
+
+    function onCheck(i) {
+        var cb = document.getElementById('q' + i);
+        var label = document.getElementById('label-' + i);
+        if (cb.checked) {
+            label.classList.add('checked');
+        } else {
+            label.classList.remove('checked');
+        }
+    }
+
+    function checkScore() {
+        var score = 0;
+        for (var i = 0; i < 10; i++) {
+            var cb = document.getElementById('q' + i);
+            var warn = document.getElementById('warn-' + i);
+            if (cb.checked) {
+                score++;
+                warn.classList.remove('visible');
+            } else {
+                warn.classList.add('visible');
+            }
+        }
+
+        var result = document.getElementById('result');
+        var scoreLine = document.getElementById('score-line');
+        var scoreMsg = document.getElementById('score-msg');
+
+        result.classList.add('visible');
+
+        scoreLine.className = 'score-line';
+        scoreLine.textContent = score + '/10';
+
+        if (score < 5) {
+            scoreLine.classList.add('red');
+            scoreMsg.textContent = 'Not ready. The unchecked items above are active risks in production.';
+        } else if (score <= 7) {
+            scoreLine.classList.add('yellow');
+            scoreMsg.textContent = 'Getting there. Fix the gaps before you ship anything serious.';
+        } else {
+            scoreLine.classList.add('green');
+            scoreMsg.textContent = 'Solid. The full 50-point checklist covers edge cases you probably haven\'t hit yet.';
+        }
+
+        document.getElementById('hidden-score').value = score + '/10';
+
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function submitEmail(e) {
+        e.preventDefault();
+        var form = document.getElementById('email-form');
+        var data = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+            if (response.ok) {
+                document.getElementById('email-capture').innerHTML = '<p style="color:#4ade80; font-size:0.9rem;">sent! checklist coming to your inbox.</p>';
+            } else {
+                document.getElementById('email-capture').innerHTML = '<p style="color:#ff5f5f; font-size:0.9rem;">something went wrong. try again.</p>';
+            }
+        }).catch(function() {
+            document.getElementById('email-capture').innerHTML = '<p style="color:#ff5f5f; font-size:0.9rem;">something went wrong. try again.</p>';
+        });
+    }
+</script>
+
+</body>
+</html>
