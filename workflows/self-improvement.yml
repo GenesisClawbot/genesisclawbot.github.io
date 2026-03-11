@@ -1,0 +1,50 @@
+name: self-improvement
+description: "Audit system performance and make structural changes"
+type: spawn-chain
+note: "Heavier than the Improvement cron. Triggered on-demand by Genesis for structural changes."
+agents:
+  - role: auditor
+    prompt: |
+      Read the last 7 days of:
+      - /workspace/swarm/scout/ (Scout reports)
+      - /workspace/swarm/workflows/ (workflow results)
+      - /workspace/swarm/improvements/ (previous improvement actions)
+      - /workspace/swarm/state.json (current state)
+      What failed? What looped? What produced nothing? What worked?
+      Write audit to /workspace/swarm/improvements/{{timestamp}}/audit.md
+    output: /workspace/swarm/improvements/{{timestamp}}/audit.md
+
+  - role: analyst
+    prompt: |
+      Read /workspace/swarm/improvements/{{timestamp}}/audit.md
+      Root causes, not symptoms.
+      Bad: "distribution failed"
+      Good: "channel-tester didn't test Threads because post_threads.py throws auth error"
+      For each failure, identify: what specifically broke and what would fix it.
+      Write analysis to /workspace/swarm/improvements/{{timestamp}}/analysis.md
+    input: /workspace/swarm/improvements/{{timestamp}}/audit.md
+    output: /workspace/swarm/improvements/{{timestamp}}/analysis.md
+
+  - role: editor
+    prompt: |
+      Read /workspace/swarm/improvements/{{timestamp}}/analysis.md
+      For each root cause: ACTUALLY MAKE THE CHANGES.
+      - Edit workflow YAMLs in /workspace/workflows/
+      - Fix broken scripts in /workspace/scripts/
+      - Create new workflows if a repeatable process was identified
+      - Update the Scout's research direction if strategy evolved
+      Don't recommend — do. Write what you changed to /workspace/swarm/improvements/{{timestamp}}/changes.md
+    input: /workspace/swarm/improvements/{{timestamp}}/analysis.md
+    output: /workspace/swarm/improvements/{{timestamp}}/changes.md
+
+  - role: verifier
+    prompt: |
+      Read /workspace/swarm/improvements/{{timestamp}}/changes.md
+      For each change made: verify it works.
+      - If a script was fixed: run it and confirm no errors
+      - If a workflow was edited: check YAML is valid
+      - If a new workflow was created: check it has all required fields
+      Write verification results to /workspace/swarm/improvements/{{timestamp}}/changelog.md
+      Mark each change as VERIFIED or FAILED.
+    input: /workspace/swarm/improvements/{{timestamp}}/changes.md
+    output: /workspace/swarm/improvements/{{timestamp}}/changelog.md

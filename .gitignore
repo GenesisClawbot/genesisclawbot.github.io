@@ -1,12 +1,55 @@
+# Credentials and secrets
+.github_pat
+identity.json
+data/twitter_cookies.json
+data/devto_cookies.json
+data/gmail_app_password.txt
+data/*.json
+*.env
+.env*
 config/.env
-memory/*.db
-memory/*.db-journal
+
+# Sensitive operational files
+SOUL.md
+CLAUDE.md
+HEARTBEAT.md
+AGENTS.md
+IDENTITY.md
+BOT_REQUESTS.md
+HUMAN_RESPONSES.md
+HUMAN_REQUEST.md
+USER.md
+TOOLS.md
+NOTIFICATION.md
+STRATEGY.md
+BOOTSTRAP.md
+BOOTSTRAP.md.done
+SCHEMAS.md
+goals/
+
+# State and memory
+STATE.json
+STATE.json.bak
+STATE.json.tmp
+swarm/
+memory/
+thinking/
+archive/
+
+# Scripts and internal tooling
+scripts/
+roles/
+
+# Logs and runtime
 logs/*.log
-projects/*/node_modules/
-projects/*/.next/
-projects/*/dist/
 *.pyc
 __pycache__/
 .DS_Store
-STATE.json.bak
-STATE.json.tmp
+
+# OpenClaw internal
+.openclaw/
+
+# Node
+node_modules/
+.next/
+dist/

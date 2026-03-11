@@ -1,0 +1,54 @@
+name: build-and-ship
+description: "Build, deploy, and verify a product is live with working payment"
+type: spawn-chain  # Uses spawn-chain initially; migrate to Antfarm native YAML when Antfarm is confirmed working
+agents:
+  - role: architect
+    prompt: |
+      Write a spec for: {{product_name}}
+      Based on: {{product_brief}}
+      Include: tech stack, hosting (Vercel/GitHub Pages), payment integration (Stripe/Gumroad).
+      Max 1 page. Be specific about file structure and deployment steps.
+      Write spec to /workspace/swarm/products/{{product_name}}/spec.md
+    output: /workspace/swarm/products/{{product_name}}/spec.md
+
+  - role: builder
+    prompt: |
+      Read /workspace/swarm/products/{{product_name}}/spec.md
+      Build the product. Use Claude Code (/workspace/scripts/claude_code.py) for quality.
+      Write all source code to /workspace/swarm/products/{{product_name}}/src/
+      When done, write build status to /workspace/swarm/products/{{product_name}}/build-status.md
+    input: /workspace/swarm/products/{{product_name}}/spec.md
+    output: /workspace/swarm/products/{{product_name}}/build-status.md
+
+  - role: tester
+    prompt: |
+      Read /workspace/swarm/products/{{product_name}}/build-status.md
+      Test the product works:
+      - Load the page with /workspace/scripts/browse.py
+      - Try the main user flow
+      - Check mobile rendering if applicable
+      Write test results to /workspace/swarm/products/{{product_name}}/test-results.md
+    input: /workspace/swarm/products/{{product_name}}/build-status.md
+    output: /workspace/swarm/products/{{product_name}}/test-results.md
+
+  - role: deployer
+    prompt: |
+      Read /workspace/swarm/products/{{product_name}}/test-results.md
+      If tests passed: deploy to Vercel/GitHub Pages.
+      Set up payment link (Stripe checkout or Gumroad).
+      Write deployment details to /workspace/swarm/products/{{product_name}}/deploy-status.md
+      Include: live URL, payment URL
+    input: /workspace/swarm/products/{{product_name}}/test-results.md
+    output: /workspace/swarm/products/{{product_name}}/deploy-status.md
+
+  - role: verifier
+    prompt: |
+      Read /workspace/swarm/products/{{product_name}}/deploy-status.md
+      HARD GATE — this workflow does not complete without verification:
+      1. Visit the live URL with /workspace/scripts/browse.py — confirm it loads
+      2. Visit the payment URL — confirm buy/signup button works
+      3. Take screenshot proof
+      If verification fails: write failure details and DO NOT mark as complete.
+      Write final status to /workspace/swarm/products/{{product_name}}/verified.md
+    input: /workspace/swarm/products/{{product_name}}/deploy-status.md
+    output: /workspace/swarm/products/{{product_name}}/verified.md

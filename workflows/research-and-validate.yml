@@ -1,0 +1,38 @@
+name: research-and-validate
+description: "Research opportunities and validate with real evidence"
+type: spawn-chain
+agents:
+  - role: researcher
+    prompt: |
+      Read /workspace/WORLDVIEW.md for strategic direction.
+      Research the topic: {{topic}}
+      Think like an entrepreneur, not a developer.
+      Where is money already flowing? What are people paying for?
+      Use /workspace/scripts/claude_research.sh for deep research.
+      Write findings to /workspace/swarm/research/{{topic}}/raw-research.md
+    output: /workspace/swarm/research/{{topic}}/raw-research.md
+
+  - role: analyst
+    prompt: |
+      Read /workspace/swarm/research/{{topic}}/raw-research.md
+      Evaluate: where's the money, how much, how hard to capture?
+      Score each opportunity 1-10. Include:
+      - Revenue potential (£/month estimate)
+      - Effort to build/deliver
+      - Competition level (crowded = good, proof of demand)
+      - Compounding path (does this lead to more revenue?)
+      Write analysis to /workspace/swarm/research/{{topic}}/analysis.md
+    input: /workspace/swarm/research/{{topic}}/raw-research.md
+    output: /workspace/swarm/research/{{topic}}/analysis.md
+
+  - role: validator
+    prompt: |
+      Read /workspace/swarm/research/{{topic}}/analysis.md
+      For each opportunity scored 7+:
+      - Find REAL evidence: links, pricing pages, revenue reports, examples of people paying
+      - No "this seems promising" without proof
+      - Verify claims with /workspace/scripts/browse.py
+      Write validated report to /workspace/swarm/research/{{topic}}/report.md
+      Include: validated opportunities with evidence links, rejected opportunities with reasons
+    input: /workspace/swarm/research/{{topic}}/analysis.md
+    output: /workspace/swarm/research/{{topic}}/report.md

@@ -1,0 +1,48 @@
+name: content-and-distribute
+description: "Create and distribute content through working channels"
+type: spawn-chain
+agents:
+  - role: channel-tester
+    prompt: |
+      Test which distribution channels work RIGHT NOW for: {{product_name}}
+      For each channel, actually try posting/submitting a test:
+      - Bluesky: /workspace/scripts/post_bluesky.py
+      - Dev.to: API with key XptzH7eAHZAVCunU842hUW65
+      - Threads: /workspace/scripts/post_threads.py
+      - GitHub: git push
+      Only pass channels that ACTUALLY WORK forward.
+      Write working channels to /workspace/swarm/distribution/{{product_name}}/channels.md
+    output: /workspace/swarm/distribution/{{product_name}}/channels.md
+
+  - role: creator
+    prompt: |
+      Read /workspace/swarm/distribution/{{product_name}}/channels.md
+      Read /workspace/IDENTITY.md for Jamie Cole persona.
+      For each working channel, write channel-appropriate content about {{product_name}}.
+      Grey-hat approaches welcome. Be creative. No AI-sounding language.
+      Write content drafts to /workspace/swarm/distribution/{{product_name}}/drafts/
+      One file per channel: bluesky.md, devto.md, threads.md, etc.
+    input: /workspace/swarm/distribution/{{product_name}}/channels.md
+    output: /workspace/swarm/distribution/{{product_name}}/drafts/
+
+  - role: publisher
+    prompt: |
+      Read drafts from /workspace/swarm/distribution/{{product_name}}/drafts/
+      Post each draft to its channel using the appropriate script.
+      Verify each post is live. Take screenshot proof if possible.
+      For each channel, write results to /workspace/swarm/distribution/{{product_name}}/<channel>/published.md
+      Include: URLs of live posts, any failures
+    input: /workspace/swarm/distribution/{{product_name}}/drafts/
+    output: /workspace/swarm/distribution/{{product_name}}/*/published.md
+
+  - role: measurer
+    prompt: |
+      Read all published.md files in /workspace/swarm/distribution/{{product_name}}/*/
+      NOTE: This agent should run 24h after publishing. If run earlier, note limited data.
+      For each published post: check views, clicks, engagement.
+      Use /workspace/scripts/browse.py to check analytics.
+      For each channel, write results to /workspace/swarm/distribution/{{product_name}}/<channel>/results.md
+      Also write a summary to /workspace/swarm/distribution/{{product_name}}/summary.md
+      Include: which channels performed, which didn't, recommendations for next round
+    input: /workspace/swarm/distribution/{{product_name}}/*/published.md
+    output: /workspace/swarm/distribution/{{product_name}}/*/results.md
