@@ -1,0 +1,131 @@
+{
+  "updated": "2026-03-23",
+  "seo_improvements": {
+    "pages_improved": [
+      {
+        "file": "affiliate-sites/home-office-gear/index.html",
+        "changes": [
+          "Meta title updated with UK-specific keywords and 2026",
+          "Meta description updated with UK WFH statistics",
+          "Added 300+ word content section with UK ergonomic data",
+          "Added Amazon UK product widget with 6 products",
+          "Added internal links cross-linking to gaming-gear-pro and ai-saas-tools",
+          "Added breadcrumb navigation",
+          "Added JSON-LD schema markup"
+        ],
+        "amazon_links_added": 6
+      },
+      {
+        "file": "affiliate-sites/ai-saas-tools/index.html",
+        "changes": [
+          "Meta title updated with UK AI tool keywords and 2026",
+          "Meta description updated with UK AI SaaS keywords",
+          "Added 300+ word content section on AI tools for UK businesses",
+          "Added Amazon deals section with 6 AI tool deals",
+          "Added internal links to gaming-gear-pro and home-office-gear",
+          "Added JSON-LD schema markup"
+        ],
+        "amazon_links_added": 6
+      },
+      {
+        "file": "affiliate-sites/gaming-gear-pro/index.html",
+        "changes": [
+          "Meta title updated with UK gaming keywords and 2026",
+          "Meta description updated with UK gaming equipment keywords",
+          "Added 300+ word content section with UK gaming market context",
+          "Added Amazon UK product widget with 6 gaming products",
+          "Added internal links to ai-saas-tools and home-office-gear",
+          "Added breadcrumb navigation",
+          "Added JSON-LD schema markup"
+        ],
+        "amazon_links_added": 6
+      },
+      {
+        "file": "affiliate-sites/pet-products-hub/index.html",
+        "changes": [
+          "Meta title updated: 'Best Pet Supplies UK 2026'",
+          "Meta description updated with UK pet product keywords",
+          "Added 300+ word content section with UK pet care guidance",
+          "Added content-section and related-links CSS classes"
+        ],
+        "amazon_links_added": 0
+      },
+      {
+        "file": "affiliate-sites/online-courses-guide/index.html",
+        "changes": [
+          "Meta title updated: 'Best Online Courses UK 2026'",
+          "Meta description updated with UK learning platform keywords",
+          "Added 300+ word content section on UK online learning",
+          "Added content-section and related-links CSS classes"
+        ],
+        "amazon_links_added": 0
+      }
+    ],
+    "new_pages_created": [
+      {
+        "file": "affiliate-sites/gaming-gear-pro/best-gaming-headsets-2026.html",
+        "target_keyword": "best gaming headsets 2026 UK",
+        "word_count_estimate": 1200,
+        "features": [
+          "Full SEO meta tags (title, description, keywords, canonical URL)",
+          "JSON-LD Product and WebSite schema markup",
+          "Table of contents with anchor links",
+          "Top 10 ranking table",
+          "Budget category section (under \u00a350)",
+          "Wireless category section (\u00a389-200)",
+          "How-to-choose guide",
+          "FAQ section",
+          "6 Amazon UK affiliate links (HyperX Cloud III, Razer BlackShark V2 X, Logitech G432, SteelSeries Arctis 7+, HyperX Cloud Alpha, Astro A10 Gen 2)",
+          "Internal links to other gaming-gear pages"
+        ],
+        "amazon_links_added": 6
+      },
+      {
+        "file": "affiliate-sites/home-office-gear/best-standing-desks-uk.html",
+        "target_keyword": "best standing desk UK",
+        "word_count_estimate": 1400,
+        "features": [
+          "Full SEO meta tags (title, description, keywords, canonical URL)",
+          "JSON-LD Product and WebSite schema markup",
+          "Table of contents with anchor links",
+          "Top 10 ranking table",
+          "Budget category section (under \u00a3300)",
+          "Premium category section (\u00a3500+)",
+          "Pros/cons comparison box",
+          "How-to-choose guide",
+          "FAQ section",
+          "6 Amazon UK affiliate links (Flexispot QS+110, ERGOMAKER, Fezibo, Autonomous SmartDesk Pro, Klicelor, Flexispot EN1)",
+          "Internal links to ergonomic chairs, monitor arms, other affiliate sites"
+        ],
+        "amazon_links_added": 6
+      },
+      {
+        "file": "affiliate-sites/ai-saas-tools/best-ai-writing-tools-2026.html",
+        "target_keyword": "best AI writing tools 2026 UK",
+        "word_count_estimate": 1600,
+        "features": [
+          "Full SEO meta tags (title, description, keywords, canonical URL)",
+          "JSON-LD Product and WebSite schema markup",
+          "Table of contents with anchor links",
+          "Top 8 ranking table",
+          "Detailed Jasper AI review section",
+          "Detailed Copy.ai review section",
+          "Detailed Writesonic review section",
+          "Detailed ChatGPT Plus section",
+          "Other AI tools section (Rytr, ShortlyAI, Anyword, Copysmith)",
+          "How-to-choose guide with UK GDPR note",
+          "FAQ section",
+          "6 affiliate deals (Jasper, ChatGPT Plus, Copy.ai, Writesonic, Rytr, Frase)",
+          "Internal links to ChatGPT alternatives, AI coding, AI image pages"
+        ],
+        "amazon_links_added": 6
+      }
+    ]
+  },
+  "total_pages_improved": 5,
+  "total_new_pages_created": 3,
+  "total_amazon_links_added": 36,
+  "seo_script_run": true,
+  "commit_sha": "73aeec4",
+  "commit_message": "SEO improvements: better meta, Amazon links, new content"
+}
