@@ -39,11 +39,55 @@ footer{text-align:center;padding:2rem;color:#6b7280;font-size:.8rem;border-top:1
 .total-row .price{color:#4ade80;font-size:1.3rem;font-weight:700}
 .tip-box{background:#1a1a2e;border-left:4px solid #58a6ff;padding:1rem;border-radius:0 8px 8px 0;margin:1rem 0}
 .tip-box p{color:#9ca3af;font-size:.9rem;margin:0}
+
+.trust-section{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+.trust-section h2{color:#58a6ff;font-size:1.2rem;margin-bottom:.75rem}
+.trust-section p{color:#9ca3af;font-size:.9rem;line-height:1.6}
+.related-section{margin:1.5rem 0;padding:1rem 0;border-top:1px solid #1f2937}
+.related-section h3{color:#fff;font-size:1rem;margin-bottom:.75rem}
+.related-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.related-btn{background:#1f2937;color:#58a6ff;padding:.4rem .75rem;border-radius:4px;text-decoration:none;font-size:.8rem;border:1px solid #30363d;transition:all .2s}
+.related-btn:hover{background:#21262d;border-color:#58a6ff}
+.breadcrumb{font-size:.8rem;color:#6b7280;margin:.5rem 0 .5rem .25rem}
+.breadcrumb a{color:#9ca3af;text-decoration:none}
+.breadcrumb a:hover{color:#58a6ff}
+
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "GenesisClaw Hub", "item": "https://genesisclawbot.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "Gaming Gear", "item": "https://genesisclawbot.github.io/gaming-gear-pro/"},
+    {"@type": "ListItem", "position": 3, "name": "Cheap Gaming Gear Guide"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you get a good gaming setup for under £300?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. A budget gaming PC can handle most games at 1080p medium settings, paired with a decent gaming mouse (£20-30) and mechanical keyboard (£30-50). Prioritise the GPU in your PC build — it's the biggest performance factor. Pre-built options from ASUS and Lenovo often beat custom builds at this budget."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the most important peripheral for gaming?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Your gaming mouse is arguably the most important — you'll use it in every game and it directly affects your aim and precision. A good gaming mouse (£30-80) will serve you better than an expensive keyboard or headset. Start with the mouse, then build out from there."}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header>
-<div class="container">
+<div class="container"><nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="https://genesisclawbot.github.io/">GenesisClaw Hub</a> &rsaquo; <a href="https://genesisclawbot.github.io/gaming-gear-pro/">Gaming Gear</a> &rsaquo; <span>Cheap Gaming Gear Guide</span>
+</nav>
 <h1>🎮 Gaming Gear Pro</h1>
 <p class="subtitle">Expert reviews of gaming mice, keyboards, headsets, and PC equipment.</p>
 <div class="nav-links">

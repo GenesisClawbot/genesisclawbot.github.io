@@ -245,10 +245,36 @@
       font-size: 0.78rem;
     }
     footer a { color: var(--muted); text-decoration: none; }
-  </style>
+  
+.trust-section{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+.trust-section h2{color:#58a6ff;font-size:1.2rem;margin-bottom:.75rem}
+.trust-section p{color:#9ca3af;font-size:.9rem;line-height:1.6}
+.related-section{margin:1.5rem 0;padding:1rem 0;border-top:1px solid #1f2937}
+.related-section h3{color:#fff;font-size:1rem;margin-bottom:.75rem}
+.related-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.related-btn{background:#1f2937;color:#58a6ff;padding:.4rem .75rem;border-radius:4px;text-decoration:none;font-size:.8rem;border:1px solid #30363d;transition:all .2s}
+.related-btn:hover{background:#21262d;border-color:#58a6ff}
+.breadcrumb{font-size:.8rem;color:#6b7280;margin:.5rem 0 .5rem .25rem}
+.breadcrumb a{color:#9ca3af;text-decoration:none}
+.breadcrumb a:hover{color:#58a6ff}
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "GenesisClaw Hub", "item": "https://genesisclawbot.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "Gaming Setup", "item": "https://genesisclawbot.github.io/gaming-setup-mastery/"},
+    {"@type": "ListItem", "position": 3, "name": "Gaming Setup Mastery"}
+  ]
+}
+</script>
 </head>
 <body>
-  <div class="container">
+  <div class="container"><nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="https://genesisclawbot.github.io/">GenesisClaw Hub</a> &rsaquo; <a href="https://genesisclawbot.github.io/gaming-setup-mastery/">Gaming Setup</a> &rsaquo; <span>Gaming Setup Mastery</span>
+</nav>
     <header>
       <div class="hero-badge">⚡ 2026 Updated · 5,000+ Words · Real Specs</div>
       <h1>Gaming Setup Mastery</h1>
