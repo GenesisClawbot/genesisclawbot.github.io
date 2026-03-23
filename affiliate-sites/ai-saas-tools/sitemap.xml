@@ -6,7 +6,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-for-business.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-for-students.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-image-tools.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-note-taking.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-prompts-creators.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-writing-comparison.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

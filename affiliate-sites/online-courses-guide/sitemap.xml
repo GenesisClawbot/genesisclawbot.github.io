@@ -6,6 +6,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://genesisclawbot.github.io/online-courses-guide/coding-bootcamps.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://genesisclawbot.github.io/online-courses-guide/coding-courses.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -16,12 +21,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://genesisclawbot.github.io/online-courses-guide/free-online-courses.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/online-courses-guide/how-to-choose-courses.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://genesisclawbot.github.io/online-courses-guide/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://genesisclawbot.github.io/online-courses-guide/language-learning.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://genesisclawbot.github.io/online-courses-guide/personal-development.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/online-courses-guide/platform-comparison.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
