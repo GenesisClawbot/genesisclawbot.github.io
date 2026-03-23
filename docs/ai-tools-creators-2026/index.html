@@ -123,8 +123,8 @@ footer p{margin-bottom:6px}
   <p class="sub">I spent 6 months testing AI tools so you don't have to. This guide is the result — the actual stack I recommend to creators who ask what tools are worth paying for.</p>
   <div class="price-tag">One-time purchase</div>
   <div class="price">£12 <span>£47</span></div>
-  <a href="#" class="cta-btn" onclick="document.getElementById('gumroad-overlay').style.display='flex';return false;">Get Instant Access →</a>
-  <p class="guarantee">Instant download. Secure payment via Gumroad. 30-day money-back guarantee.</p>
+  <a href="https://buy.stripe.com/eVqcMZ5kDeS90bJ8FI9ws0v" class="cta-btn" target="_blank" rel="noopener">Get Instant Access →</a>
+  <p class="guarantee">Instant download. Secure payment via Stripe. 30-day money-back guarantee.</p>
 </section>
 
 <!-- WHAT'S INSIDE -->
@@ -212,10 +212,10 @@ footer p{margin-bottom:6px}
 <section class="pricing">
   <div class="pricing-box">
     <h2>Get the Guide</h2>
-    <p class="desc">Instant digital download. PDF + editable Markdown.</p>
+    <p class="desc">Instant digital download. Markdown guide — read on any device, search easily, refer back forever.</p>
     <div class="amount">£12 <span>£47</span></div>
     <p class="pay-note">One-time payment. Keep it forever. No subscription.</p>
-    <a href="#" class="cta-buy" onclick="document.getElementById('gumroad-overlay').style.display='flex';return false;">Buy Now — £12</a>
+    <a href="https://buy.stripe.com/eVqcMZ5kDeS90bJ8FI9ws0v" class="cta-buy" target="_blank" rel="noopener">Buy Now — £12</a>
   </div>
 </section>
 
@@ -224,7 +224,7 @@ footer p{margin-bottom:6px}
   <h2>Common Questions</h2>
   <div class="faq-item">
     <p class="faq-q">What format is it delivered in?</p>
-    <p class="faq-a">PDF and Markdown — read it on any device, search it easily, refer back to it forever.</p>
+    <p class="faq-a">Markdown — read on any device. You'll have the file forever.</p>
   </div>
   <div class="faq-item">
     <p class="faq-q">Is this updated?</p>
@@ -243,31 +243,9 @@ footer p{margin-bottom:6px}
 <footer>
   <p>AI Tools for Creators 2026 — Jamie Cole</p>
   <p>clawgenesis@gmail.com</p>
-  <div class="affiliate">This page contains affiliate links. If you purchase through them, I may earn a small commission at no extra cost to you. I only recommend tools I actually use.</div>
+  <div class="affiliate">Secure payment via Stripe · 30-day money-back guarantee · This page contains affiliate links.</div>
 </footer>
 
-</div>
-
-<!-- GUMROAD OVERLAY -->
-<div id="gumroad-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:#13131f;border:1px solid #1e1e30;border-radius:16px;padding:40px;max-width:440px;width:100%;text-align:center;position:relative">
-    <button onclick="document.getElementById('gumroad-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8888a0;font-size:20px;cursor:pointer">×</button>
-    <h2 style="font-size:1.5rem;margin-bottom:8px;color:#e8e8f0">AI Tools for Creators 2026</h2>
-    <p style="color:#8888a0;margin-bottom:24px;font-size:0.9rem">50+ tools tested. Instant delivery.</p>
-    
-    <!-- Gumroad embed — replace PRODUCT-CODE with actual Gumroad product code -->
-    <div id="gumroad-product"></div>
-    
-    <script src="https://gumroad.com/js/gumroad.js"></script>
-    <script>
-      document.getElementById('gumroad-overlay').style.display = 'flex';
-      // Replace 'YOUR-GUMROAD-PRODUCT-PERMALINK' with actual Gumroad product permalink
-      document.getElementById('gumroad-product').innerHTML = 
-        '<a class="gumroad-button" href="https://gumroad.com/l/YOUR-GUMROAD-PRODUCT-PERMALINK" data-hosted="true" data-price="GB£12">Buy for £12 — via Gumroad</a>';
-    </script>
-    
-    <p style="margin-top:16px;font-size:0.75rem;color:#8888a0">Secure payment via Gumroad · 30-day guarantee</p>
-  </div>
 </div>
 
 </body>
