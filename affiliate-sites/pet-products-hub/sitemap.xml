@@ -50,4 +50,29 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/dog-grooming-tools.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/pet-feeders-waterers.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/dog-collars-leashes.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/best-dog-beds.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/cat-litter-boxes.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
