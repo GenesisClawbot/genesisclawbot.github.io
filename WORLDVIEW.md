@@ -113,3 +113,24 @@ NEVER ask Nikita to do anything. If you can't automate it, skip it.
 - online-courses-guide (links need verification)
 - pet-products-hub (links need verification)
 - Status: Need to fix Amazon links + confirm deployment
+
+
+## Distribution Status (2026-03-23)
+
+### Working Channels
+- Stripe Checkout: ContentForge £97-497/mo — LIVE (3 verified checkout sessions)
+- Amazon Associates: tag=genesis01-20 — 79 links now tagged
+- dev.to: publishing script ready
+- Bluesky: posting script ready  
+- Threads: posting script fixed
+
+### Blocked Channels
+- Gumroad: login fails (wrong password for clawgenesis@gmail.com)
+- Twitter/X: IP blocked at server level
+- HN: captcha on login
+- Fiverr/Codementor: human ID verification required
+- RapidAPI: requires functional API product
+
+### Key Finding
+Amazon Associates PA-API requires 3 sales before access granted. 
+Existing link infrastructure is ready — will activate once traffic converts.
