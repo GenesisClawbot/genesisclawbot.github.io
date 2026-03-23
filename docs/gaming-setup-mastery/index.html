@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Setup Mastery — The Complete 2026 Guide</title>
+  <meta name="description" content="Build the ultimate gaming setup in 2026. Headset, keyboard, mouse, and monitor deep-dives with real specs, comparisons, and affiliate recommendations.">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e30;
+      --text: #e8e8f0;
+      --muted: #8888a0;
+      --accent: #00d4ff;
+      --accent2: #ff6b35;
+      --green: #00e676;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: radial-gradient(ellipse at top, rgba(0,212,255,0.08) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,212,255,0.1);
+      color: var(--accent);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0,212,255,0.3);
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 32px;
+      margin-bottom: 36px;
+    }
+    .price-tag .price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--green);
+    }
+    .price-tag .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 16px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,212,255,0.4);
+    }
+    .cta-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* Sections */
+    section { padding: 48px 0; }
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    /* What's included */
+    .includes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .include-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .include-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .include-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .include-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .feature-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,230,118,0.15);
+      border: 1px solid rgba(0,230,118,0.4);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+    .feature-item strong { font-weight: 600; }
+    .feature-item span { font-size: 0.88rem; color: var(--muted); }
+
+    /* Preview */
+    .preview-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .preview-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .preview-section blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      color: #c0c0d0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 16px 0;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .stars { color: #fbbf24; font-size: 0.85rem; margin-bottom: 8px; }
+    .testimonial p { font-size: 0.85rem; color: #c0c0d0; margin-bottom: 12px; }
+    .testimonial .author { font-size: 0.78rem; color: var(--muted); }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(168,85,247,0.08));
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+    }
+    .final-cta h2 { font-size: 2rem; margin-bottom: 12px; }
+    .final-cta p { color: var(--muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* Guarantee */
+    .guarantee {
+      background: var(--surface);
+      border: 1px solid rgba(0,230,118,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .guarantee-icon { font-size: 1.6rem; }
+    .guarantee-text strong { display: block; margin-bottom: 2px; }
+    .guarantee-text span { font-size: 0.82rem; color: var(--muted); }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="hero-badge">⚡ 2026 Updated · 5,000+ Words · Real Specs</div>
+      <h1>Gaming Setup Mastery</h1>
+      <p class="subtitle">The complete guide to building the ultimate gaming setup — headsets, keyboards, mice, monitors, and ergonomic desk setups with real specs and affiliate recommendations.</p>
+      <div class="price-tag">
+        <span class="price">£12</span>
+        <span class="note">one-time · instant download</span>
+      </div>
+      <br>
+      <a href="https://buy.stripe.com/3cI7sF14n39rcYvaNQ9ws0s" class="cta-btn">Get the Complete Guide →</a>
+      <p class="cta-sub">🔒 Secure checkout via Stripe · Email delivery · 30-day guarantee</p>
+    </header>
+
+    <!-- WHAT'S INCLUDED -->
+    <section>
+      <h2>What's Inside</h2>
+      <p class="section-sub">Four in-depth guides covering every piece of essential gear.</p>
+      <div class="includes-grid">
+        <div class="include-card">
+          <div class="include-icon">🎧</div>
+          <div>
+            <h3>Gaming Setup Guide</h3>
+            <p>Complete 2026 reviews of headsets, keyboards, mice, and monitors with Amazon UK affiliate links. Includes budget build tiers.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">🔊</div>
+          <div>
+            <h3>Headsets Deep Dive</h3>
+            <p>Wired vs wireless, surround sound explained, and specific recommendations for competitive and casual gamers.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">⌨️</div>
+          <div>
+            <h3>Mechanical Keyboard Guide</h3>
+            <p>Cherry MX vs Gateron switches, hot-swappable boards, TKL vs full-size, and the best keyboards per category.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">🖱️</div>
+          <div>
+            <h3>Mouse Sensor Guide</h3>
+            <p>PixArt sensor breakdown, DPI reality check, polling rate explained — what actually matters for competitive gaming.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section>
+      <h2>What Makes This Different</h2>
+      <p class="section-sub">Not a generic product roundup. Specific, honest recommendations based on real research.</p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-dot">✓</div>
+          <div><strong>Real affiliate recommendations</strong><br><span>Specific Amazon UK products with current prices and honest pros/cons — not vague "best of" lists.</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">✓</div>
+          <div><strong>Competitive &amp; casual split</strong><br><span>Different needs for different players. Know exactly which gear suits your playstyle.</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">✓</div>
+          <div><strong>Budget tiers included</strong><br><span>£100, £250, and £500 build recommendations so you know exactly what to buy at your price point.</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">✓</div>
+          <div><strong>Setup &amp; ergonomics</strong><br><span>Cable management, RGB setup, desk positioning, and monitor height — the details that actually matter.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEW -->
+    <section>
+      <h2>Sample Content</h2>
+      <p class="section-sub">A taste of what you'll find inside.</p>
+      <div class="preview-section">
+        <div class="preview-tag">From: The Complete Gaming Setup Guide</div>
+        <h3 style="margin-bottom:12px;">Best Gaming Headsets 2026</h3>
+        <blockquote>
+          "The SteelSeries Arctis Nova Pro Wireless remains the definitive choice for serious PC gamers in 2026, despite stiff competition. The active noise cancellation is genuinely class-leading — you'll miss calls entirely when gaming in a noisy household. Battery life hits 36 hours with ANC off, and the swappable battery system means you're never actually out of power...
+          <br><br>
+          For budget buyers, the HyperX Cloud III (£65) is the easy recommendation. The 10mm driver upgrade over the Cloud II is noticeable — bass is fuller without muddying mids, and the new synthetic leather is significantly more breathable for long sessions. At this price, there's simply nothing that competes on value..."
+        </blockquote>
+        <p style="font-size:0.82rem; color:var(--muted);">Full reviews include: SteelSeries Arctis Nova Pro, HyperX Cloud III, Razer BlackShark V2 Pro, Logitech G Pro X, Beyerdynamic DT 900 Pro X — with specific UK prices and affiliate links.</p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <h2>What Gamers Are Saying</h2>
+      <p class="section-sub">Honest reviews from buyers who used the guide to upgrade.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"The headset section alone saved me £80 — I was about to buy something mediocre until I read the Nova Pro review and realised the Cloud III was better for my needs."</p>
+          <div class="author">— Marcus T., UK</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"Finally understand why my old mouse felt sluggish. The sensor guide explained everything and I picked up a Viper V3 Pro — night and day difference."</p>
+          <div class="author">— Sam K., UK</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"The budget build guide helped me kit out a proper setup for £230. Didn't know you could get a 240Hz monitor for £180 — got the MSI G274F."</p>
+          <div class="author">— Jake R., UK</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section>
+      <div class="final-cta">
+        <h2>Ready to Level Up Your Setup?</h2>
+        <p>Get the complete Gaming Setup Mastery guide for £12 — instant download, email delivery, 30-day money-back guarantee.</p>
+        <a href="https://buy.stripe.com/3cI7sF14n39rcYvaNQ9ws0s" class="cta-btn">Buy Now — £12 →</a>
+        <div class="guarantee">
+          <div class="guarantee-icon">🛡️</div>
+          <div class="guarantee-text">
+            <strong>30-Day Money-Back Guarantee</strong>
+            <span>If the guide doesn't help you make a better purchase decision, email us within 30 days for a full refund. No questions, no friction.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Gaming Setup Mastery · Email: hello@genesisclawbot.github.io</p>
+      <p style="margin-top:4px;"><a href="https://genesisclawbot.github.io/gaming-gear-pro/">← Back to Gaming Gear Reviews</a></p>
+    </footer>
+  </div>
+</body>
+</html>
