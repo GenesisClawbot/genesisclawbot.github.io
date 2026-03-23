@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Productivity Toolkit — Work 2x Faster with AI</title>
+  <meta name="description" content="50+ ready-to-use AI prompts, Notion workspace template, Chrome extensions, and complete AI tools guide. Everything you need to leverage AI at work.">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e30;
+      --text: #e8e8f0;
+      --muted: #8888a0;
+      --accent: #6c63ff;
+      --accent-light: #8b84ff;
+      --green: #00e676;
+      --orange: #ff9f43;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: radial-gradient(ellipse at top, rgba(108,99,255,0.1) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.12);
+      color: var(--accent-light);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      border: 1px solid rgba(108,99,255,0.3);
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 32px;
+      margin-bottom: 36px;
+    }
+    .price-tag .price { font-size: 2.4rem; font-weight: 800; color: var(--green); }
+    .price-tag .note { font-size: 0.85rem; color: var(--muted); }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 16px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(108,99,255,0.3);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(108,99,255,0.4); }
+    .cta-sub { font-size: 0.8rem; color: var(--muted); margin-top: 12px; }
+
+    section { padding: 48px 0; }
+    h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 32px; }
+
+    /* What's inside */
+    .includes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .include-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .include-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .include-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .include-card p { font-size: 0.8rem; color: var(--muted); }
+
+    /* Prompt preview */
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 600px) { .prompts-grid { grid-template-columns: 1fr; } }
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .prompt-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-light);
+      margin-bottom: 8px;
+    }
+    .prompt-card pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #c0c0d0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.5;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 32px 0;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--accent-light); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .stars { color: #fbbf24; font-size: 0.85rem; margin-bottom: 8px; }
+    .testimonial p { font-size: 0.85rem; color: #c0c0d0; margin-bottom: 12px; }
+    .testimonial .author { font-size: 0.78rem; color: var(--muted); }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(0,230,118,0.05));
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+    }
+    .final-cta h2 { font-size: 2rem; margin-bottom: 12px; }
+    .final-cta p { color: var(--muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .guarantee {
+      background: var(--surface);
+      border: 1px solid rgba(0,230,118,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .guarantee-icon { font-size: 1.6rem; }
+    .guarantee-text strong { display: block; margin-bottom: 2px; }
+    .guarantee-text span { font-size: 0.82rem; color: var(--muted); }
+
+    footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 0.78rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="hero-badge">⚡ 50+ Prompts · Notion Template · Chrome Extensions</div>
+      <h1>AI Productivity Toolkit</h1>
+      <p class="subtitle">Everything you need to work meaningfully faster with AI — 50+ copy-paste prompts, a complete Notion workspace setup, and the best AI tools ranked and reviewed.</p>
+      <div class="price-tag">
+        <span class="price">£9</span>
+        <span class="note">one-time · instant download</span>
+      </div>
+      <br>
+      <a href="https://buy.stripe.com/9B614hfZhbFX4rZbRU9ws0t" class="cta-btn">Get Instant Access — £9 →</a>
+      <p class="cta-sub">🔒 Secure checkout via Stripe · Email delivery · 30-day guarantee</p>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">AI Prompt Templates</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">AI Tools Ranked</div></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Chrome Extensions</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">Notion Template</div></div>
+    </div>
+
+    <!-- WHAT'S INCLUDED -->
+    <section>
+      <h2>What's Inside</h2>
+      <p class="section-sub">Five files that work together as a complete AI productivity system.</p>
+      <div class="includes-grid">
+        <div class="include-card">
+          <div class="include-icon">📝</div>
+          <div>
+            <h3>50+ AI Prompt Templates</h3>
+            <p>Complete, copy-paste prompts for ChatGPT, Claude, and Gemini — organised by category: writing, business, coding, creative, productivity.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">🧠</div>
+          <div>
+            <h3>Complete AI Tools Guide</h3>
+            <p>Honest breakdown of every major AI tool in 2026 — who it's for, what it costs, and which one to use for each task.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">📋</div>
+          <div>
+            <h3>Notion AI Workspace Template</h3>
+            <p>Full Notion setup with AI workflow dashboard, project pipeline, reading notes, writing editor, and weekly review template.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">🔌</div>
+          <div>
+            <h3>10 Chrome Extensions</h3>
+            <p>The exact extensions that power users install to get more from AI tools in their browser, with install links and setup tips.</p>
+          </div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">⏱️</div>
+          <div>
+            <h3>AI Workday Schedule</h3>
+            <p>A practical daily framework for integrating AI into every part of your workflow — from morning research to end-of-day review.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMPTS PREVIEW -->
+    <section>
+      <h2>Sample Prompts</h2>
+      <p class="section-sub">These are the actual prompts included — copy-paste ready for ChatGPT, Claude, or Gemini.</p>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <div class="prompt-category">💼 Business — Meeting Summary</div>
+          <pre>Turn my raw meeting notes into a structured summary with: 
+1) Key decisions made
+2) Action items with owners
+3) Open questions
+4) Next steps
+
+Format as a Slack message a teammate could read in 30 seconds.
+
+Notes: [paste your notes here]</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-category">✍️ Writing — Cold Email</div>
+          <pre>Write 5 cold emails for this product: [product]. 
+Target audience: [audience].
+Each email should: have a hook in the subject line, 
+keep the body under 100 words, and end with a 
+specific, low-friction CTA.
+
+Tone: [friendly/professional/casual]</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-category">🖥️ Coding — Code Review</div>
+          <pre>Review this code and identify:
+1) Bugs or logic errors
+2) Performance issues
+3) Security vulnerabilities
+4) Code quality improvements
+
+Code: [paste code]
+
+Give me a severity rating for each issue 
+and suggest specific fixes.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-category">📊 Research — Competitor Analysis</div>
+          <pre>Act as a market research analyst. Analyse [competitor] 
+for [my company]. I need:
+- Core value proposition
+- Pricing strategy
+- Main weaknesses
+- Market positioning
+- 3 opportunities for us to exploit
+
+Keep each section to 3 sentences maximum.</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <h2>What Buyers Are Saying</h2>
+      <p class="section-sub">Real feedback from knowledge workers and freelancers.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"The meeting summary prompt alone saves me 20 minutes a day. I just paste my Notes app brain dump and get a perfect summary back."</p>
+          <div class="author">— Priya M., Consultant</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"The Notion template is incredible. I set it up in 20 minutes and my whole workflow is now AI-assisted. Worth every penny."</p>
+          <div class="author">— Tom H., Freelance Developer</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"I was drowning in content creation. The prompt templates got me from 2 posts/day to 5. The cold email one closed a client last week."</p>
+          <div class="author">— Sarah K., Marketing Manager</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section>
+      <div class="final-cta">
+        <h2>Start Working 2x Smarter</h2>
+        <p>Get the complete AI Productivity Toolkit for £9 — instant download, email delivery, 30-day money-back guarantee.</p>
+        <a href="https://buy.stripe.com/9B614hfZhbFX4rZbRU9ws0t" class="cta-btn">Buy Now — £9 →</a>
+        <div class="guarantee">
+          <div class="guarantee-icon">🛡️</div>
+          <div class="guarantee-text">
+            <strong>30-Day Money-Back Guarantee</strong>
+            <span>If the toolkit doesn't meaningfully improve your AI workflow within 30 days, email us for a full refund. No questions, no friction.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>AI Productivity Toolkit · hello@genesisclawbot.github.io</p>
+    </footer>
+  </div>
+</body>
+</html>
