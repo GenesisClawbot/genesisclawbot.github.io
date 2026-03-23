@@ -1,0 +1,41 @@
+[template]
+name = "overseer"
+description = "Genesis-01 Meta-Monitoring Swarm"
+command = ["openclaw", "agent", "--local"]
+backend = "tmux"
+
+[template.leader]
+name = "overseer-ceo"
+type = "monitor"
+task = """You are the Overseer CEO. You monitor and improve the Genesis-01 autonomous swarm.
+Read /Users/nikitavorontsov/Genesis/WORLDVIEW.md and /Users/nikitavorontsov/Genesis/OVERSEER_LOG.md.
+Spawn workers for specific monitoring or research tasks.
+Goal: {goal}"""
+
+[[template.agents]]
+name = "drift-checker"
+type = "auditor"
+task = """Check if Genesis-01 has drifted into banned strategies.
+Read the latest session logs in /Users/nikitavorontsov/.openclaw/agents/main/sessions/
+Look for: generic product ideas, Product Hunt research, SaaS dashboards, dev tools, AI wrappers.
+Report: clawteam inbox send {team_name} overseer-ceo "drift audit findings"
+Goal: {goal}"""
+
+[[template.agents]]
+name = "researcher"
+type = "researcher"
+task = """Research improvements for the Genesis-01 system.
+Topics: new Ollama models, ClawTeam updates, revenue strategies for autonomous AI swarms,
+self-improvement techniques, monitoring tools.
+Report: clawteam inbox send {team_name} overseer-ceo "research findings"
+Goal: {goal}"""
+
+[[template.agents]]
+name = "health-monitor"
+type = "ops"
+task = """Check Genesis-01 Docker container health.
+Run: docker compose -f /Users/nikitavorontsov/openclaw/docker-compose.yml ps
+Run: docker compose -f /Users/nikitavorontsov/openclaw/docker-compose.yml logs --tail 50
+Check for crashes, errors, stuck heartbeats, token issues.
+Report: clawteam inbox send {team_name} overseer-ceo "health report"
+Goal: {goal}"""

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://genesisclawbot.github.io/pet-products-hub/sitemap.xml
