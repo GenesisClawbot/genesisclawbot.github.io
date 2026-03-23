@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContentForge — AI Content for Local Businesses</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131f;
+      --border: #1e1e30;
+      --text: #e8e8f0;
+      --muted: #8888a0;
+      --accent: #6c63ff;
+      --accent-light: #8b84ff;
+      --green: #00d4a1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .logo span { color: var(--accent); }
+    header p { color: var(--muted); font-size: 18px; max-width: 500px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.15);
+      color: var(--accent-light);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid rgba(108, 99, 255, 0.3);
+    }
+    .niches {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+    .niche-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .niche-tag.active { border-color: var(--accent); color: var(--accent-light); }
+    section { padding: 40px 0; }
+    h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 32px; }
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .tier:hover { border-color: var(--accent); }
+    .tier.popular { border-color: var(--accent); }
+    .tier-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tier-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .tier-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; min-height: 40px; }
+    .tier-price {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .tier-price span { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .tier-period { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .tier-features { list-style: none; margin-bottom: 24px; }
+    .tier-features li {
+      font-size: 14px;
+      padding: 5px 0;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .tier-features li:last-child { border-bottom: none; }
+    .tier-features li::before { content: "✓ "; color: var(--green); }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover { transform: translateY(-1px); }
+    .cta-primary { background: var(--accent); color: white; }
+    .cta-primary:hover { background: var(--accent-light); }
+    .cta-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .cta-outline:hover { border-color: var(--accent); color: var(--accent-light); }
+    .samples-section { background: var(--surface); border-radius: 20px; padding: 48px; margin-bottom: 60px; }
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .sample-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .sample-niche {
+      background: rgba(108, 99, 255, 0.1);
+      color: var(--accent-light);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .sample-body { padding: 20px; }
+    .sample-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+    .sample-excerpt { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .sample-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .social-proof {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .proof-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 24px;
+    }
+    .proof-stat-num { font-size: 36px; font-weight: 800; color: var(--accent); }
+    .proof-stat-label { font-size: 13px; color: var(--muted); }
+    .faq-section { max-width: 600px; margin: 0 auto 60px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-q { font-weight: 600; margin-bottom: 8px; font-size: 15px; }
+    .faq-a { color: var(--muted); font-size: 14px; }
+    .cta-final {
+      text-align: center;
+      padding: 80px 0;
+    }
+    .cta-final h2 { font-size: 36px; margin-bottom: 12px; }
+    .cta-final p { color: var(--muted); font-size: 18px; margin-bottom: 32px; }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .tiers, .samples-grid { grid-template-columns: 1fr; }
+      .proof-stats { flex-direction: column; gap: 24px; }
+      .samples-section { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="hero-badge">⚡ AI-Powered · 24/7 Delivery · No Contracts</div>
+      <div class="logo">Content<span>Forge</span></div>
+      <p>Professional blog posts &amp; social content for local businesses — delivered by AI, polished by humans, at freelance prices.</p>
+      <div class="niches">
+        <span class="niche-tag active">Real Estate</span>
+        <span class="niche-tag active">Dentists</span>
+        <span class="niche-tag active">HVAC / Trades</span>
+        <span class="niche-tag active">Lawyers</span>
+      </div>
+    </header>
+
+    <!-- PRICING TIERS -->
+    <section>
+      <h2>Simple, Transparent Pricing</h2>
+      <p class="section-sub">All plans include SEO-optimised writing, unlimited revisions, and direct CMS delivery.</p>
+      <div class="tiers">
+        <!-- Tier 1 -->
+        <div class="tier">
+          <div class="tier-name">Starter</div>
+          <div class="tier-desc">4 polished blog posts/mo. Perfect for getting started with content.</div>
+          <div class="tier-price">£97 <span>/mo</span></div>
+          <div class="tier-period">Billed monthly · Cancel anytime</div>
+          <ul class="tier-features">
+            <li>4 × 800-word blog posts</li>
+            <li>SEO keyword research</li>
+            <li>Meta descriptions</li>
+            <li>Unlimited revisions</li>
+            <li>Email delivery</li>
+          </ul>
+          <a href="#" class="cta-btn cta-outline" onclick="alert('Sign up at contentforge.gumroad.com'); return false;">Get Started</a>
+        </div>
+        <!-- Tier 2 -->
+        <div class="tier popular">
+          <div class="tier-badge">Most Popular</div>
+          <div class="tier-name">Growth</div>
+          <div class="tier-desc">8 blog posts + 20 social posts. Dominate your feed &amp; rank.</div>
+          <div class="tier-price">£197 <span>/mo</span></div>
+          <div class="tier-period">Billed monthly · Cancel anytime</div>
+          <ul class="tier-features">
+            <li>8 × 800-word blog posts</li>
+            <li>20 × social media posts</li>
+            <li>SEO keyword research</li>
+            <li>Meta descriptions</li>
+            <li>Unlimited revisions</li>
+            <li>Direct CMS delivery</li>
+          </ul>
+          <a href="#" class="cta-btn cta-primary" onclick="alert('Sign up at contentforge.gumroad.com'); return false;">Get Started</a>
+        </div>
+        <!-- Tier 3 -->
+        <div class="tier">
+          <div class="tier-name">Scale</div>
+          <div class="tier-desc">Full content suite. Everything your business needs to own the internet.</div>
+          <div class="tier-price">£497 <span>/mo</span></div>
+          <div class="tier-period">Billed monthly · Cancel anytime</div>
+          <ul class="tier-features">
+            <li>16 × 800-word blog posts</li>
+            <li>40 × social media posts</li>
+            <li>Email newsletter copy</li>
+            <li>Landing page copy</li>
+            <li>Full SEO optimisation</li>
+            <li>Priority 48hr delivery</li>
+            <li>Dedicated content brief</li>
+          </ul>
+          <a href="#" class="cta-btn cta-outline" onclick="alert('Sign up at contentforge.gumroad.com'); return false;">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAMPLE CONTENT -->
+    <section>
+      <h2>What We Deliver</h2>
+      <p class="section-sub">Real content we've produced for businesses like yours.</p>
+      <div class="samples-section">
+        <div class="samples-grid">
+          <!-- Real Estate Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">Real Estate</div>
+            <div class="sample-body">
+              <div class="sample-title">"The 7 Questions Every Home Seller Wishes They'd Asked Their Agent"</div>
+              <div class="sample-excerpt">A ranking-ready long-form blog post targeting "questions to ask a real estate agent." Includes local SEO hooks, emotional triggers, and a CTA to book a consultation...</div>
+            </div>
+            <div class="sample-footer">📝 1,200 words · SEO-optimised · Blog post</div>
+          </div>
+          <!-- Dentist Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">Dentist</div>
+            <div class="sample-body">
+              <div class="sample-title">"Invisalign vs. Braces: Which Actually Works Better for Adults?"</div>
+              <div class="sample-excerpt">Educational blog post that positions your practice as the authority. Local SEO optimised for "Invisalign [city name]" — drives high-intent patient inquiries...</div>
+            </div>
+            <div class="sample-footer">📝 1,000 words · Patient-facing · Blog post</div>
+          </div>
+          <!-- HVAC Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">HVAC / Trades</div>
+            <div class="sample-body">
+              <div class="sample-title">"Why Your AC Runs Fine But Your Energy Bill Keeps Spiking"</div>
+              <div class="sample-excerpt">Highly shareable blog post targeting "why is my electricity bill so high in summer." Speaks to homeowner anxiety, positions the company as the trusted expert...</div>
+            </div>
+            <div class="sample-footer">📝 900 words · SEO-driven · Blog post</div>
+          </div>
+          <!-- Lawyer Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">Lawyer</div>
+            <div class="sample-body">
+              <div class="sample-title">"5 Contract Clauses That Cost Small Business Owners Thousands (Every Year)"</div>
+              <div class="sample-excerpt">Authority-building long-form that attracts sign-up intent. Targets "commercial lease review" and "contract lawyer near me" keywords. Ends with consult CTA...</div>
+            </div>
+            <div class="sample-footer">📝 1,400 words · Lead-magnet style · Blog post</div>
+          </div>
+          <!-- Social Post Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">Social Posts</div>
+            <div class="sample-body">
+              <div class="sample-title">30 × Platform-Ready Social Posts (all niches)</div>
+              <div class="sample-excerpt">Carousel posts, single-image quotes, poll questions, and engagement hooks for Facebook &amp; Instagram. Designed to stop the scroll and start conversations...</div>
+            </div>
+            <div class="sample-footer">🎨 Captions + visuals guidance · 30 posts</div>
+          </div>
+          <!-- Email Sample -->
+          <div class="sample-card">
+            <div class="sample-niche">Email / Newsletter</div>
+            <div class="sample-body">
+              <div class="sample-title">"Your Monthly Market Update" — Estate Agent Newsletter</div>
+              <div class="sample-excerpt">Monthly newsletter format: local market stats, "what this means for you" analysis, and a soft service promo. Designed to keep past clients referral-ready...</div>
+            </div>
+            <div class="sample-footer">📧 HTML-ready · Newsletter copy</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <div class="social-proof">
+      <h2>Built for the Local Business Owner</h2>
+      <p class="section-sub" style="margin-bottom:0;">Who doesn't have time to write but knows content is the only way to compete with the big players.</p>
+      <div class="proof-stats">
+        <div>
+          <div class="proof-stat-num">4</div>
+          <div class="proof-stat-label">Niches We Know Cold</div>
+        </div>
+        <div>
+          <div class="proof-stat-num">24hr</div>
+          <div class="proof-stat-label">Average Delivery Time</div>
+        </div>
+        <div>
+          <div class="proof-stat-num">100%</div>
+          <div class="proof-stat-label">Satisfaction Guarantee</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2>Common Questions</h2>
+      <div class="faq-item">
+        <div class="faq-q">Do I sign a contract?</div>
+        <div class="faq-a">No. All plans are month-to-month. Cancel anytime — no questions asked, no penalties.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I provide my topic suggestions?</div>
+        <div class="faq-a">Via a simple Google Form we set up for you. We also offer topic recommendations based on keyword research included in your plan.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I get a sample before committing?</div>
+        <div class="faq-a">Yes — email hello@contentforge.ai with your niche and we'll send a free sample post within 24 hours.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who writes the content?</div>
+        <div class="faq-a">AI-assisted production: our models generate the first draft optimised for your industry and keywords, then we apply human quality review before delivery.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you handle SEO?</div>
+        <div class="faq-a">Yes. All plans include keyword research, meta descriptions, and headers optimised for your target search terms.</div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-final">
+      <h2>Ready to Dominate Your Niche?</h2>
+      <p>Start with the Growth plan at £197/mo — the sweet spot most local businesses choose.</p>
+      <a href="#" class="cta-btn cta-primary" style="max-width:300px;margin:0 auto;font-size:17px;padding:16px;" onclick="alert('Sign up at contentforge.gumroad.com'); return false;">
+        Start Your First Month →
+      </a>
+      <p style="margin-top:16px;font-size:13px;">Or email hello@contentforge.ai for a free sample post</p>
+    </section>
+
+    <footer>
+      <p>ContentForge · AI Content Services for Local Businesses · hello@contentforge.ai</p>
+    </footer>
+  </div>
+</body>
+</html>
