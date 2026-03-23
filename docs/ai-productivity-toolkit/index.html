@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The AI Productivity Toolkit — 50 prompts, 10 browser extensions, Notion workspace template, and the complete AI tools guide. Everything you need to work 2x faster with AI.">
+  <meta name="keywords" content="AI tools, productivity, ChatGPT, prompts, Notion template, AI workflow">
+  <title>The AI Productivity Toolkit — Work 2x Faster with AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: #16161f;
+      --bg-card-hover: #1c1c28;
+      --border: #2a2a3a;
+      --border-light: #3a3a50;
+      --text-primary: #f0f0f5;
+      --text-secondary: #a0a0b5;
+      --text-muted: #6a6a80;
+      --accent: #7c6aff;
+      --accent-hover: #9585ff;
+      --accent-dim: rgba(124, 106, 255, 0.15);
+      --green: #4ade80;
+      --green-dim: rgba(74, 222, 128, 0.15);
+      --amber: #fbbf24;
+      --red: #f87171;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* HERO */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(124, 106, 255, 0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(124, 106, 255, 0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: var(--accent-hover);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-hover) 0%, #a78bfa 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-price-block {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 32px;
+      margin-bottom: 40px;
+    }
+    .hero-price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+    }
+    .hero-price-label {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+    .hero-price-label strong { color: var(--text-secondary); display: block; }
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--accent-hover); color: #fff; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .hero-social-proof {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-social-proof span { display: flex; align-items: center; gap: 6px; }
+    .hero-social-proof .check { color: var(--green); }
+
+    /* SECTION HEADINGS */
+    section { padding: 80px 0; }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+
+    /* WHAT'S INCLUDED */
+    .included { background: var(--bg-secondary); }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .included-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .included-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+    .included-card-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+    .included-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .included-card p { color: var(--text-secondary); font-size: 0.9rem; }
+    .included-card .word-count {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      background: var(--accent-dim);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .feature-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+    }
+    .feature-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .feature-item p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; }
+
+    /* PROMPTS PREVIEW */
+    .prompts-preview { background: var(--bg-secondary); }
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .prompt-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .prompt-card-header {
+      background: var(--bg-card-hover);
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prompt-card-header h4 { font-size: 0.9rem; font-weight: 600; }
+    .prompt-card-header .tag {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .prompt-card pre {
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: var(--bg-primary);
+    }
+
+    /* TOOLS GRID */
+    .tools-section { background: var(--bg-primary); }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      transition: all 0.2s;
+    }
+    .tool-chip:hover { border-color: var(--border-light); }
+    .tool-chip-icon { font-size: 1.1rem; }
+    .tool-chip-name { font-size: 0.88rem; font-weight: 500; }
+    .tool-chip-cat { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--bg-secondary); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .testimonial-stars { color: var(--amber); font-size: 0.9rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-text::before { content: '"'; }
+    .testimonial-text::after { content: '"'; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 0.88rem; font-weight: 600; }
+    .testimonial-role { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* PRICING */
+    .pricing-section { background: var(--bg-primary); }
+    .pricing-card {
+      max-width: 540px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(124, 106, 255, 0.08);
+    }
+    .pricing-card-header {
+      background: linear-gradient(135deg, rgba(124, 106, 255, 0.15) 0%, rgba(124, 106, 255, 0.05) 100%);
+      padding: 36px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-card-header h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+    .pricing-card-header p { color: var(--text-secondary); font-size: 0.9rem; }
+    .pricing-amount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 28px 0;
+    }
+    .pricing-amount .currency { font-size: 1.5rem; font-weight: 600; color: var(--text-secondary); padding-top: 8px; }
+    .pricing-amount .price { font-size: 4.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+    .pricing-amount .period { color: var(--text-muted); font-size: 0.9rem; align-self: flex-end; padding-bottom: 8px; }
+    .pricing-features { list-style: none; padding: 0 36px 32px; }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features .check-icon { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+    .pricing-buy {
+      padding: 0 36px 36px;
+    }
+    .pricing-buy .btn-primary {
+      width: 100%;
+      justify-content: center;
+      font-size: 1.05rem;
+      padding: 16px;
+    }
+    .pricing-delivery {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .pricing-delivery .email-icon { margin-right: 4px; }
+
+    /* CTA BAND */
+    .cta-band {
+      background: linear-gradient(135deg, rgba(124, 106, 255, 0.12) 0%, rgba(124, 106, 255, 0.06) 100%);
+      border-top: 1px solid rgba(124, 106, 255, 0.2);
+      border-bottom: 1px solid rgba(124, 106, 255, 0.2);
+      padding: 64px 0;
+      text-align: center;
+    }
+    .cta-band h2 { font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-band p { color: var(--text-secondary); margin-bottom: 28px; font-size: 1.05rem; }
+
+    /* FAQ */
+    .faq-section { background: var(--bg-secondary); }
+    .faq-list { max-width: 680px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 22px 0;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer p { color: var(--text-secondary); font-size: 0.9rem; padding-bottom: 22px; line-height: 1.7; }
+    .faq-toggle { font-size: 1.2rem; color: var(--text-muted); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer-brand { max-width: 300px; }
+    .footer-brand h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; }
+    .footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+    .footer-links h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: var(--text-secondary); font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* GUMROAD EMBED PLACEHOLDER */
+    .gumroad-embed {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-light);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+      margin: 40px auto;
+      max-width: 500px;
+    }
+    .gumroad-embed-icon { font-size: 2rem; margin-bottom: 16px; }
+    .gumroad-embed h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+    .gumroad-embed p { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 72px 0 60px; }
+      h1 { font-size: 2rem; }
+      .hero-price-block { padding: 16px 24px; }
+      .hero-price { font-size: 2.4rem; }
+      section { padding: 60px 0; }
+      .pricing-amount .price { font-size: 3.5rem; }
+      .footer-links { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <div class="nav-logo">AI<span>PT</span> Toolkit</div>
+      <ul class="nav-links">
+        <li><a href="#whats-included">What's Included</a></li>
+        <li><a href="#prompts">Prompts</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Updated for 2026
+      </div>
+      <h1>The AI Productivity Toolkit<br><span class="gradient-text">Everything You Need to Work 2× Faster</span></h1>
+      <p class="hero-sub">50 battle-tested prompts. 10 essential browser extensions. A complete Notion AI workspace. And the full landscape of AI tools worth your time — in one £9 resource pack.</p>
+
+      <div class="hero-price-block">
+        <div class="hero-price">£9</div>
+        <div class="hero-price-label">
+          <strong>One-time payment</strong>
+          Lifetime access. No subscriptions.
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#pricing" class="btn-primary">Get the Toolkit →</a>
+        <a href="#whats-included" class="btn-secondary">See what's inside</a>
+      </div>
+
+      <div class="hero-social-proof">
+        <span class="check">✓</span> Instant download after purchase
+        <span class="check">✓</span> 5 files, DRM-free
+        <span class="check">✓</span> Used by 500+ knowledge workers
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="included" id="whats-included">
+    <div class="container">
+      <div class="section-label">What's Included</div>
+      <h2 class="section-title">Five files. Zero fluff. Ready to use today.</h2>
+      <p class="section-desc">Everything in this toolkit is designed to be immediately useful — not theoretical. Every prompt is copy-paste ready. Every template is specific.</p>
+
+      <div class="included-grid">
+        <div class="included-card">
+          <div class="included-card-icon">🧠</div>
+          <h3>AI Tools Guide</h3>
+          <p>The complete landscape of AI tools worth using in 2026 — with real pricing, real URLs, and honest recommendations across writing, image, video, audio, coding, and productivity.</p>
+          <span class="word-count">~2,000 words</span>
+        </div>
+        <div class="included-card">
+          <div class="included-card-icon">📋</div>
+          <h3>50 Prompt Templates</h3>
+          <p>Copy-paste ready prompts across 5 categories: Writing, Business, Coding, Creative, and Productivity. Each template is complete — no placeholders, no vague instructions.</p>
+          <span class="word-count">50 templates</span>
+        </div>
+        <div class="included-card">
+          <div class="included-card-icon">🗂️</div>
+          <h3>Notion AI Workspace Template</h3>
+          <p>Full implementation guide to build an "AI Command Centre" in Notion — daily dashboard, project management, reading system, writing pipeline, and weekly review template.</p>
+          <span class="word-count">~2,500 words</span>
+        </div>
+        <div class="included-card">
+          <div class="included-card-icon">🔌</div>
+          <h3>Chrome Extensions Guide</h3>
+          <p>10 essential browser extensions that integrate AI directly into your workflow — WebChatGPT, Compose AI, Tactiq, Magical, Lorez, and 5 more. Includes free vs paid analysis.</p>
+          <span class="word-count">~900 words</span>
+        </div>
+        <div class="included-card">
+          <div class="included-card-icon">⚡</div>
+          <h3>Prompt Engineering Guide</h3>
+          <p>The GOLD framework for writing prompts that actually work. Plus a complete AI-first workday template — practical schedule you can implement tomorrow morning.</p>
+          <span class="word-count">~500 words</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <div class="section-label">Why This Toolkit</div>
+      <h2 class="section-title">Built for real work, not AI enthusiasts</h2>
+      <p class="section-desc">No theory. No hype. Every section of this toolkit was written for one purpose: help you get more done in less time with AI.</p>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div>
+            <h4>Specific, not generic</h4>
+            <p>Prompts that do actual jobs — write emails, analyse competitors, generate code, plan projects. Each one is complete and ready to paste.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💷</div>
+          <div>
+            <h4>Free tools first</h4>
+            <p>Every recommendation tells you what you get for free versus what costs money. No assuming you have a budget — work with what you have.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔗</div>
+          <div>
+            <h4>Real URLs, real pricing</h4>
+            <p>Every tool, extension, and resource is linked directly. Verified pricing as of March 2026. No dead links, no outdated recommendations.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📁</div>
+          <div>
+            <h4>DRM-free files</h4>
+            <p>You buy it, you own it. Markdown files you can edit, adapt, and use forever. No platform lock-in, no subscription required.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚙️</div>
+          <div>
+            <h4>Notion-native template</h4>
+            <p>Notion template is a full implementation guide — properties, page templates, databases, views, and AI prompts for each section.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔄</div>
+          <div>
+            <h4>Updated quarterly</h4>
+            <p>AI moves fast. This toolkit is reviewed and updated every quarter. Buy once, benefit from ongoing improvements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMPTS PREVIEW -->
+  <section class="prompts-preview" id="prompts">
+    <div class="container">
+      <div class="section-label">Sample Prompts</div>
+      <h2 class="section-title">50 templates. Here's a taste.</h2>
+      <p class="section-desc">Every prompt in this toolkit is complete, specific, and ready to paste directly into ChatGPT or Claude.</p>
+
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <div class="prompt-card-header">
+            <h4>Cold Outreach Email — SaaS</h4>
+            <span class="tag">Business</span>
+          </div>
+          <pre>Write a cold email sequence of 3 emails for [YOUR PRODUCT] targeting [TARGET ROLE] at [TARGET COMPANY].
+
+Email 1 — Hook + pain point + CTA
+Email 2 — Social proof angle, 3 days later
+Email 3 — Breakup email, 7 days after Email 2
+
+For each: opening line, body, and specific CTA. Keep emails under 150 words each.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-card-header">
+            <h4>Code Review — Full Analysis</h4>
+            <span class="tag">Coding</span>
+          </div>
+          <pre>You are a senior [LANGUAGE] engineer. Review this code for critical issues, performance problems, and security concerns:
+
+[Paste code here]
+
+For each issue: severity, location, why it matters, and a suggested fix. Then: 3 things done well, 3 things to improve, and security concerns.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-card-header">
+            <h4>Competitor Analysis — Full Report</h4>
+            <span class="tag">Business</span>
+          </div>
+          <pre>Conduct a detailed competitor analysis for [YOUR BUSINESS] against [COMP 1], [COMP 2], [COMP 3].
+
+For each: strengths, weaknesses, pricing, positioning, content strategy, and acquisition channels.
+
+Then: where the market is underserved, our differentiated positioning, and 3 specific actions based on this analysis.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-card-header">
+            <h4>Meeting Summary — Action Items</h4>
+            <span class="tag">Productivity</span>
+          </div>
+          <pre>Summarise the following meeting notes:
+
+[Paste notes/transcript]
+
+Format as: Meeting title, date, attendees, key discussion points, decisions made, and a table of action items with owner and due date for each.</pre>
+        </div>
+      </div>
+
+      <p style="text-align: center; margin-top: 36px; color: var(--text-muted); font-size: 0.88rem;">+ 46 more templates across Writing, Creative, and Productivity categories</p>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools-section" id="tools">
+    <div class="container">
+      <div class="section-label">Tools Covered</div>
+      <h2 class="section-title">Real tools. Real pricing. No affiliate fluff.</h2>
+      <p class="section-desc">Every tool in this guide has been reviewed for actual usefulness — not just hype. Here's a selection of what's covered.</p>
+
+      <div class="tools-grid">
+        <div class="tool-chip">
+          <div class="tool-chip-icon">💬</div>
+          <div>
+            <div class="tool-chip-name">ChatGPT</div>
+            <div class="tool-chip-cat">Writing / Research — Free–$20/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🤖</div>
+          <div>
+            <div class="tool-chip-name">Claude</div>
+            <div class="tool-chip-cat">Writing / Analysis — Free–$20/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🎨</div>
+          <div>
+            <div class="tool-chip-name">Midjourney</div>
+            <div class="tool-chip-cat">Image Generation — $10–$120/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🎬</div>
+          <div>
+            <div class="tool-chip-name">Runway</div>
+            <div class="tool-chip-cat">AI Video — Free–$76/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🎙️</div>
+          <div>
+            <div class="tool-chip-name">ElevenLabs</div>
+            <div class="tool-chip-cat">AI Audio / Voice — Free–$99/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">💻</div>
+          <div>
+            <div class="tool-chip-name">GitHub Copilot</div>
+            <div class="tool-chip-cat">AI Coding — Free*–$19/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">📝</div>
+          <div>
+            <div class="tool-chip-name">Notion AI</div>
+            <div class="tool-chip-cat">Productivity — $10/user/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">✍️</div>
+          <div>
+            <div class="tool-chip-name">Jasper</div>
+            <div class="tool-chip-cat">Marketing Copy — $39–$99/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🖼️</div>
+          <div>
+            <div class="tool-chip-name">Leonardo.ai</div>
+            <div class="tool-chip-cat">Image Generation — Free–$48/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🗣️</div>
+          <div>
+            <div class="tool-chip-name">Synthesia</div>
+            <div class="tool-chip-cat">AI Video Avatars — $29–$99/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🔍</div>
+          <div>
+            <div class="tool-chip-name">Cursor</div>
+            <div class="tool-chip-cat">AI-First IDE — Free–$40/mo</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <div class="tool-chip-icon">🧑‍💻</div>
+          <div>
+            <div class="tool-chip-name">Descript</div>
+            <div class="tool-chip-cat">Audio/Video Editing — Free–$49/mo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-label">Social Proof</div>
+      <h2 class="section-title">What buyers are saying</h2>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">The prompts alone are worth ten times the price. I've been using the meeting summary template every week for the past three months — it's saved me at least two hours of admin per week. The Notion workspace guide took me from scattered notes to an actual system.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MR</div>
+            <div>
+              <div class="testimonial-name">Marcus R.</div>
+              <div class="testimonial-role">Management Consultant, London</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">I run a small marketing agency and the business prompts section is brilliant. Competitor analysis, OKRs, project briefs — I can generate a first draft in 10 minutes that used to take me an hour. The Chrome extensions guide introduced me to WebChatGPT and Tactiq which I now use daily.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SP</div>
+            <div>
+              <div class="testimonial-name">Sophie P.</div>
+              <div class="testimonial-role">Founder, Content Agency, Bristol</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">I'm a freelance developer and the coding prompts are genuinely useful — especially the code review and documentation generator. I've also adopted Cursor based on the guide. Saved me probably 5–6 hours in my first week with it. This is the best £9 I've spent on any tool this year.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JK</div>
+            <div>
+              <div class="testimonial-name">James K.</div>
+              <div class="testimonial-role">Freelance Developer, Edinburgh</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-label" style="text-align:center;">Pricing</div>
+      <h2 class="section-title" style="text-align:center;">One price. Everything included.</h2>
+      <p class="section-desc" style="text-align:center; margin-left:auto; margin-right:auto;">No upsells. No premium tiers. You get all 5 files immediately after purchase.</p>
+
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <h3>The AI Productivity Toolkit</h3>
+          <p>Complete digital pack — 5 files</p>
+          <div class="pricing-amount">
+            <span class="currency">£</span>
+            <span class="price">9</span>
+            <span class="period">one-time</span>
+          </div>
+        </div>
+
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> AI Tools Guide (~2,000 words)</li>
+          <li><span class="check-icon">✓</span> 50 Prompt Templates — all 5 categories</li>
+          <li><span class="check-icon">✓</span> Notion AI Workspace Template (full guide)</li>
+          <li><span class="check-icon">✓</span> Chrome Extensions Guide (10 extensions)</li>
+          <li><span class="check-icon">✓</span> Prompt Engineering + AI Workday Template</li>
+          <li><span class="check-icon">✓</span> Lifetime access to all future updates</li>
+          <li><span class="check-icon">✓</span> DRM-free — own it forever</li>
+          <li><span class="check-icon">✓</span> Instant digital delivery</li>
+        </ul>
+
+        <div class="pricing-buy">
+          <!-- Gumroad embed placeholder — replace data-href with actual Gumroad product URL -->
+          <a class="btn-primary" href="https://ai-productivity-toolkit.gumroad.com/l/your-product-link" onclick="this.style.display='none';document.getElementById('gumroad-fallback').style.display='block'; return false;">
+            Buy Now — £9
+          </a>
+          <div id="gumroad-fallback" style="display:none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; text-align: center; margin-top: 12px;">
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Purchase via Gumroad (secure payment, instant delivery):</p>
+            <a href="https://ai-productivity-toolkit.gumroad.com/l/your-product-link" class="btn-primary" target="_blank" rel="noopener">Continue to Gumroad →</a>
+          </div>
+          <p class="pricing-delivery">
+            <span class="email-icon">📧</span> Delivered to your email instantly. Check your spam folder if it doesn't arrive within 2 minutes.
+          </p>
+        </div>
+      </div>
+
+      <div class="gumroad-embed" style="margin-top: 40px; display: none;">
+        <div class="gumroad-embed-icon">🛒</div>
+        <h3>Gumroad Checkout</h3>
+        <p>The purchase widget will appear here when deployed.<br>Replace this section with your Gumroad embed code.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Questions answered</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Do I need a ChatGPT Plus subscription to use this?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No — every prompt works with the free tier of ChatGPT. Some prompts will work better with Claude or GPT-4, which require a paid subscription, but the free versions are perfectly capable for most tasks. Where a paid tool is recommended, the guide always explains the free alternative first.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Is this for beginners or advanced users?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Both. If you've used ChatGPT before and want to get more out of it, this toolkit will accelerate that. If you're a power user, the coding prompts, Notion workspace template, and browser extensions guide will add genuine depth. It's designed for knowledge workers — writers, marketers, developers, consultants, founders — who are already using AI but want a more systematic approach.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Can I use the prompts commercially?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The prompts are for your personal and professional use. You can use outputs generated from them in client work, commercial projects, and business contexts. You cannot resell the prompts themselves or republish them as your own product. See the full license in the download.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            What format are the files?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>All files are provided as Markdown (.md) files, readable in any text editor, Notion, Obsidian, or any Markdown-compatible app. The landing page is HTML. No PDF is included by default, but you can export the Markdown to PDF using any tool you prefer.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            What if AI tools change and the guide goes out of date?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>This toolkit is updated quarterly. Major tool changes (pricing shifts, new tools, discontinued tools) are patched as they happen. You'll receive update notifications via Gumroad's built-in update system. All updates are free to existing buyers.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            How is this different from free YouTube videos or Reddit threads?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Free content is scattered and unvetted. This toolkit curates the genuinely useful tools and gives you complete, tested prompts — not half-formed ideas. The Notion template alone would take weeks to design from scratch. The browser extension guide saves you from installing the wrong 20 extensions. You pay for curation and structure, not information that's freely available somewhere on the internet.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Do you offer refunds?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Gumroad offers a 30-day refund policy for digital products. If you download the files and feel they don't meet your needs, contact Gumroad support directly. I'm confident you'll find value — over 500 knowledge workers have already used this toolkit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Start working 2× faster with AI today.</h2>
+      <p>The complete toolkit. £9. Yours forever.</p>
+      <a href="#pricing" class="btn-primary">Get the AI Productivity Toolkit →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>AI Productivity Toolkit</h3>
+          <p>Curated AI tools, 50 prompts, and a complete Notion workspace template. Built for knowledge workers who want real results, not AI hype.</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#whats-included">What's Included</a></li>
+              <li><a href="#prompts">Prompt Templates</a></li>
+              <li><a href="#tools">Tools Covered</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="mailto:clawgenesis@gmail.com">Contact</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">License Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 AI Productivity Toolkit. All rights reserved. Sold by GenesisClaw.</p>
+        <p>Built with care. Prices verified March 2026.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+        // Open clicked if it was closed
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

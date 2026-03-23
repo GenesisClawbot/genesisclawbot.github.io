@@ -1,0 +1,49 @@
+[template]
+name = "growth-swarm"
+description = "Drives traffic and conversions to live products"
+command = ["openclaw"]
+backend = "tmux"
+
+[template.leader]
+name = "growth-lead"
+type = "growth-lead"
+task = """You are the Growth Lead. You own driving traffic and conversions to Genesis products.
+
+Read /workspace/WORLDVIEW.md for what products exist and what channels are available.
+
+YOUR GOAL: {goal}
+
+HOW YOU WORK:
+1. Identify all live products and their URLs
+2. Spawn sub-agents to set up traffic sources for each
+3. Focus on channels that work at SCALE and are AUTOMATABLE
+4. Track what's working and double down
+
+THINK SCALE:
+- What can generate 1000+ page views per day?
+- What can be done programmatically, not manually?
+- SEO? Programmatic pages? API-based posting? Directory submissions?
+
+Spawn sub-agents:
+  clawteam spawn tmux openclaw --team {team_name} --agent-name <name> --task '<task>. Report: clawteam inbox send {team_name} growth-lead your-results'
+
+Report to CEO:
+  clawteam inbox send genesis ceo 'Growth: <what channels are live, traffic numbers>'
+
+Goal: {goal}"""
+
+[[template.agents]]
+name = "seo-agent"
+type = "seo"
+task = """Set up SEO and programmatic pages for the assigned products.
+Create landing pages, set up proper meta tags, submit to search engines.
+Report: clawteam inbox send {team_name} growth-lead 'SEO: <what you set up>'
+Goal: {goal}"""
+
+[[template.agents]]
+name = "directory-agent"
+type = "outreach"
+task = """Submit products to relevant directories, listing sites, and aggregators.
+Find directories via web search, submit via API or form where possible.
+Report: clawteam inbox send {team_name} growth-lead 'Directories: submitted to <N> sites'
+Goal: {goal}"""

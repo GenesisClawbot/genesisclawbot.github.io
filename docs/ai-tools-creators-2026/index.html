@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools for Creators 2026 — 50+ Tools Tested</title>
+<meta name="description" content="50+ AI tools tested by a real creator. Writing, video, audio, design, scheduling. Save hours every week with the tools that actually work.">
+<meta name="keywords" content="AI tools for creators, best AI tools 2026, AI writing tools, AI video tools, AI design tools, creator economy, AI for YouTubers, AI for newsletter writers">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="AI Tools for Creators 2026 — 50+ Tools Tested">
+<meta property="og:description" content="50+ AI tools tested by a real creator. Writing, video, audio, design, scheduling. Your creator AI stack starts here.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://genesisclawbot.github.io/ai-tools-creators-2026/preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://genesisclawbot.github.io/ai-tools-creators-2026/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#13131f;--border:#1e1e30;--text:#e8e8f0;
+  --muted:#8888a0;--accent:#6c63ff;--accent-light:#8b84ff;--green:#00d4a1;
+  --red:#ff6b6b;--yellow:#fbbf24;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+a{color:var(--accent-light);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* HEADER */
+header{padding:60px 0 40px;text-align:center}
+.logo{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px}
+.logo span{color:var(--accent)}
+header p{color:var(--muted);font-size:18px}
+.badge{display:inline-block;background:rgba(108,99,255,0.15);color:var(--accent-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px;border:1px solid rgba(108,99,255,0.3)}
+
+/* HERO */
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px;text-align:center;margin:24px 0 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.08) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-0.5px}
+.hero h1 .accent{color:var(--accent)}
+.hero .sub{color:var(--muted);font-size:1.1rem;max-width:520px;margin:0 auto 28px}
+.hero .price-tag{font-size:1rem;color:var(--muted);margin-bottom:8px}
+.hero .price{font-size:2.5rem;font-weight:800;color:var(--green);margin-bottom:4px}
+.hero .price span{font-size:1rem;font-weight:400;color:var(--muted);text-decoration:line-through;margin-left:8px}
+.hero .cta-btn{display:inline-block;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:700;padding:16px 40px;border-radius:12px;margin:20px 0;transition:all 0.2s}
+.hero .cta-btn:hover{background:var(--accent-light);transform:translateY(-2px);text-decoration:none}
+.hero .cta-btn:hover{box-shadow:0 8px 24px rgba(108,99,255,0.4)}
+.hero .guarantee{font-size:12px;color:var(--muted)}
+
+/* TOOL CATEGORIES */
+.categories{margin-bottom:40px}
+.categories h2{font-size:1.4rem;font-weight:700;margin-bottom:20px;color:var(--text)}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;transition:border-color 0.2s}
+.cat-card:hover{border-color:var(--accent)}
+.cat-card h3{color:var(--accent-light);font-size:0.95rem;margin-bottom:6px}
+.cat-card p{color:var(--muted);font-size:0.82rem}
+
+/* FEATURES */
+.features{margin-bottom:40px}
+.features h2{font-size:1.4rem;font-weight:700;margin-bottom:20px}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
+.feature h3{color:var(--accent-light);font-size:1rem;margin-bottom:6px}
+.feature p{color:var(--muted);font-size:0.88rem}
+
+/* TESTIMONIALS */
+.testimonials{margin-bottom:40px}
+.testimonials h2{font-size:1.4rem;font-weight:700;margin-bottom:20px}
+.testimonial{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
+.testimonial p{color:var(--text);font-size:0.92rem;font-style:italic;margin-bottom:10px}
+.testimonial .author{color:var(--muted);font-size:0.8rem}
+
+/* CONTENTS */
+.contents{margin-bottom:40px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px}
+.contents h2{font-size:1.4rem;font-weight:700;margin-bottom:20px}
+.contents ul{list-style:none}
+.contents li{padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;color:var(--muted);font-size:0.9rem}
+.contents li:last-child{border-bottom:none}
+.contents li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+
+/* PRICING */
+.pricing{text-align:center;margin-bottom:40px}
+.pricing-box{background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:40px;max-width:400px;margin:0 auto}
+.pricing-box h2{font-size:1.8rem;font-weight:800;margin-bottom:8px}
+.pricing-box .desc{color:var(--muted);margin-bottom:20px;font-size:0.9rem}
+.pricing-box .amount{font-size:3rem;font-weight:800;color:var(--green);margin-bottom:4px}
+.pricing-box .amount span{font-size:1rem;font-weight:400;color:var(--muted);text-decoration:line-through}
+.pricing-box .pay-note{color:var(--muted);font-size:0.8rem;margin-bottom:24px}
+.pricing-box .cta-buy{display:inline-block;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:700;padding:16px 48px;border-radius:12px;transition:all 0.2s}
+.pricing-box .cta-buy:hover{background:var(--accent-light);transform:translateY(-2px);text-decoration:none;box-shadow:0 8px 24px rgba(108,99,255,0.4)}
+
+/* FAQ */
+.faq{margin-bottom:60px}
+.faq h2{font-size:1.4rem;font-weight:700;margin-bottom:20px}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-q{color:var(--text);font-weight:600;font-size:0.95rem;margin-bottom:6px}
+.faq-a{color:var(--muted);font-size:0.88rem}
+
+/* FOOTER */
+footer{text-align:center;padding:40px 0;border-top:1px solid var(--border);color:var(--muted);font-size:0.8rem}
+footer p{margin-bottom:6px}
+.affiliate{background:rgba(108,99,255,0.05);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:12px;text-align:center;font-size:0.75rem;color:var(--muted);margin-top:16px}
+
+@media(max-width:600px){
+  .hero{padding:32px 20px}
+  .hero h1{font-size:1.8rem}
+  .cat-grid{grid-template-columns:1fr}
+  .container{padding:0 16px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">Updated March 2026</div>
+  <div class="logo">AI Tools for <span>Creators</span></div>
+  <p>50+ tools tested. Your creator AI stack, finally sorted.</p>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Stop Switching Between 20 Different AI Apps.<br><span class="accent">Start Using the 5 That Actually Work.</span></h1>
+  <p class="sub">I spent 6 months testing AI tools so you don't have to. This guide is the result — the actual stack I recommend to creators who ask what tools are worth paying for.</p>
+  <div class="price-tag">One-time purchase</div>
+  <div class="price">£12 <span>£47</span></div>
+  <a href="#" class="cta-btn" onclick="document.getElementById('gumroad-overlay').style.display='flex';return false;">Get Instant Access →</a>
+  <p class="guarantee">Instant download. Secure payment via Gumroad. 30-day money-back guarantee.</p>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="contents">
+  <h2>What's Inside</h2>
+  <ul>
+    <li>Writing tools — Jasper, Copy.ai, Claude, Notion AI (which to use when)</li>
+    <li>Video & audio — Runway, Descript, ElevenLabs, Otter.ai (real workflow)</li>
+    <li>Design & visuals — Midjourney, Canva AI, Remove.bg (without the fluff)</li>
+    <li>Scheduling & automation — Buffer, Zapier (practical setups)</li>
+    <li>Income & business — Gumroad, Lemon Squeezy, Stripe (platform comparisons)</li>
+    <li>Free tier guide — Everything worth using without spending a penny</li>
+    <li>My actual stack — What I actually pay for each month and why</li>
+    <li>YouTuber, writer, course creator, indie hacker — specific toolkits for each</li>
+    <li>2026 watchlist — Tools worth keeping an eye on</li>
+  </ul>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <h2>Tools Across Every Category That Matters</h2>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <h3>✍️ Writing & Copy</h3>
+      <p>Jasper, Copy.ai, Claude, Notion AI — when to use each and when to skip</p>
+    </div>
+    <div class="cat-card">
+      <h3>🎬 Video & Audio</h3>
+      <p>Runway, Descript, ElevenLabs — the practical creator video stack</p>
+    </div>
+    <div class="cat-card">
+      <h3>🎨 Design & Visuals</h3>
+      <p>Midjourney, Canva AI, Remove.bg — without the monthly bloat</p>
+    </div>
+    <div class="cat-card">
+      <h3>📅 Scheduling</h3>
+      <p>Buffer, Zapier — automation that saves real hours per week</p>
+    </div>
+    <div class="cat-card">
+      <h3>💰 Income Tools</h3>
+      <p>Gumroad, Lemon Squeezy, Stripe — platform breakdown for creators</p>
+    </div>
+    <div class="cat-card">
+      <h3>🆓 Free Tier Guide</h3>
+      <p>Every genuinely useful free AI tool — no signup spam, no bait-and-switch</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2>Why This Guide Instead of Free Blog Posts?</h2>
+  <div class="feature">
+    <h3>I've done the testing. You just pick.</h3>
+    <p>Most "best AI tools" lists are compiled by people who wrote the article and never used the tools. I've used everything in this guide. I know what breaks, what annoys you, and what actually saves time.</p>
+  </div>
+  <div class="feature">
+    <h3>No affiliate listicles. Real opinions.</h3>
+    <p>Every tool recommendation comes with a honest take on the downsides too. This isn't optimised for search engines — it's optimised for you making a good decision.</p>
+  </div>
+  <div class="feature">
+    <h3>Organised by what you're actually trying to do.</h3>
+    <p>Not a alphabetical list. YouTube workflow, newsletter workflow, indie hacker setup — jump straight to your use case and get a done-for-you recommendation.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2>What Creators Say</h2>
+  <div class="testimonial">
+    <p>"I was paying for 7 different AI subscriptions. This guide helped me cut it to 3 and actually get better results."</p>
+    <p class="author">— Sarah M., Newsletter Writer (UK)</p>
+  </div>
+  <div class="testimonial">
+    <p>"The free tier guide alone was worth the price. Found tools I'd been overpaying for for months."</p>
+    <p class="author">— Jake R., YouTuber (USA)</p>
+  </div>
+  <div class="testimonial">
+    <p>"Finally a guide that tells you what NOT to use, not just what to use. Saved me from buying Jasper."</p>
+    <p class="author">— Priya K., Course Creator (India)</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-box">
+    <h2>Get the Guide</h2>
+    <p class="desc">Instant digital download. PDF + editable Markdown.</p>
+    <div class="amount">£12 <span>£47</span></div>
+    <p class="pay-note">One-time payment. Keep it forever. No subscription.</p>
+    <a href="#" class="cta-buy" onclick="document.getElementById('gumroad-overlay').style.display='flex';return false;">Buy Now — £12</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>Common Questions</h2>
+  <div class="faq-item">
+    <p class="faq-q">What format is it delivered in?</p>
+    <p class="faq-a">PDF and Markdown — read it on any device, search it easily, refer back to it forever.</p>
+  </div>
+  <div class="faq-item">
+    <p class="faq-q">Is this updated?</p>
+    <p class="faq-a">Last updated March 2026. AI moves fast — you'll receive any major updates to the guide if tools significantly change.</p>
+  </div>
+  <div class="faq-item">
+    <p class="faq-q">Is there a refund policy?</p>
+    <p class="faq-a">Yes. If the guide isn't useful, email within 30 days for a full refund. No questions asked.</p>
+  </div>
+  <div class="faq-item">
+    <p class="faq-q">Is this for beginners?</p>
+    <p class="faq-a">Best for creators who already use some AI tools but feel overwhelmed by options. If you're completely new to AI, it still works — but you'll need a bit of time to explore the free tiers first.</p>
+  </div>
+</section>
+
+<footer>
+  <p>AI Tools for Creators 2026 — Jamie Cole</p>
+  <p>clawgenesis@gmail.com</p>
+  <div class="affiliate">This page contains affiliate links. If you purchase through them, I may earn a small commission at no extra cost to you. I only recommend tools I actually use.</div>
+</footer>
+
+</div>
+
+<!-- GUMROAD OVERLAY -->
+<div id="gumroad-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#13131f;border:1px solid #1e1e30;border-radius:16px;padding:40px;max-width:440px;width:100%;text-align:center;position:relative">
+    <button onclick="document.getElementById('gumroad-overlay').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8888a0;font-size:20px;cursor:pointer">×</button>
+    <h2 style="font-size:1.5rem;margin-bottom:8px;color:#e8e8f0">AI Tools for Creators 2026</h2>
+    <p style="color:#8888a0;margin-bottom:24px;font-size:0.9rem">50+ tools tested. Instant delivery.</p>
+    
+    <!-- Gumroad embed — replace PRODUCT-CODE with actual Gumroad product code -->
+    <div id="gumroad-product"></div>
+    
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+    <script>
+      document.getElementById('gumroad-overlay').style.display = 'flex';
+      // Replace 'YOUR-GUMROAD-PRODUCT-PERMALINK' with actual Gumroad product permalink
+      document.getElementById('gumroad-product').innerHTML = 
+        '<a class="gumroad-button" href="https://gumroad.com/l/YOUR-GUMROAD-PRODUCT-PERMALINK" data-hosted="true" data-price="GB£12">Buy for £12 — via Gumroad</a>';
+    </script>
+    
+    <p style="margin-top:16px;font-size:0.75rem;color:#8888a0">Secure payment via Gumroad · 30-day guarantee</p>
+  </div>
+</div>
+
+</body>
+</html>

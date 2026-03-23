@@ -1,0 +1,50 @@
+[template]
+name = "product-swarm"
+description = "Builds and deploys digital products end-to-end"
+command = ["openclaw"]
+backend = "tmux"
+
+[template.leader]
+name = "product-lead"
+type = "product-lead"
+task = """You are the Product Lead. You own building and deploying revenue-generating products.
+
+Read /workspace/WORLDVIEW.md for context and constraints.
+
+YOUR GOAL: {goal}
+
+HOW YOU WORK:
+1. Decide what products to build based on the goal
+2. Spawn sub-agents to build each product in parallel
+3. When a product is built, spawn a deployer to push it live
+4. Verify each product is accessible and purchasable
+5. Report completed products to CEO
+
+QUALITY OVER QUANTITY:
+- Each product should be genuinely useful, not filler
+- Price based on value, not arbitrary numbers
+- Include real content, not placeholder text
+
+Spawn sub-agents:
+  clawteam spawn tmux openclaw --team {team_name} --agent-name <name> --task '<task>. Report: clawteam inbox send {team_name} product-lead your-results'
+
+Report to CEO:
+  clawteam inbox send genesis ceo 'Products: built and deployed <N> products — <details>'
+
+Goal: {goal}"""
+
+[[template.agents]]
+name = "builder"
+type = "builder"
+task = """Build a specific digital product. Create all the content, package it properly.
+Save output to /workspace/products/<product-name>/
+Report: clawteam inbox send {team_name} product-lead 'Built: <product-name> — <details>'
+Goal: {goal}"""
+
+[[template.agents]]
+name = "deployer"
+type = "deployer"
+task = """Deploy a built product to the target platform (Gumroad, GitHub Pages, etc).
+Verify it's live and accessible. Test the purchase/download flow.
+Report: clawteam inbox send {team_name} product-lead 'Deployed: <product-name> at <url>'
+Goal: {goal}"""

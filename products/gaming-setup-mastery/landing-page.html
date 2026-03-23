@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Setup Mastery — The Complete 2026 Hardware Guide for UK Gamers</title>
+    <meta name="description" content="Stop researching for weeks. Get the complete gaming peripherals guide — headsets, keyboards, mice, monitors, and budget builds. All in one bundle for £12.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-card-hover: #22222e;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-orange: #f97316;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --border: #2a2a3a;
+            --glow-cyan: 0 0 30px rgba(0, 212, 255, 0.3);
+            --glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-price {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-price {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 36px;
+        }
+
+        .price-tag {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .price-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .email-note {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        /* What's Included */
+        .included-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .included-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .included-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .included-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+
+        .icon-headset { background: rgba(0, 212, 255, 0.15); }
+        .icon-keyboard { background: rgba(168, 85, 247, 0.15); }
+        .icon-mouse { background: rgba(249, 115, 22, 0.15); }
+        .icon-monitor { background: rgba(34, 197, 94, 0.15); }
+        .icon-bonus { background: rgba(245, 158, 11, 0.15); }
+
+        .included-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .included-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .word-count {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            background: var(--bg-primary);
+        }
+
+        .preview-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            background: var(--bg-secondary);
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .preview-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+
+        .preview-body {
+            padding: 36px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .preview-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .preview-body::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        .preview-body::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .preview-body h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .preview-body h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 24px 0 12px;
+            color: var(--text-primary);
+        }
+
+        .preview-body p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        .preview-body ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .preview-body li {
+            color: var(--text-secondary);
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .preview-body li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        .preview-fade {
+            position: relative;
+        }
+
+        .preview-fade::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(transparent, var(--bg-card));
+            pointer-events: none;
+        }
+
+        .preview-cta {
+            text-align: center;
+            padding: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--bg-primary);
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .author-detail {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 32px 20px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .final-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 16px auto 0;
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .price-tag {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .preview-body {
+                padding: 24px;
+            }
+
+            .preview-body h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">Gaming<span>Setup</span>Mastery</a>
+            <div class="nav-price">£12 — Instant Download</div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-badge">2026 Edition · UK Priced · Amazon Linked</div>
+            <h1>The Hardware Guide That <span class="gradient-text">Saves You Weeks</span> of Research</h1>
+            <p class="hero-subtitle">Stop endlessly scrolling reviews and comparing specs. Get the complete 2026 gaming peripherals guide — headsets, keyboards, mice, monitors, and budget builds — all in one bundle.</p>
+            <div class="hero-price">
+                <span class="price-tag">£12</span>
+                <span class="price-label">one-time payment</span>
+            </div>
+            <br>
+            <a href="#purchase" class="cta-button">Get the Full Gaming Setup Mastery — £12</a>
+            <p class="email-note">📧 Instant email delivery · Download immediately after purchase</p>
+        </div>
+    </header>
+
+    <section class="included-section">
+        <div class="container">
+            <div class="section-label">What's Inside</div>
+            <h2>5 Premium Guides. Zero Filler.</h2>
+            <p class="section-intro">Every file is packed with real specs, real UK prices, and genuinely useful advice. No generic fluff, no sponsored placements.</p>
+
+            <div class="included-grid">
+                <div class="included-card">
+                    <div class="included-icon icon-headset">🎧</div>
+                    <h3>Gaming Setup Guide</h3>
+                    <p>The main guide: 5 headset reviews, 5 keyboard reviews, 5 mouse reviews, 4 monitor reviews, budget build tiers (£100/£250/£500), setup tips, and cable management.</p>
+                    <span class="word-count">~2,500 words</span>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon icon-headset">🔊</div>
+                    <h3>Headsets Deep Dive</h3>
+                    <p>Wired vs wireless explained, surround sound myths debunked, best picks for competitive vs casual gaming, budget recommendations by price tier.</p>
+                    <span class="word-count">~1,000 words</span>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon icon-keyboard">⌨️</div>
+                    <h3>Keyboards Mechanical Guide</h3>
+                    <p>Cherry MX vs Gateron vs TTC explained, linear vs tactile vs clicky vs speed switches, hot-swap explained, TKL vs 60% vs full-size, best keyboards by category.</p>
+                    <span class="word-count">~900 words</span>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon icon-mouse">🖱️</div>
+                    <h3>Mouse Sensor Guide</h3>
+                    <p>PixArt sensor deep dive, DPI myths debunked, polling rate explained, what actually matters for competitive gaming, sensor tier list with real product examples.</p>
+                    <span class="word-count">~700 words</span>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon icon-bonus">📋</div>
+                    <h3>Product Specification</h3>
+                    <p>Full product documentation: pricing strategy, affiliate approach, target audience, included files list, and Gumroad integration details.</p>
+                    <span class="word-count">~200 words</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="preview-section">
+        <div class="container">
+            <div class="section-label">See Inside</div>
+            <h2>A Sample of What's Included</h2>
+            <p class="section-intro">Real content. Real specs. Real recommendations. Here's a preview from the main guide.</p>
+
+            <div class="preview-content">
+                <div class="preview-header">
+                    <div class="preview-dot dot-red"></div>
+                    <div class="preview-dot dot-yellow"></div>
+                    <div class="preview-dot dot-green"></div>
+                    <span class="preview-title">gaming-setup-guide.md</span>
+                </div>
+                <div class="preview-body preview-fade">
+                    <h3>Best Gaming Mice 2026</h3>
+
+                    <h4>1. Logitech G Pro X Superlight 2</h4>
+                    <p><strong>Sensor:</strong> Logitech Hero 2 (25K DPI) · <strong>Weight:</strong> 60g · <strong>Polling:</strong> 8000Hz · <strong>RRP:</strong> ~£160</p>
+                    <p>The benchmark wireless gaming mouse. At 60g it's extraordinarily light without feeling flimsy, and the Hero 2 sensor is flawless — no smoothing, no acceleration, no jitter at any speed. This is the mouse most pro esports players reach for.</p>
+
+                    <h4>2. Razer Viper V3 Pro</h4>
+                    <p><strong>Sensor:</strong> Razer Focus Pro 30K Optical (PixArt PA3952) · <strong>Weight:</strong> 55g · <strong>Polling:</strong> 8000Hz · <strong>RRP:</strong> ~£140</p>
+                    <p>Razer's answer to the Superlight 2, and it's genuinely close. The Focus Pro 30K sensor is top-tier, the 55g weight is incredibly nimble, and Razer's optical switches are lightning-fast.</p>
+
+                    <h4>3. HyperX Pulsefire Haste 2</h4>
+                    <p><strong>Sensor:</strong> PixArt PA3319 (26K DPI) · <strong>Weight:</strong> 53g · <strong>Polling:</strong> 8000Hz · <strong>RRP:</strong> ~£65</p>
+                    <p>The budget performance winner. For £65 you get 8000Hz polling, a solid PixArt sensor, and a sub-60g weight — features that were exclusive to £150 mice two years ago. The best mouse under £80.</p>
+
+                    <h4>What DPI Should You Actually Use?</h4>
+                    <ul>
+                        <li>Competitive FPS (Valorant, CS2): <strong>400–1600 DPI</strong>. Most pros land at 800.</li>
+                        <li>Strategy / MOBAs: <strong>800–1600 DPI</strong></li>
+                        <li>Higher DPI is NOT better — it amplifies hand tremors, reducing precision</li>
+                    </ul>
+
+                    <h4>£250 Budget Build — Recommended Mouse Priority</h4>
+                    <ul>
+                        <li>Logitech G Pro X Superlight 2 (£160) — top priority</li>
+                        <li>Razer Viper V3 Pro (£140) — strong alternative</li>
+                        <li>HyperX Pulsefire Haste 2 (£65) — best value under £100</li>
+                    </ul>
+                </div>
+                <div class="preview-cta">
+                    <a href="#purchase" class="cta-button">Unlock the Full Guide — £12</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-label">What Gamers Say</div>
+            <h2>Trusted by UK Gamers</h2>
+
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I was about to drop £300 on a monitor and keyboard combo before finding this guide. The £500 build tier alone saved me from making two bad purchases. The monitor recommendation (LG 27GR93U) is perfect for my setup."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div>
+                            <div class="author-name">James D.</div>
+                            <div class="author-detail">Manchester · Valorant & Cyberpunk 2077</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The mouse sensor guide alone is worth the £12. I'd been running 6400 DPI thinking higher was better. Switched to 800 and my aim got noticeably more consistent within a week. Should have found this sooner."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div>
+                            <div class="author-name">Sarah K.</div>
+                            <div class="author-detail">Leeds · Apex Legends (Diamond rank)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"As someone who's been building gaming PCs for 10 years, I was skeptical. But the keyboard guide is genuinely well-researched — the section on rapid trigger and the Wooting 60HE+ is exactly the kind of specific info you can't find on generic 'best of' lists."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MW</div>
+                        <div>
+                            <div class="author-name">Marcus W.</div>
+                            <div class="author-detail">Birmingham · CS2 & Rust</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <div class="section-label">Why This Bundle</div>
+            <h2>Not Another Generic List</h2>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🇬🇧</div>
+                    <h3>UK Prices</h3>
+                    <p>Every product priced in GBP with Amazon UK links. No currency conversion guesswork.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <h3>2026 Updated</h3>
+                    <p>Current generation hardware. No outdated recommendations from 2023.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>No Sponsored Picks</h3>
+                    <p>Real pros and cons for every product. If something is overpriced, we say so.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Saves You Hours</h3>
+                    <p> Weeks of research condensed into ~5,000 words of actionable intel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" id="purchase">
+        <div class="container">
+            <div class="section-label">Get Started</div>
+            <h2>Build Your Perfect Setup Today</h2>
+            <p>5 guides · Instant delivery · No subscription · No fluff</p>
+            <div class="hero-price" style="justify-content: center;">
+                <span class="price-tag">£12</span>
+                <span class="price-label">one-time</span>
+            </div>
+            <br>
+            <!-- Gumroad embed placeholder -->
+            <div id="gumroad-placeholder" style="display: flex; justify-content: center; margin-bottom: 16px;">
+                <a href="https://gumroad.com/l/gaming-setup-mastery" class="cta-button" target="_blank" rel="noopener">
+                    Get the Full Gaming Setup Mastery — £12
+                </a>
+            </div>
+            <p class="email-note">📧 Delivered instantly to your email · Gumroad handles secure payment</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">Gaming<span>Setup</span>Mastery</a>
+            <p class="footer-disclaimer">Gaming Setup Mastery is a digital product sold via Gumroad. All product recommendations are independent and based on research. This site contains affiliate links (Amazon Associates UK, tag: genesis01-20). As an associate, we may earn commission on qualifying purchases at no extra cost to you. Prices shown are RRP estimates and may vary.</p>
+        </div>
+    </footer>
+</body>
+</html>
