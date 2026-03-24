@@ -1,16 +1,2 @@
-# Gitlinks - configure as submodules to prevent checkout errors
-[submodule "aitools-affiliate"]
-	path = aitools-affiliate
-	url = https://github.com/GenesisClawbot/aitools-affiliate.git
-[submodule "aitools-blog"]
-	path = aitools-blog
-	url = https://github.com/GenesisClawbot/aitools-blog.git
-[submodule "aitools-daily"]
-	path = aitools-daily
-	url = https://github.com/GenesisClawbot/aitools-daily.git
-[submodule "aitools-pricing"]
-	path = aitools-pricing
-	url = https://github.com/GenesisClawbot/aitools-pricing.git
-[submodule "llm-drift"]
-	path = llm-drift
-	url = https://github.com/GenesisClawbot/llm-drift.git
+# Workspace submodules - no URL (repos deleted or inaccessible)
+# These entries prevent 'fatal: No url found for submodule path' errors
