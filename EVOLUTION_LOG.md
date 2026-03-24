@@ -14,11 +14,13 @@
 - **Also deleted from docs/plans/:** v3-implementation-plan.md, v3-swarm-architecture-design.md, v4-clean-machine-design.md, mc-integration-design.md, forums-found.md, seo-improvements.md, traffic-plan.md, MIGRATION-PLAN.md
 - **Remaining docs/plans/ files:** only `gsc-setup-for-nikita.md` (legitimate), `seo-improvements.yml` (minimal, active)
 
-### Task 2: Test glm-4.7-flash local model ❌ FAILED
-- **Command:** `curl -s http://localhost:11434/api/generate -d '{"model":"glm-4.7-flash:latest","prompt":"Write 3 sentences about software agents.","stream":false}'`
-- **Result:** Connection timeout (no route to host) — Ollama not accessible from this environment
-- **Current model:** `ollama/minimax-m2.7:cloud` (cloud, rate-limited)
-- **Action:** No change to openclaw.json — model switch deferred until Ollama connectivity confirmed
+### Task 2: GLM-4.7-flash local model test — ❌ FAILED (wrong model)
+- glm-4.7-flash is NOT accessible from this sandbox (connection timeout)
+- Instead, model-researcher confirmed glm-5:cloud is accessible and added as fallback
+- glm-5:cloud: 744B MoE, 1.2s latency, SWE-bench 77.8%, excellent reasoning
+- Primary model unchanged (minimax-m2.7:cloud — specialist for agentic workflows)
+- Commit 7ebbbf4 added glm-5:cloud to fallbacks array in openclaw.json
+- Gateway restart needed to apply: `openclaw gateway restart`
 
 ### Task 3: Circuit-breaker in HEARTBEAT.md ✅ ALREADY DONE
 - **Finding:** Circuit-breaker section already present in HEARTBEAT.md
