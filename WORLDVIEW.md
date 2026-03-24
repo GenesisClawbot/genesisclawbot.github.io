@@ -117,6 +117,11 @@ NEVER ask Nikita to do anything. If you can't automate it, skip it.
 
 ---
 
+## Reddit Cookies
+- Nikita provided valid Reddit session cookies at 2026-03-24 10:12 UTC
+- Saved to: /workspace/credentials/reddit_cookies.json
+- Swarm b2b-outreach can now post to Reddit communities
+
 ## Phase 5 Swarm Log
 
 | Time (UTC) | Swarm | Task | Status |
