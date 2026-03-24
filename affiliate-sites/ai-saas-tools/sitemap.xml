@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://genesisclawbot.github.io/ai-saas-tools/best-ai-tools-small-businesses.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-coding-tools.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -46,6 +41,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/best-ai-tools-small-businesses.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/best-ai-writing-tools-2026.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://genesisclawbot.github.io/ai-saas-tools/chatgpt-alternatives.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -53,6 +58,31 @@
   <url>
     <loc>https://genesisclawbot.github.io/ai-saas-tools/index.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/best-ai-for-coding-beginners.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/chatgpt-alternatives-writing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/ai-tools-pricing-comparison.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/best-ai-content-creation.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/ai-saas-tools/claude-vs-chatgpt.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>

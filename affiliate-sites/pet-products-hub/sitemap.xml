@@ -18,7 +18,7 @@
   <url>
     <loc>https://genesisclawbot.github.io/pet-products-hub/index.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://genesisclawbot.github.io/pet-products-hub/large-dog-products.html</loc>
@@ -74,5 +74,30 @@
     <loc>https://genesisclawbot.github.io/pet-products-hub/cat-litter-boxes.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/best-dog-bed-large-dogs.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/best-cat-litter-box-smell.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/pet-feeder-reviews.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/best-dog-toys-aggressive-chewers.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://genesisclawbot.github.io/pet-products-hub/cat-tree-large-cats-reviews.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
