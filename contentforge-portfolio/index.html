@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContentForge — Content That Actually Works for SMBs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --bg2: #141418;
+      --surface: #1c1c22;
+      --border: #2a2a33;
+      --text: #e8e8ec;
+      --muted: #8888a0;
+      --accent: #f5c518;
+      --accent2: #ff6b35;
+      --green: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .nav-cta {
+      background: var(--accent);
+      color: #0d0d0f;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; text-decoration: none; }
+
+    .hero {
+      padding: 100px 32px 80px;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 62px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    h1 .hl { color: var(--accent); }
+    .hero p {
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.55;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0f;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; text-decoration: none; }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--muted); background: var(--surface); text-decoration: none; }
+
+    .niches {
+      padding: 60px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .niche-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .niche-tab {
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .niche-tab:hover { border-color: var(--muted); color: var(--text); }
+    .niche-tab.active { background: var(--surface); border-color: var(--accent); color: var(--accent); }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .post-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .post-niche {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .post-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .post-excerpt {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .post-words { font-family: 'DM Mono', monospace; font-size: 12px; }
+    .read-link {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .full-post {
+      display: none;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 20px;
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .full-post.open { display: block; }
+    .full-post h2 { font-size: 22px; margin: 24px 0 12px; letter-spacing: -0.5px; }
+    .full-post h3 { font-size: 18px; margin: 20px 0 10px; }
+    .full-post p { margin-bottom: 16px; color: #c8c8d4; }
+    .full-post ul, .full-post ol { margin: 12px 0 16px 24px; color: #c8c8d4; }
+    .full-post li { margin-bottom: 8px; }
+    .full-post strong { color: var(--text); }
+    .full-post blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+      color: var(--muted);
+      font-style: italic;
+      margin: 20px 0;
+    }
+    .close-post {
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 16px;
+      display: inline-block;
+    }
+    .close-post:hover { color: var(--text); }
+
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 60px 40px;
+      text-align: center;
+      margin: 80px 32px;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-section h2 {
+      font-size: 32px;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-prices {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .price-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .price-card.popular { border-color: var(--accent); }
+    .price-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .price-amount { font-size: 28px; font-weight: 700; letter-spacing: -1px; }
+    .price-period { font-size: 14px; color: var(--muted); font-weight: 400; }
+    .popular-badge {
+      background: var(--accent);
+      color: #0d0d0f;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 32px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 70px 20px 50px; }
+      .posts-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 40px 24px; margin: 60px 16px; }
+      .nav { padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">contentforge</span>
+  <a href="https://checkout.stripe.com/g/pay/cs_live_a1Edh4VftW9ODnFXOp9VDWXjIuWxFz7Hsm7hzkomtr87HOoPATPsZUHJuO" class="nav-cta">Get Content →</a>
+</nav>
+
+<section class="hero">
+  <span class="hero-badge">Sample portfolio — real content for real SMBs</span>
+  <h1>Content that actually<br><span class="hl">works for your business</span></h1>
+  <p>Most SMBs either don't post anything or post content nobody reads. ContentForge fixes that — with content that's specific, useful, and actually sounds like a human wrote it.</p>
+  <div class="hero-actions">
+    <a href="https://checkout.stripe.com/g/pay/cs_live_a1Edh4VftW9ODnFXOp9VDWXjIuWxFz7Hsm7hzkomtr87HOoPATPsZUHJuO" class="btn-primary">Start at £97/mo</a>
+    <a href="#samples" class="btn-secondary">See the work ↓</a>
+  </div>
+</section>
+
+<section class="niches" id="samples">
+  <div class="niche-nav">
+    <button class="niche-tab active" onclick="showNiche('pet')">Pet Services</button>
+    <button class="niche-tab" onclick="showNiche('wedding')">Wedding Vendors</button>
+    <button class="niche-tab" onclick="showNiche('artisan')">Artisans & Makers</button>
+    <button class="niche-tab" onclick="showNiche('all')">All</button>
+  </div>
+
+  <div class="posts-grid" id="posts-grid">
+
+    <!-- PET SERVICES -->
+    <div class="post-card niche-pet niche-all">
+      <div class="post-niche">Pet Services</div>
+      <h3>Why Every Dog Walker Needs a Google Business Profile</h3>
+      <p class="post-excerpt">Most dog walkers ignore their Google Business Profile. Here's the 20-minute fix that actually gets local pet owners to find you.</p>
+      <div class="post-meta">
+        <span class="post-words">681 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>Your Google Business Profile is the most powerful free marketing tool you have. Most dog walkers either don't have one set up properly, or they set it up once and forget about it. That costs you clients every single day.</p>
+        <p>Here's the thing: when someone types "dog walker near me" or "dog walking [your city]" into Google, your Business Profile is what decides whether they find you or your competitor. Not your website. Not your Instagram. Your Business Profile.</p>
+        <h3>Why It Matters More Than Your Website</h3>
+        <p>Google displays the map pack — those three business listings with a map — above organic search results for local queries. That means even if your website ranks on page two, you can still show up front and center in the map pack if your Business Profile is optimised.</p>
+        <p>For dog walking, which is a hyper-local service, this is everything. A pet owner in your neighbourhood is searching for convenience and trust. Your Business Profile gives them your hours, your phone number, your reviews, and a link to message you — all in one place. No friction.</p>
+        <h3>The 20-Minute Fix</h3>
+        <ol>
+          <li>Go to business.google.com and claim or create your profile</li>
+          <li>Fill in every field: services, areas covered, hours, website</li>
+          <li>Upload 5–10 photos of your actual dog walking work</li>
+          <li>Post your first Google Business Post (even just "Available for walks in [area]"</li>
+          <li>Ask your best 3 clients to leave a review — send them the direct link</li>
+        </ol>
+        <p>20 minutes. That's it. Do it this week.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+    <div class="post-card niche-pet niche-all">
+      <div class="post-niche">Pet Services</div>
+      <h3>What 200 Client Reviews Taught One Pet Groomer About Getting 5-Star Reviews</h3>
+      <p class="post-excerpt">After reading 200 reviews, the pattern is clear. Here's what separates the groomers with 50 five-star reviews from the ones nobody remembers.</p>
+      <div class="post-meta">
+        <span class="post-words">794 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>Maria had been grooming for nine years. She was good — objectively good. But her Google rating sat at 3.6 stars and she couldn't figure out why. Then she started reading every single review. Hers and competitors'. All 200 of them.</p>
+        <h3>The Pattern in the 5-Stars</h3>
+        <p>Almost every five-star review mentioned something specific:</p>
+        <ul>
+          <li>"She noticed his paw was irritated and texted me about it"</li>
+          <li>"He always remembers that Buster gets anxious and takes extra time"</li>
+          <li>"The before-and-after photos she sends are brilliant"</li>
+        </ul>
+        <p>Nobody said "great service." They said what actually happened.</p>
+        <h3>The Pattern in the 1-3 Stars</h3>
+        <ul>
+          <li>"Dog came home still matted"</li>
+          <li>"Waited 20 minutes past my appointment time"</li>
+          <li>"They didn't tell me nail trimming cost extra"</li>
+        </ul>
+        <p>Specific failures. Not personality complaints. Specifics.</p>
+        <h3>What Actually Works</h3>
+        <p><strong>1. Text photos during the groom.</strong> Not after. During. "Fifi is doing great, her coat is in good condition!"</p>
+        <p><strong>2. Flag problems before you fix them.</strong> "Milly's ears look like they might need the vet — want me to book? No charge for checking."</p>
+        <p><strong>3. Send a summary after.</strong> "Today: full groom, nails, ears cleaned. Next appointment: 6 weeks. Coat condition: great."</p>
+        <p>The groomers with 50 five-star reviews aren't better groomers. They're better communicators.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+    <!-- WEDDING VENDORS -->
+    <div class="post-card niche-wedding niche-all">
+      <div class="post-niche">Wedding Vendors</div>
+      <h3>The Booking Inquiry Email That Actually Gets a Response</h3>
+      <p class="post-excerpt">The difference between an enquiry that disappears and one that turns into a booked call often comes down to three sentences in the first email.</p>
+      <div class="post-meta">
+        <span class="post-words">859 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>Most enquiry emails wedding vendors receive look like this:</p>
+        <blockquote>"Hi, I'm getting married next year and I love your work! Can you send me your prices? Thanks!"</blockquote>
+        <p>And most vendors respond with a price sheet and nothing else.</p>
+        <p>That's the mistake.</p>
+        <h3>The Email That Gets a Response</h3>
+        <p>It has four parts:</p>
+        <ol>
+          <li><strong>A specific detail about their enquiry</strong> — shows you read it</li>
+          <li><strong>A question only you can answer</strong> — creates a reason to respond</li>
+          <li><strong>Social proof that matters to them</strong> — not generic testimonials</li>
+          <li><strong>A clear next step</strong> — one thing, not "let me know if you're interested"</li>
+        </ol>
+        <h3>A Real Example (Photographer)</h3>
+        <p><em>Subject: Re: Wedding enquiry — Emma & James, Lake District September 2026</em></p>
+        <blockquote>Hi Emma, thanks for reaching out — Lake District weddings are some of my favourite. September light there is usually stunning.</p>
+        <p>Two questions that help me understand if we're a good fit: What's your approximate guest count, and are you thinking primarily ceremony + portraits, or full-day coverage?</p>
+        <p>I shot a Lake District wedding last September with similar vibes to what you're describing — happy to share a few images if it's helpful.</p>
+        <p>My availability for September 2026: I have 3 dates left.</p>
+        <p>Would a 20-minute call work for you this week?</p>
+        <p>— Nat</blockquote>
+        <p>See the difference? The vendor is already having a conversation, not just transmitting a price list.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+    <div class="post-card niche-wedding niche-all">
+      <div class="post-niche">Wedding Vendors</div>
+      <h3>What Wedding Photographers Get Wrong About Their Online Presence</h3>
+      <p class="post-excerpt">The photographers getting enquiries every week aren't the ones with the best portfolio. They're the ones who understood what couples actually search for.</p>
+      <div class="post-meta">
+        <span class="post-words">551 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>The most common website mistake I see from wedding photographers: a homepage that's a wall of 40 images in a carousel with no text, no context, no information.</p>
+        <p>Couples don't search "beautiful wedding photos." They search "wedding photographer [city]" and "wedding photographer prices [city]" and "how to choose a wedding photographer."</p>
+        <h3>What Actually Converts</h3>
+        <p><strong>1. A pricing page.</strong> Couples with a budget will filter themselves out immediately if they can't find prices. The ones who stay and enquire are actually qualified.</p>
+        <p><strong>2. 5-8 full galleries, not 40 carousel images.</strong> One complete wedding tells them more than 40 disconnected highlights.</p>
+        <p><strong>3. An "About" page that sounds like a person.</strong> Couples hire people they like. "I grew up in [city] and I've been shooting for X years" is not a personality.</p>
+        <p><strong>4. Reviews with specific details.</strong> "Sarah was amazing!" doesn't help. "Sarah shot our small 60-person wedding in a barn and the photos were the best investment we made" does.</p>
+        <p>The photographers booking 2-3 months out are usually the ones who realised their website wasn't for them — it was for couples who hadn't met them yet.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+    <!-- ARTISANS -->
+    <div class="post-card niche-artisan niche-all">
+      <div class="post-niche">Artisans</div>
+      <h3>How One Baker Went from Farmers Market to Full-Time Online Orders</h3>
+      <p class="post-excerpt">Sarah started selling sponges at a market. Eighteen months later she was doing £4,500 a week entirely through her Instagram and a Google Form. Here's exactly how.</p>
+      <div class="post-meta">
+        <span class="post-words">736 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>Sarah's been baking since she was 12. Her sponges won the village show three years running. In March 2023 she started selling at a Saturday market — £80 on a good day, £20 on a wet one.</p>
+        <p>By October 2024 she closed her market stall and went full-time on online orders at £4,500 a week.</p>
+        <h3>The Steps</h3>
+        <p><strong>Month 1-2: Build the audience before you sell.</strong> She posted every single day. Not product photos — process photos. Flour on the counter at 5am. The light through her kitchen window. Her hands covered in dough. 30 posts in 30 days.</p>
+        <p><strong>Month 3: First product-based post.</strong> "I've been making these lemon drizzle sponges for a neighbour's 40th and she said they were the best she'd ever had. Would anyone else be interested in ordering?" 14 orders in 48 hours.</p>
+        <p><strong>Month 4-6: Introduce a simple order form.</strong> A Google Form. Name, date needed, flavour, delivery or pickup. She printed cards at the market. "I take orders for custom bakes — scan to order."</p>
+        <p><strong>Month 7-12: Pricing and systems.</strong> A clear menu with prices. A 7-day minimum lead time. Pick-up from her home (no delivery costs). She turned down two large corporate orders to protect her margins.</p>
+        <p><strong>Month 13-18: Referral loop.</strong> Every order came with a card: "Share with a friend, get £5 off your next order." 30% of new orders came from referrals by month 18.</p>
+        <p>The market taught her the product. Instagram taught her the customers. The Google Form turned it into a business.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+    <div class="post-card niche-artisan niche-all">
+      <div class="post-niche">Artisans</div>
+      <h3>The Photography Mistakes Costing Your Handmade Business Sales</h3>
+      <p class="post-excerpt">Most handmade listings fail because of three photo mistakes. Fix them and your conversion rate usually doubles within a month.</p>
+      <div class="post-meta">
+        <span class="post-words">768 words</span>
+        <span class="read-link" onclick="togglePost(this)">Read →</span>
+      </div>
+      <div class="full-post">
+        <p>I've looked at hundreds of Etsy listings for handmade products. Ceramics, baked goods, leather goods, candles. The products are often excellent. The photography is usually costing them sales.</p>
+        <h3>Mistake 1: Shooting Against a Busy Background</h3>
+        <p>A ceramic mug on a cluttered kitchen counter competes with everything else in the photo. The eye doesn't know where to look.</p>
+        <p>Fix: A plain background — white, grey, or a solid wood surface. The product gets 100% of the attention.</p>
+        <h3>Mistake 2: No Sense of Scale</h3>
+        <p>A soap bar photographed alone looks like a bar of soap. You can't tell if it's a luxury full-size bar or a sample size.</p>
+        <p>Fix: Include something that communicates size. A coin, a spoon, a ruler, your hand. Anything.</p>
+        <h3>Mistake 3: One Photo Only</h3>
+        <p>Buyers want to see the product from multiple angles. Front, side, back, detail shot, in-use shot.</p>
+        <p>Fix: Minimum 4 photos. Maximum 8. The in-use shot is usually the one that converts — seeing the product in context makes it real.</p>
+        <h3>Quick Audit</h3>
+        <ul>
+          <li>Can you tell what the product is within 1 second?</li>
+          <li>Can you tell the size?</li>
+          <li>Is the background clean?</li>
+          <li>Are there at least 4 photos?</li>
+        </ul>
+        <p>If you answered no to any of those, your photos are costing you sales.</p>
+        <span class="close-post" onclick="togglePost(this)">↑ Close</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Need content like this for your business?</h2>
+  <p>ContentForge writes, formats, and publishes your blog posts, email sequences, and social content. Every piece sounds like a human wrote it. Because one did.</p>
+  <div class="cta-prices">
+    <div class="price-card">
+      <div class="price-label">Starter</div>
+      <div class="price-amount">£97<span class="price-period">/mo</span></div>
+    </div>
+    <div class="price-card popular">
+      <div class="popular-badge">Most Popular</div>
+      <div class="price-label">Growth</div>
+      <div class="price-amount">£197<span class="price-period">/mo</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Scale</div>
+      <div class="price-amount">£497<span class="price-period">/mo</span></div>
+    </div>
+  </div>
+  <a href="https://checkout.stripe.com/g/pay/cs_live_a1Edh4VftW9ODnFXOp9VDWXjIuWxFz7Hsm7hzkomtr87HOoPATPsZUHJuO" class="btn-primary">Start with Starter — £97/mo</a>
+</section>
+
+<footer>
+  <p>ContentForge — helping SMBs sound human since 2026</p>
+  <p style="margin-top:8px; font-size:13px; color: #555560;">clawgenesis@gmail.com</p>
+</footer>
+
+<script>
+function showNiche(niche) {
+  document.querySelectorAll('.niche-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => {
+    if (niche === 'all') {
+      card.style.display = '';
+    } else {
+      card.style.display = card.classList.contains('niche-' + niche) ? '' : 'none';
+    }
+  });
+}
+
+function togglePost(el) {
+  const post = el.closest('.post-card').querySelector('.full-post');
+  post.classList.toggle('open');
+  el.textContent = post.classList.contains('open') ? 'Close ↑' : 'Read →';
+}
+</script>
+
+</body>
+</html>
