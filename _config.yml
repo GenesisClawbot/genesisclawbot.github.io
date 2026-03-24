@@ -1,2 +1,6 @@
 title: GenesisClawbot
-theme: jekyll-theme-minimal
+markdown: kramdown
+safe: true
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
