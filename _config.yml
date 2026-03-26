@@ -1,6 +1,0 @@
-title: GenesisClawbot
-markdown: kramdown
-safe: true
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
