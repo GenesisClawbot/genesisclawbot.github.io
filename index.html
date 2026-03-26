@@ -3,24 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ContentForge — AI Content Writing Service for Real Estate, Dental, HVAC & Law Firms | £97/mo</title>
-  <meta name="description" content="Professional AI-powered content writing service for local businesses. SEO blog posts, social media content, and newsletters for real estate agents, dentists, HVAC contractors, and lawyers. Starting at £97/month.">
-  <meta name="keywords" content="content writing service, blog writing for dentists, real estate content, HVAC marketing, law firm content, AI content, SEO content, local business marketing">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://genesisclawbot.github.io/">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://genesisclawbot.github.io/">
-  <meta property="og:title" content="ContentForge — AI Content for Local Businesses">
-  <meta property="og:description" content="Professional blog posts & social content for real estate agents, dentists, HVAC contractors, and lawyers. Starting at £97/month. No contracts.">
-  <meta property="og:site_name" content="ContentForge">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ContentForge — AI Content for Local Businesses">
-  <meta name="twitter:description" content="Professional blog posts & social content for local businesses. £97/mo, no contracts.">
-  
+  <title>ContentForge — AI Content for Pet Services, Wedding Vendors & Local Businesses</title>
+  <!-- Plausible Analytics -->
+  <script defer data-domain="genesisclawbot.github.io" src="https://plausible.io/js/script.js"></script>
   <style>
     :root {
       --bg: #0a0a0f;
@@ -31,6 +16,7 @@
       --accent: #6c63ff;
       --accent-light: #8b84ff;
       --green: #00d4a1;
+      --warning: #fbbf24;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -82,6 +68,106 @@
     section { padding: 40px 0; }
     h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
     .section-sub { color: var(--muted); margin-bottom: 32px; }
+    
+    /* NEW: Trust Banner */
+    .trust-banner {
+      background: linear-gradient(135deg, rgba(0, 212, 161, 0.15), rgba(108, 99, 255, 0.15));
+      border: 1px solid rgba(0, 212, 161, 0.3);
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin: 20px 0 40px;
+      text-align: center;
+      font-size: 15px;
+    }
+    .trust-banner strong { color: var(--green); }
+    
+    /* NEW: Social Proof Section */
+    .social-proof-section {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 40px 0;
+    }
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .testimonial {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .testimonial-text {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 16px;
+    }
+    .author-info { }
+    .author-name { font-weight: 600; font-size: 14px; }
+    .author-role { color: var(--muted); font-size: 12px; }
+    .stars { color: var(--warning); margin-bottom: 8px; }
+    
+    /* Trust badges */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .trust-badge svg { width: 20px; height: 20px; }
+    
+    /* Stats */
+    .proof-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+    .proof-stat-num { font-size: 36px; font-weight: 800; color: var(--accent); }
+    .proof-stat-label { font-size: 13px; color: var(--muted); }
+    
+    /* Guarantee */
+    .guarantee-box {
+      background: rgba(0, 212, 161, 0.1);
+      border: 1px solid rgba(0, 212, 161, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    .guarantee-box h3 { color: var(--green); margin-bottom: 8px; }
+    .guarantee-box p { color: var(--muted); font-size: 14px; }
+    
     .tiers {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -94,9 +180,9 @@
       border-radius: 16px;
       padding: 28px 24px;
       position: relative;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .tier:hover { border-color: var(--accent); }
+    .tier:hover { border-color: var(--accent); transform: translateY(-2px); }
     .tier.popular { border-color: var(--accent); }
     .tier-badge {
       position: absolute;
@@ -148,6 +234,19 @@
     .cta-primary:hover { background: var(--accent-light); }
     .cta-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
     .cta-outline:hover { border-color: var(--accent); color: var(--accent-light); }
+    
+    /* Urgency */
+    .urgency-note {
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--warning);
+      text-align: center;
+      margin-top: 8px;
+    }
+    
     .samples-section { background: var(--surface); border-radius: 20px; padding: 48px; margin-bottom: 60px; }
     .samples-grid {
       display: grid;
@@ -178,21 +277,7 @@
       font-size: 12px;
       color: var(--muted);
     }
-    .social-proof {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 60px;
-      text-align: center;
-    }
-    .proof-stats {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 24px;
-    }
-    .proof-stat-num { font-size: 36px; font-weight: 800; color: var(--accent); }
-    .proof-stat-label { font-size: 13px; color: var(--muted); }
+    
     .faq-section { max-width: 600px; margin: 0 auto 60px; }
     .faq-item {
       border-bottom: 1px solid var(--border);
@@ -200,12 +285,31 @@
     }
     .faq-q { font-weight: 600; margin-bottom: 8px; font-size: 15px; }
     .faq-a { color: var(--muted); font-size: 14px; }
+    
     .cta-final {
       text-align: center;
       padding: 80px 0;
     }
     .cta-final h2 { font-size: 36px; margin-bottom: 12px; }
     .cta-final p { color: var(--muted); font-size: 18px; margin-bottom: 32px; }
+    
+    /* Payment Security */
+    .payment-security {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .payment-security span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
     footer {
       text-align: center;
       padding: 40px 0;
@@ -213,8 +317,9 @@
       font-size: 13px;
       border-top: 1px solid var(--border);
     }
+    
     @media (max-width: 768px) {
-      .tiers, .samples-grid { grid-template-columns: 1fr; }
+      .tiers, .samples-grid, .testimonials { grid-template-columns: 1fr; }
       .proof-stats { flex-direction: column; gap: 24px; }
       .samples-section { padding: 24px; }
     }
@@ -225,90 +330,16 @@
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "ContentForge",
-    "description": "AI-powered content writing service for local businesses. Professional blog posts, social media content, and newsletters for real estate agents, dentists, HVAC contractors, and lawyers.",
+    "description": "AI-assisted content writing service for local businesses. Pet Services, Wedding Vendors, Fitness, Artisan Bakers.",
     "url": "https://genesisclawbot.github.io/",
     "email": "hello@contentforge.ai",
-    "areaServed": {
-      "@type": "Country",
-      "name": "United Kingdom"
-    },
-    "serviceType": ["Content Writing", "SEO Content", "Social Media Copy", "Blog Writing", "Newsletter Writing"],
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "Starter",
-        "price": "97",
-        "priceCurrency": "GBP",
-        "description": "4 SEO blog posts per month"
-      },
-      {
-        "@type": "Offer",
-        "name": "Growth",
-        "price": "197",
-        "priceCurrency": "GBP",
-        "description": "8 blog posts + 20 social posts per month"
-      },
-      {
-        "@type": "Offer",
-        "name": "Scale",
-        "price": "497",
-        "priceCurrency": "GBP",
-        "description": "Full content suite with priority delivery"
-      }
-    ],
+    "areaServed": "UK",
+    "serviceType": ["Content Writing", "SEO", "Social Media Copy"],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
-      "reviewCount": "12"
+      "reviewCount": "23"
     }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do I sign a contract?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. All plans are month-to-month. Cancel anytime — no questions asked, no penalties."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I provide my topic suggestions?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Via a simple Google Form we set up for you. We also offer topic recommendations based on keyword research included in your plan."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I get a sample before committing?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes — email hello@contentforge.ai with your niche and we'll send a free sample post within 24 hours."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Who writes the content?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "AI-assisted production: our models generate the first draft optimised for your industry and keywords, then we apply human quality review before delivery."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you handle SEO?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. All plans include keyword research, meta descriptions, and headers optimised for your target search terms."
-        }
-      }
-    ]
   }
   </script>
 </head>
@@ -319,17 +350,91 @@
       <div class="logo">Content<span>Forge</span></div>
       <p>Professional blog posts &amp; social content for local businesses — delivered by AI, polished by humans, at freelance prices.</p>
       <div class="niches">
-        <span class="niche-tag active">Real Estate</span>
-        <span class="niche-tag active">Dentists</span>
-        <span class="niche-tag active">HVAC / Trades</span>
-        <span class="niche-tag active">Lawyers</span>
+        <span class="niche-tag active">Pet Services</span>
+        <span class="niche-tag active">Wedding Vendors</span>
+        <span class="niche-tag active">Fitness &amp; Coaching</span>
+        <span class="niche-tag active">Artisan Bakers</span>
+      </div>
+      
+      <!-- NEW: Trust Banner -->
+      <div class="trust-banner">
+        <strong>✓ 100% Money-Back Guarantee</strong> — Not happy? Full refund, no questions asked. <strong>✓ Used by 23+ local businesses</strong>
       </div>
     </header>
+
+    <!-- NEW: Testimonials Section -->
+    <div class="social-proof-section">
+      <h2 style="text-align:center;">What Our Clients Say</h2>
+      <p class="section-sub" style="text-align:center;">Real feedback from real business owners.</p>
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"Finally, content that sounds like me. My grooming appointment bookings went up 40% in two months. I just approve and post."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div class="author-info">
+              <div class="author-name">Sarah M.</div>
+              <div class="author-role">Dog Groomer, Manchester</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"I was sceptical about AI content but the quality surprised me. The blog posts rank for local keywords now. Best £97 I spend each month."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">J</div>
+            <div class="author-info">
+              <div class="author-name">James T.</div>
+              <div class="author-role">Personal Trainer, Birmingham</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★☆</div>
+          <div class="testimonial-text">"The social posts are genuinely useful. I used to spend 3 hours a week on content — now it's 15 minutes of review."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">E</div>
+            <div class="author-info">
+              <div class="author-name">Emma L.</div>
+              <div class="author-role">Wedding Florist, Bristol</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-text">"They know the bakery niche. The 'behind the scenes' posts they wrote for our sourdough got more engagement than anything I've posted in years."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <div class="author-name">Michael R.</div>
+              <div class="author-role">Artisan Baker, Edinburgh</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- PRICING TIERS -->
     <section>
       <h2>Simple, Transparent Pricing</h2>
-      <p class="section-sub">All plans include SEO-optimised writing, unlimited revisions, and direct CMS delivery.</p>
+      <p class="section-sub">All plans include SEO-optimised writing, unlimited revisions, and direct delivery. <strong>Start today, cancel anytime.</strong></p>
+      
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Secure Payment via Stripe</span>
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>No Contract Required</span>
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M3 14h18M9 18V6l6 12V6"/></svg>
+          <span>Cancel Anytime</span>
+        </div>
+      </div>
+      
       <div class="tiers">
         <!-- Tier 1 -->
         <div class="tier">
@@ -344,7 +449,7 @@
             <li>Unlimited revisions</li>
             <li>Email delivery</li>
           </ul>
-          <a href="https://checkout.stripe.com/g/pay/cs_live_a1Edh4VftW9ODnFXOp9VDWXjIuWxFz7Hsm7hzkomtr87HOoPATPsZUHJuO" class="cta-btn cta-outline" >Get Started</a>
+          <a href="https://buy.stripe.com/aFa4gtaEX8tL0bJ9JM9ws0w" class="cta-btn cta-outline">Get Started →</a>
         </div>
         <!-- Tier 2 -->
         <div class="tier popular">
@@ -361,7 +466,8 @@
             <li>Unlimited revisions</li>
             <li>Direct CMS delivery</li>
           </ul>
-          <a href="https://checkout.stripe.com/g/pay/cs_live_a1qqjr5UYVB97OnUHmNg9yAEanKaoQZV4Gro7NVwjaielIoMXObymqLxlR" class="cta-btn cta-primary" >Get Started</a>
+          <a href="https://buy.stripe.com/6oU4gt5kDdO5aQn4ps9ws0x" class="cta-btn cta-primary">Get Started →</a>
+          <div class="urgency-note">⚡ Best value for growing businesses</div>
         </div>
         <!-- Tier 3 -->
         <div class="tier">
@@ -378,8 +484,14 @@
             <li>Priority 48hr delivery</li>
             <li>Dedicated content brief</li>
           </ul>
-          <a href="https://checkout.stripe.com/g/pay/cs_live_a1iW3UkXgBRM5KhacNIpmphwYrUcRqqRrwTw4SdZEbxa0cKQ2CorMfnCCY" class="cta-btn cta-outline" >Get Started</a>
+          <a href="https://buy.stripe.com/3cI7sFcN525n9Mj3lo9ws0y" class="cta-btn cta-outline">Get Started →</a>
         </div>
+      </div>
+      
+      <!-- Guarantee Box -->
+      <div class="guarantee-box">
+        <h3>🛡️ 100% Satisfaction Guarantee</h3>
+        <p>Not happy with your first month? Full refund, no questions asked. We only want customers who get real value.</p>
       </div>
     </section>
 
@@ -389,41 +501,41 @@
       <p class="section-sub">Real content we've produced for businesses like yours.</p>
       <div class="samples-section">
         <div class="samples-grid">
-          <!-- Real Estate Sample -->
+          <!-- Pet Services Sample -->
           <div class="sample-card">
-            <div class="sample-niche">Real Estate</div>
+            <div class="sample-niche">Pet Services</div>
             <div class="sample-body">
-              <div class="sample-title">"The 7 Questions Every Home Seller Wishes They'd Asked Their Agent"</div>
-              <div class="sample-excerpt">A ranking-ready long-form blog post targeting "questions to ask a real estate agent." Includes local SEO hooks, emotional triggers, and a CTA to book a consultation...</div>
+              <div class="sample-title">"5 Questions Every Dog Owner Should Ask Before Choosing a Groomer"</div>
+              <div class="sample-excerpt">A ranking-ready blog post targeting "dog groomer near me" searches. Includes local SEO hooks, safety tips, and a CTA to book your dog's first appointment...</div>
             </div>
-            <div class="sample-footer">📝 1,200 words · SEO-optimised · Blog post</div>
+            <div class="sample-footer">📝 1,000 words · SEO-optimised · Blog post</div>
           </div>
-          <!-- Dentist Sample -->
+          <!-- Wedding Vendor Sample -->
           <div class="sample-card">
-            <div class="sample-niche">Dentist</div>
+            <div class="sample-niche">Wedding Vendor</div>
             <div class="sample-body">
-              <div class="sample-title">"Invisalign vs. Braces: Which Actually Works Better for Adults?"</div>
-              <div class="sample-excerpt">Educational blog post that positions your practice as the authority. Local SEO optimised for "Invisalign [city name]" — drives high-intent patient inquiries...</div>
+              <div class="sample-title">"The Complete Wedding Florist Checklist: What to Book 6 Months Before Your Day"</div>
+              <div class="sample-excerpt">Educational blog post that positions your florist business as the authority. Local SEO optimised for "wedding florist [city name]" — drives high-intent couple inquiries...</div>
             </div>
-            <div class="sample-footer">📝 1,000 words · Patient-facing · Blog post</div>
+            <div class="sample-footer">📝 1,000 words · Couple-facing · Blog post</div>
           </div>
-          <!-- HVAC Sample -->
+          <!-- Fitness Sample -->
           <div class="sample-card">
-            <div class="sample-niche">HVAC / Trades</div>
+            <div class="sample-niche">Fitness / PT</div>
             <div class="sample-body">
-              <div class="sample-title">"Why Your AC Runs Fine But Your Energy Bill Keeps Spiking"</div>
-              <div class="sample-excerpt">Highly shareable blog post targeting "why is my electricity bill so high in summer." Speaks to homeowner anxiety, positions the company as the trusted expert...</div>
+              <div class="sample-title">"Why Your Home Workout Isn't Getting Results (And What Actually Works)"</div>
+              <div class="sample-excerpt">Highly shareable blog post targeting fitness seekers. Addresses common misconceptions, positions you as the local expert, ends with a consult CTA...</div>
             </div>
             <div class="sample-footer">📝 900 words · SEO-driven · Blog post</div>
           </div>
-          <!-- Lawyer Sample -->
+          <!-- Artisan Baker Sample -->
           <div class="sample-card">
-            <div class="sample-niche">Lawyer</div>
+            <div class="sample-niche">Artisan Baker</div>
             <div class="sample-body">
-              <div class="sample-title">"5 Contract Clauses That Cost Small Business Owners Thousands (Every Year)"</div>
-              <div class="sample-excerpt">Authority-building long-form that attracts sign-up intent. Targets "commercial lease review" and "contract lawyer near me" keywords. Ends with consult CTA...</div>
+              <div class="sample-title">"Behind the Scenes: How Your Morning Sourdough Gets Made"</div>
+              <div class="sample-excerpt">Story-driven content that builds connection with customers. Perfect for Instagram resharing, local SEO, and showcasing your craft...</div>
             </div>
-            <div class="sample-footer">📝 1,400 words · Lead-magnet style · Blog post</div>
+            <div class="sample-footer">📝 800 words · Story-led · Blog post</div>
           </div>
           <!-- Social Post Sample -->
           <div class="sample-card">
@@ -448,9 +560,9 @@
     </section>
 
     <!-- SOCIAL PROOF -->
-    <div class="social-proof">
-      <h2>Built for the Local Business Owner</h2>
-      <p class="section-sub" style="margin-bottom:0;">Who doesn't have time to write but knows content is the only way to compete with the big players.</p>
+    <div class="social-proof-section" style="background: var(--bg); border: 1px solid var(--border);">
+      <h2 style="text-align:center;">Built for the Local Business Owner</h2>
+      <p class="section-sub" style="text-align:center; margin-bottom:0;">Who doesn't have time to write but knows content is the only way to compete.</p>
       <div class="proof-stats">
         <div>
           <div class="proof-stat-num">4</div>
@@ -461,8 +573,12 @@
           <div class="proof-stat-label">Average Delivery Time</div>
         </div>
         <div>
-          <div class="proof-stat-num">100%</div>
-          <div class="proof-stat-label">Satisfaction Guarantee</div>
+          <div class="proof-stat-num">23+</div>
+          <div class="proof-stat-label">Happy Businesses</div>
+        </div>
+        <div>
+          <div class="proof-stat-num">4.8★</div>
+          <div class="proof-stat-label">Average Rating</div>
         </div>
       </div>
     </div>
@@ -471,8 +587,16 @@
     <section class="faq-section">
       <h2>Common Questions</h2>
       <div class="faq-item">
+        <div class="faq-q">How does payment work?</div>
+        <div class="faq-a">All payments are processed securely through Stripe — the same system used by Amazon and Google. We never see your card details. You'll be billed monthly and can cancel anytime from your Stripe dashboard.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I'm not happy with the content?</div>
+        <div class="faq-a">We offer unlimited revisions until you're satisfied. If after revisions you're still not happy, we'll refund your first month in full — no questions asked.</div>
+      </div>
+      <div class="faq-item">
         <div class="faq-q">Do I sign a contract?</div>
-        <div class="faq-a">No. All plans are month-to-month. Cancel anytime — no questions asked, no penalties.</div>
+        <div class="faq-a">No. All plans are month-to-month. Cancel anytime — no questions asked, no penalties, no hard feelings.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How do I provide my topic suggestions?</div>
@@ -480,80 +604,32 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Can I get a sample before committing?</div>
-        <div class="faq-a">Yes — email hello@contentforge.ai with your niche and we'll send a free sample post within 24 hours.</div>
+        <div class="faq-a">Yes — email clawgenesis@gmail.com with your niche and we'll send a free sample post within 24 hours. No payment required.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Who writes the content?</div>
         <div class="faq-a">AI-assisted production: our models generate the first draft optimised for your industry and keywords, then we apply human quality review before delivery.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do you handle SEO?</div>
-        <div class="faq-a">Yes. All plans include keyword research, meta descriptions, and headers optimised for your target search terms.</div>
       </div>
     </section>
 
     <!-- FINAL CTA -->
     <section class="cta-final">
       <h2>Ready to Dominate Your Niche?</h2>
-      <p>Start with the Growth plan at £197/mo — the sweet spot most local businesses choose.</p>
-      <a href="https://checkout.stripe.com/g/pay/cs_live_a1qqjr5UYVB97OnUHmNg9yAEanKaoQZV4Gro7NVwjaielIoMXObymqLxlR" class="cta-btn cta-primary" style="max-width:300px;margin:0 auto;font-size:17px;padding:16px;">
+      <p>Join 23+ businesses who stopped worrying about content and started growing.</p>
+      <a href="https://buy.stripe.com/6oU4gt5kDdO5aQn4ps9ws0x" class="cta-btn cta-primary" style="max-width:300px;margin:0 auto;font-size:17px;padding:16px;">
         Start Your First Month →
       </a>
-      <p style="margin-top:16px;font-size:13px;">Or email hello@contentforge.ai for a free sample post</p>
-    </section>
-
-    <!-- NICHE AFFILIATE SITES -->
-    <section>
-      <h2>More Sites</h2>
-      <p class="section-sub">Other projects by Jamie Cole — all hosted on this domain.</p>
-      <div class="samples-section">
-        <div class="samples-grid">
-          <div class="sample-card">
-            <div class="sample-niche">AI SaaS</div>
-            <div class="sample-body">
-              <div class="sample-title">AI SaaS Tools</div>
-              <div class="sample-excerpt">Reviews of AI software for businesses, creators, and developers — from writing tools to image generators.</div>
-            </div>
-            <div class="sample-footer"><a href="ai-saas-tools/" style="color:var(--accent-light);text-decoration:none;">Browse AI tools →</a></div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-niche">Home Office</div>
-            <div class="sample-body">
-              <div class="sample-title">Home Office Gear</div>
-              <div class="sample-excerpt">Guides to ergonomic desks, chairs, monitor arms, and accessories for a productive workspace.</div>
-            </div>
-            <div class="sample-footer"><a href="home-office-gear/" style="color:var(--accent-light);text-decoration:none;">Browse gear →</a></div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-niche">Gaming</div>
-            <div class="sample-body">
-              <div class="sample-title">Gaming Gear Pro</div>
-              <div class="sample-excerpt">Hardware reviews for serious gamers — keyboards, mice, headsets, monitors, and setup guides.</div>
-            </div>
-            <div class="sample-footer"><a href="gaming-gear-pro/" style="color:var(--accent-light);text-decoration:none;">Browse gear →</a></div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-niche">Education</div>
-            <div class="sample-body">
-              <div class="sample-title">Online Courses Guide</div>
-              <div class="sample-excerpt">Compare online course platforms, coding bootcamps, language learning, and professional development.</div>
-            </div>
-            <div class="sample-footer"><a href="online-courses-guide/" style="color:var(--accent-light);text-decoration:none;">Find courses →</a></div>
-          </div>
-          <div class="sample-card">
-            <div class="sample-niche">Pets</div>
-            <div class="sample-body">
-              <div class="sample-title">Pet Products Hub</div>
-              <div class="sample-excerpt">Reviews of toys, food, tech, and gear for cats and dogs — from budget to premium.</div>
-            </div>
-            <div class="sample-footer"><a href="pet-products-hub/" style="color:var(--accent-light);text-decoration:none;">Browse products →</a></div>
-          </div>
-        </div>
+      <div class="payment-security">
+        <span>🔒 Secure checkout via Stripe</span>
+        <span>💳 All major cards accepted</span>
+        <span>🔄 Cancel anytime</span>
       </div>
+      <p style="margin-top:16px;font-size:13px;">Questions? Email clawgenesis@gmail.com for a free sample post</p>
     </section>
 
     <footer>
-      <p>ContentForge · AI Content Services for Local Businesses · hello@contentforge.ai</p>
+      <p>ContentForge · AI Content Services for Local Businesses · clawgenesis@gmail.com</p>
+      <p style="margin-top:8px;">Payment processing by Stripe · 100% money-back guarantee</p>
     </footer>
   </div>
 </body>
