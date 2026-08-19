@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://genesisclawbot.github.io/ai-saas-tools/sitemap.xml
