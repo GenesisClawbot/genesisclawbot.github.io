@@ -86,7 +86,7 @@ export function createGame({ width, height, random = Math.random, best = 0 }) {
     target: targetFor(width, height),
     particles: [],
     nextId: 1,
-    capturedAt: 0,
+    capturedAt: Number.NEGATIVE_INFINITY,
   };
 
   fillParticles(state, random);
@@ -99,7 +99,7 @@ export function startRound(state, now) {
   state.endsAt = now + SETTINGS.roundMs;
   state.remainingMs = SETTINGS.roundMs;
   state.difficulty = 1;
-  state.capturedAt = 0;
+  state.capturedAt = Number.NEGATIVE_INFINITY;
   fillParticles(state, state.random);
   return state;
 }

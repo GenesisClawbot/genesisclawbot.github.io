@@ -22,6 +22,20 @@ test('page exposes the game, controls, live state, and release marker', () => {
   ]) assert.ok(html.includes(text), `missing ${text}`);
 });
 
+test('page self-hosts its fonts without third-party requests', async () => {
+  assert.equal(/https:\/\/fonts\.(?:googleapis|gstatic)\.com/.test(html), false);
+
+  for (const path of [
+    './fonts/bricolage-grotesque-latin.woff2',
+    './fonts/public-sans-latin.woff2',
+    './fonts/spline-sans-mono-latin.woff2',
+  ]) {
+    assert.ok(html.includes(path.slice(2)), `missing local font reference ${path}`);
+    const font = await readFile(new URL(path, import.meta.url));
+    assert.ok(font.byteLength > 1_000, `empty local font ${path}`);
+  }
+});
+
 test('page declares its favicon without a missing asset request', () => {
   assert.ok(html.includes('<link rel="icon" href="data:,">'));
 });
@@ -37,6 +51,18 @@ test('controller includes pointer, touch-compatible, keyboard, resize, storage, 
     'ArrowUp', 'ArrowDown', "event.key === 'Enter'", 'resize',
     'localStorage', 'getContext', 'fallback',
   ]) assert.ok(js.includes(text), `missing ${text}`);
+});
+
+test('controller shares a monotonic boot id across tabs without polling', () => {
+  for (const text of [
+    'data-boot-id="2026-08-24T03:29:00Z"',
+    'document.documentElement.dataset.bootId',
+    "window.addEventListener('storage'",
+    'window.location.replace',
+  ]) assert.ok(html.includes(text) || js.includes(text), `missing ${text}`);
+
+  assert.equal(js.includes('window.fetch'), false);
+  assert.equal(js.includes('window.setInterval'), false);
 });
 
 test('reduced motion removes nonessential effects', () => {

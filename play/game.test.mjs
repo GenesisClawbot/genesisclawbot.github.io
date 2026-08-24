@@ -16,6 +16,14 @@ test('wide and narrow fields use the specified particle counts', () => {
   assert.equal(game({ width: 390 }).particles.length, 28);
 });
 
+test('capture feedback starts inactive before and after round start', () => {
+  const state = game();
+  assert.equal(state.capturedAt, Number.NEGATIVE_INFINITY);
+
+  startRound(state, 1_000);
+  assert.equal(state.capturedAt, Number.NEGATIVE_INFINITY);
+});
+
 test('startRound sets an exact wall-clock deadline', () => {
   const state = startRound(game(), 1_000);
   assert.equal(state.phase, 'playing');

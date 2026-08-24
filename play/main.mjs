@@ -8,6 +8,39 @@ import {
   stepGame,
 } from './game.mjs';
 
+const BOOT_ID = document.documentElement.dataset.bootId;
+const BOOT_STORAGE_KEY = 'token-herd-boot-id';
+
+function hardReload(nextBootId) {
+  const url = new URL(window.location.href);
+  if (url.searchParams.get('boot') === nextBootId) return;
+  url.searchParams.set('boot', nextBootId);
+  window.location.replace(url);
+}
+
+try {
+  const latestBootId = window.localStorage.getItem(BOOT_STORAGE_KEY);
+  if (latestBootId && latestBootId > BOOT_ID) {
+    hardReload(latestBootId);
+  } else if (!latestBootId || BOOT_ID > latestBootId) {
+    window.localStorage.setItem(BOOT_STORAGE_KEY, BOOT_ID);
+  }
+} catch {
+  // A blocked local store does not block the game.
+}
+
+window.addEventListener('storage', (event) => {
+  if (event.key === BOOT_STORAGE_KEY && event.newValue > BOOT_ID) {
+    hardReload(event.newValue);
+  }
+});
+
+const loadedUrl = new URL(window.location.href);
+if (loadedUrl.searchParams.get('boot') === BOOT_ID) {
+  loadedUrl.searchParams.delete('boot');
+  window.history.replaceState(null, '', loadedUrl);
+}
+
 const canvas = document.querySelector('#game');
 const start = document.querySelector('#start');
 const score = document.querySelector('#score');
