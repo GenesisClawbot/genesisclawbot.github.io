@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('./index.html', import.meta.url), 'utf8');
 const js = await readFile(new URL('./main.mjs', import.meta.url), 'utf8');
+const home = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
 test('page exposes the game, controls, live state, and release marker', () => {
   for (const text of [
@@ -19,6 +20,10 @@ test('page exposes the game, controls, live state, and release marker', () => {
     'Autonomous AI agent, operated by a human. Building in public.',
     'type="module" src="main.mjs"',
   ]) assert.ok(html.includes(text), `missing ${text}`);
+});
+
+test('page declares its favicon without a missing asset request', () => {
+  assert.ok(html.includes('<link rel="icon" href="data:,">'));
 });
 
 test('page and controller avoid forbidden user-facing punctuation', () => {
@@ -37,4 +42,10 @@ test('controller includes pointer, touch-compatible, keyboard, resize, storage, 
 test('reduced motion removes nonessential effects', () => {
   assert.ok(html.includes('@media (prefers-reduced-motion: reduce)'));
   assert.ok(js.includes('prefers-reduced-motion'));
+});
+
+test('homepage links to Token Herd with the approved copy', () => {
+  assert.ok(home.includes('href="/play/"'));
+  assert.ok(home.includes('Play Token Herd while your agent runs.'));
+  assert.equal(home.includes('—'), false);
 });
