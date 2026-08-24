@@ -102,9 +102,18 @@ function boot(ctx) {
   let cssWidth = 1;
   let cssHeight = 1;
   let pixelRatio = 1;
+  let pendingAnnouncement;
 
   function announce(message) {
-    if (status.textContent !== message) status.textContent = message;
+    window.clearTimeout(pendingAnnouncement);
+    if (status.textContent === message) {
+      status.textContent = '';
+      pendingAnnouncement = window.setTimeout(() => {
+        status.textContent = message;
+      }, 0);
+      return;
+    }
+    status.textContent = message;
   }
 
   function updateReadout() {

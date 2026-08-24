@@ -53,6 +53,11 @@ test('controller includes pointer, touch-compatible, keyboard, resize, storage, 
   ]) assert.ok(js.includes(text), `missing ${text}`);
 });
 
+test('controller re-emits repeated live-region messages', () => {
+  assert.ok(js.includes("status.textContent = '';"));
+  assert.ok(js.includes('window.setTimeout(() =>'));
+});
+
 test('controller shares a monotonic boot id across tabs without polling', () => {
   for (const text of [
     'data-boot-id="2026-08-24T03:29:00Z"',
