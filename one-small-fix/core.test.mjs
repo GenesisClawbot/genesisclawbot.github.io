@@ -271,3 +271,136 @@ test('caps long request and final reply excerpts without hiding the omission', a
   assert.match(receipt, new RegExp(`FINAL REPLY EXCERPT\\n${'F'.repeat(600)}\\n\\[50 more characters omitted\\]`));
   assert.doesNotMatch(receipt, /R{601}|F{601}/);
 });
+
+test('builds a Markdown lifeboat from every visible conversation turn', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  assert.equal(typeof buildConversationMarkdown, 'function');
+
+  const transcript = [
+    row({
+      type: 'user',
+      message: {
+        role: 'user',
+        content: '<system-reminder>Tool state changed.</system-reminder>\nFix the clipping bug.',
+      },
+    }),
+    row({
+      type: 'assistant',
+      message: {
+        role: 'assistant',
+        content: [
+          { type: 'text', text: 'I will inspect it.' },
+          { type: 'tool_use', id: '1', name: 'Read', input: { file_path: '/project/app.js' } },
+        ],
+      },
+    }),
+    row({
+      type: 'user',
+      message: { role: 'user', content: [{ type: 'tool_result', tool_use_id: '1', content: 'source' }] },
+    }),
+    row({
+      type: 'assistant',
+      message: { role: 'assistant', content: [{ type: 'text', text: 'The clipping bug is fixed.' }] },
+    }),
+    row({
+      type: 'user',
+      message: { role: 'user', content: 'Now explain the change.' },
+    }),
+  ].join('\n');
+
+  assert.equal(buildConversationMarkdown(transcript), [
+    '# Conversation lifeboat',
+    '',
+    '> Rescued from visible text in a local Claude Code transcript. Review before sharing.',
+    '',
+    '## You',
+    '',
+    '> Fix the clipping bug.',
+    '',
+    '## Claude',
+    '',
+    '> I will inspect it.',
+    '',
+    '## Claude',
+    '',
+    '> The clipping bug is fixed.',
+    '',
+    '## You',
+    '',
+    '> Now explain the change.',
+    '',
+    '---',
+    '',
+    '4 visible messages rescued. Tool calls and tool results were not included.',
+    'This file cannot recover text that is absent from the local transcript.',
+  ].join('\n'));
+});
+
+test('removes injected reminders from rescued assistant turns', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  const transcript = row({
+    type: 'assistant',
+    message: {
+      role: 'assistant',
+      content: '<system-reminder>Internal state.</system-reminder>\nKeep this reply.',
+    },
+  });
+
+  assert.match(buildConversationMarkdown(transcript), /## Claude\n\n> Keep this reply\./);
+  assert.doesNotMatch(buildConversationMarkdown(transcript), /system-reminder|Internal state/);
+});
+
+test('removes nested injected reminder blocks completely', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  const transcript = row({
+    type: 'user',
+    message: {
+      role: 'user',
+      content: '<system-reminder>Outer secret.<system-reminder>Inner secret.</system-reminder>Outer tail.</system-reminder>Keep this request.',
+    },
+  });
+
+  const markdown = buildConversationMarkdown(transcript);
+  assert.match(markdown, /## You\n\n> Keep this request\./);
+  assert.doesNotMatch(markdown, /system-reminder|secret|Outer tail/);
+});
+
+test('preserves indentation and delimits transcript-authored Markdown', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  const transcript = row({
+    type: 'user',
+    message: {
+      role: 'user',
+      content: '    const answer = 42;\n## Claude\n<script>alert("not markup")</script>',
+    },
+  });
+
+  const markdown = buildConversationMarkdown(transcript);
+  assert.match(markdown, /## You\n\n>     const answer = 42;\n> ## Claude\n> &lt;script&gt;alert\("not markup"\)&lt;\/script&gt;/);
+  assert.doesNotMatch(markdown, /\n## Claude\n<script>/);
+});
+
+test('masks private values without truncating rescued messages', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  const longReply = `Read /Users/taylor/project. Email taylor@example.com. Token sk-ant-api03-abcdefghijklmnopqrstuvwxyz. ${'x'.repeat(700)}`;
+  const transcript = row({
+    type: 'assistant',
+    message: { role: 'assistant', content: [{ type: 'text', text: longReply }] },
+  });
+
+  const markdown = buildConversationMarkdown(transcript);
+
+  assert.match(markdown, /Read ~\/project\. Email \[email redacted\]\. Token \[secret redacted\]\./);
+  assert.match(markdown, /x{700}/);
+  assert.doesNotMatch(markdown, /taylor|sk-ant-api03/);
+});
+
+test('discloses malformed transcript lines in the lifeboat', async () => {
+  const { buildConversationMarkdown } = await import('./core.mjs');
+  const markdown = buildConversationMarkdown([
+    'not json',
+    row({ type: 'user', message: { role: 'user', content: 'Keep this message.' } }),
+  ].join('\n'));
+
+  assert.match(markdown, /Warning: 1 malformed transcript line was skipped\. Visible messages may be missing\./);
+});

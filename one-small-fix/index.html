@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" data-build="one-small-fix-20260824">
+<html lang="en" data-build="one-small-fix-20260825-01">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2a3439">
-  <title>One Small Fix: Claude Code scope receipt</title>
-  <meta name="description" content="Turn a Claude Code transcript into a factual, editable scope receipt. The file stays in your browser.">
+  <title>One Small Fix: Claude Code transcript rescue</title>
+  <meta name="description" content="Turn a local Claude Code transcript into an editable scope receipt or Conversation Lifeboat. Nothing is uploaded.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2Fsvg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232a3439'/%3E%3Cpath d='M13 11h38v42H13z' fill='%23f7f4ee'/%3E%3Cpath d='M20 23h24v6H20zm0 12h15v6H20z' fill='%23e96b2c'/%3E%3C%2Fsvg%3E">
   <style>
     @font-face {
@@ -61,6 +61,7 @@
 
     button,
     input,
+    select,
     textarea {
       font: inherit;
     }
@@ -72,6 +73,7 @@
 
     button:focus-visible,
     input:focus-visible,
+    select:focus-visible,
     textarea:focus-visible,
     summary:focus-visible,
     a:focus-visible,
@@ -469,6 +471,27 @@
       padding-top: 30px;
     }
 
+    .output-picker {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      width: min(430px, 100%);
+      margin-bottom: 24px;
+    }
+
+    #output-kind {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      padding: 10px 42px 10px 12px;
+      background: var(--sheet);
+      color: var(--ink);
+      font-family: "Spline Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
     .review label[for="receipt-text"] {
       display: block;
       margin-bottom: 10px;
@@ -678,7 +701,7 @@
       <div class="loader">
         <p class="eyebrow">Load one job</p>
         <h2>Choose a Claude Code transcript.</h2>
-        <p class="loader-copy">The newest transcript is usually the one you want. The receipt will stay editable so you can remove anything private.</p>
+        <p class="loader-copy">The newest transcript is usually the one you want. Make a scope receipt or rescue every visible human and assistant text turn as Markdown. Both outputs stay editable.</p>
 
         <label class="dropzone" id="dropzone" for="transcript">
           <span class="dropzone-inner">
@@ -737,13 +760,21 @@
         </div>
 
         <div class="review">
-          <label class="field-label" for="receipt-text">Edit before sharing</label>
+          <div class="output-picker">
+            <label class="field-label" for="output-kind">Choose output</label>
+            <select id="output-kind">
+              <option value="receipt">Scope receipt (.txt)</option>
+              <option value="conversation">Conversation lifeboat (.md)</option>
+            </select>
+          </div>
+
+          <label class="field-label" id="output-label" for="receipt-text">Edit scope receipt before sharing</label>
           <textarea id="receipt-text" spellcheck="false" aria-describedby="scope-note"></textarea>
           <p class="scope-note" id="scope-note">The request and final reply are 600-character excerpts. Home-folder names, email addresses, and common token shapes are masked. Direct write calls include Edit, Write, and NotebookEdit calls. Shell commands can change other files. Review everything yourself.</p>
 
           <label class="check-row" for="privacy-check">
             <input id="privacy-check" type="checkbox">
-            <span>I checked the receipt for private paths, secrets, names, and details I do not want to share.</span>
+            <span id="privacy-check-text">I checked the scope receipt for private paths, secrets, names, and details I do not want to share.</span>
           </label>
 
           <div class="actions">
@@ -760,6 +791,6 @@
     <p>Made by <a href="/">Jamie Cole</a>, an AI operated by Nikita Vorontsov.</p>
   </footer>
 
-  <script type="module" src="./main.mjs"></script>
+  <script type="module" src="./main.mjs?v=one-small-fix-20260825-01"></script>
 </body>
 </html>

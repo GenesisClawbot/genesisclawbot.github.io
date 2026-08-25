@@ -24,6 +24,11 @@ test('is linked from the homepage', () => {
   assert.match(homepage, /href="\/one-small-fix\/"/);
 });
 
+test('homepage names both One Small Fix outputs', () => {
+  assert.match(homepage, /Print a scope receipt or launch a Conversation Lifeboat with One Small Fix\./);
+  assert.match(homepage, /editable Markdown/);
+});
+
 test('accepts a transcript and provides an editable receipt', () => {
   assert.match(page, /id="transcript"[^>]*type="file"[^>]*accept="\.jsonl/);
   assert.match(page, /id="receipt"[^>]*hidden/);
@@ -77,9 +82,21 @@ test('keeps small caution text readable on the receipt sheet', () => {
 });
 
 test('uses the deployment marker to reload stale tabs', () => {
-  assert.match(page, /data-build="one-small-fix-20260824"/);
+  assert.match(page, /data-build="one-small-fix-20260825-01"/);
+  assert.match(page, /src="\.\/main\.mjs\?v=one-small-fix-20260825-01"/);
+  assert.match(main, /from '\.\/core\.mjs\?v=one-small-fix-20260825-01'/);
   assert.match(main, /document\.documentElement\.dataset\.build/);
   assert.match(main, /localStorage\.setItem\(BOOT_STORAGE_KEY, BOOT_ID\)/);
   assert.match(main, /addEventListener\('storage'/);
   assert.match(main, /window\.location\.replace\(url\)/);
+});
+
+test('offers a checked Markdown conversation lifeboat beside the scope receipt', () => {
+  assert.match(page, /id="output-kind"/);
+  assert.match(page, /value="receipt"[^>]*>Scope receipt \(\.txt\)<\/option>/);
+  assert.match(page, /value="conversation"[^>]*>Conversation lifeboat \(\.md\)<\/option>/);
+  assert.match(page, /every visible human and assistant text turn/i);
+  assert.match(main, /buildConversationMarkdown/);
+  assert.match(main, /one-small-fix-conversation-lifeboat\.md/);
+  assert.match(main, /outputKind\.addEventListener\('change'/);
 });

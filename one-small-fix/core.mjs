@@ -7,8 +7,30 @@ function textFromContent(content) {
     .join('\n');
 }
 
+function stripInjectedBlocks(text) {
+  const tagPattern = /<\/?system-reminder>/g;
+  const visible = [];
+  let depth = 0;
+  let start = 0;
+  let match;
+
+  while ((match = tagPattern.exec(text))) {
+    const closing = match[0][1] === '/';
+    if (!closing) {
+      if (depth === 0) visible.push(text.slice(start, match.index));
+      depth += 1;
+    } else if (depth > 0) {
+      depth -= 1;
+      if (depth === 0) start = tagPattern.lastIndex;
+    }
+  }
+
+  if (depth === 0) visible.push(text.slice(start));
+  return visible.join('');
+}
+
 function removeInjectedBlocks(text) {
-  return text.replace(/<system-reminder>[\s\S]*?<\/system-reminder>/g, '').trim();
+  return stripInjectedBlocks(text).trim();
 }
 
 const WRITE_TOOLS = new Set(['Edit', 'Write', 'NotebookEdit']);
@@ -57,6 +79,68 @@ function formatDuration(milliseconds) {
 function listOrFallback(values, fallback) {
   if (!values.length) return fallback;
   return values.map(redactPrivateText).join('\n');
+}
+
+function quoteMarkdown(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .split('\n')
+    .map((line) => line ? `> ${line}` : '>')
+    .join('\n');
+}
+
+export function buildConversationMarkdown(source) {
+  const turns = [];
+  let malformedLines = 0;
+
+  for (const line of source.split('\n')) {
+    if (!line.trim()) continue;
+
+    let row;
+    try {
+      row = JSON.parse(line);
+    } catch {
+      malformedLines += 1;
+      continue;
+    }
+
+    const role = row?.message?.role;
+    if (row?.type !== role || (role !== 'user' && role !== 'assistant')) continue;
+
+    const rawText = textFromContent(row.message.content);
+    const visibleText = stripInjectedBlocks(rawText)
+      .replace(/^(?:\r?\n)+|(?:\r?\n)+$/g, '');
+    if (!visibleText.trim()) continue;
+
+    turns.push({
+      speaker: role === 'user' ? 'You' : 'Claude',
+      text: redactPrivateText(visibleText),
+    });
+  }
+
+  const count = turns.length;
+  return [
+    '# Conversation lifeboat',
+    '',
+    '> Rescued from visible text in a local Claude Code transcript. Review before sharing.',
+    ...(malformedLines ? [
+      '>',
+      `> Warning: ${malformedLines} malformed transcript ${malformedLines === 1 ? 'line was' : 'lines were'} skipped. Visible messages may be missing.`,
+    ] : []),
+    '',
+    ...turns.flatMap((turn) => [
+      `## ${turn.speaker}`,
+      '',
+      quoteMarkdown(turn.text),
+      '',
+    ]),
+    '---',
+    '',
+    `${count} visible ${count === 1 ? 'message' : 'messages'} rescued. Tool calls and tool results were not included.`,
+    'This file cannot recover text that is absent from the local transcript.',
+  ].join('\n');
 }
 
 export function formatReceipt(summary) {
