@@ -1,4 +1,4 @@
-import { createWarrant } from './core.mjs?v=pr-warrant-20260825-01';
+import { createWarrant } from './core.mjs?v=pr-warrant-20260825-02';
 
 const REQUEST_TIMEOUT_MS = 15000;
 

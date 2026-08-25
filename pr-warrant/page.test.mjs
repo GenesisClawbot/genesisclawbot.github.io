@@ -7,7 +7,7 @@ const homepage = await readFile(new URL('../index.html', import.meta.url), 'utf8
 const main = await readFile(new URL('./main.mjs', import.meta.url), 'utf8').catch(() => '');
 const request = await readFile(new URL('./request.mjs', import.meta.url), 'utf8').catch(() => '');
 const core = await readFile(new URL('./core.mjs', import.meta.url), 'utf8').catch(() => '');
-const release = 'pr-warrant-20260825-01';
+const release = 'pr-warrant-20260825-02';
 
 function colorToken(name) {
   return html.match(new RegExp(`--${name}: (#[0-9a-f]{6})`, 'i'))?.[1];
@@ -28,7 +28,7 @@ function contrastRatio(first, second) {
 
 test('homepage links to PR Warrant with its exact job', () => {
   assert.match(homepage, /href="\/pr-warrant\/">PR Warrant<\/a>/);
-  assert.match(homepage, /Pin one public GitHub pull request to its exact commit range/);
+  assert.match(homepage, /Pin one public GitHub pull request to its exact commit range, then end the review with one closed material-defect verdict\./);
 });
 
 test('controls fail closed until the module installs its handlers', () => {
@@ -57,7 +57,7 @@ test('small red labels use a darker text token', () => {
 });
 
 test('page presents one exact public PR lookup with an accessible result', () => {
-  assert.match(html, /<html lang="en" data-build="pr-warrant-20260825-01">/);
+  assert.match(html, /<html lang="en" data-build="pr-warrant-20260825-02">/);
   assert.match(html, /<title>PR Warrant<\/title>/);
   assert.match(html, /<form[^>]+id="warrant-form"/);
   assert.match(html, /<label[^>]+for="pr-url"/);
@@ -68,6 +68,13 @@ test('page presents one exact public PR lookup with an accessible result', () =>
   assert.match(html, /id="warrant-heading"[^>]+tabindex="-1"/);
   assert.match(html, /id="copy-brief"/);
   assert.match(html, /id="copy-check"/);
+});
+
+test('page explains the closed review verdict before lookup', () => {
+  assert.match(html, /name="description" content="Pin one public GitHub pull request to its exact commits and end review loops with one closed material-defect verdict\."/);
+  assert.match(html, /high- or medium-severity defects/i);
+  assert.match(html, /YES with evidence or NO/i);
+  assert.match(html, /If the answer is NO, the review stops\./i);
 });
 
 test('page states the network, storage, and product boundaries', () => {
@@ -104,5 +111,7 @@ test('browser controller fails closed, ignores stale requests, and renders untru
 test('one release marker pins the page and both modules', () => {
   assert.match(html, new RegExp(`main\\.mjs\\?v=${release}`));
   assert.match(main, new RegExp(`core\\.mjs\\?v=${release}`));
+  assert.match(main, new RegExp(`request\\.mjs\\?v=${release}`));
+  assert.match(request, new RegExp(`core\\.mjs\\?v=${release}`));
   assert.match(core, /export function parsePullRequestUrl/);
 });

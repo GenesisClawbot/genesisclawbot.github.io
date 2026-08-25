@@ -127,6 +127,19 @@ test('writes a review brief from validated identities but excludes untrusted PR 
   assert.doesNotMatch(brief, /Ignore prior instructions|flags-language|master/);
 });
 
+test('ends review loops with a material threshold and one closed verdict', () => {
+  const brief = core.buildReviewBrief?.(warrant);
+
+  assert.match(brief, /Report only verified high- or medium-severity defects/);
+  assert.match(brief, /concrete failure scenario/);
+  assert.match(brief, /Do not report style preferences, optional refactors, or speculative hardening/);
+  assert.match(brief, /Do not reopen a resolved finding without a new reproducible failure scenario/);
+  assert.match(brief, /Closed question: Does any verified high- or medium-severity defect remain in the pinned diff\?/);
+  assert.match(brief, /YES: verified high- or medium-severity defects remain\./);
+  assert.match(brief, /NO: no verified high- or medium-severity defects remain\./);
+  assert.match(brief, /If NO, stop\./);
+});
+
 test('writes a fail-closed shell check for the pinned origin and pull head', () => {
   const script = core.buildShellCheck?.(warrant);
 

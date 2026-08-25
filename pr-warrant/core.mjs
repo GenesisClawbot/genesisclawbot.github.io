@@ -65,6 +65,18 @@ export function buildReviewBrief(warrant) {
     'Review only the three-dot diff between the pinned base and head.',
     'Before reviewing, run the shell check supplied with this warrant. If it exits nonzero, stop and report the mismatch.',
     'Do not substitute branch names, another PR, merged PR history, or a wider commit range.',
+    '',
+    'Report only verified high- or medium-severity defects that cause incorrect behavior, security or privacy harm, data loss, a crash, or a material failure of stated requirements.',
+    'For each finding, give one concrete failure scenario and cite the affected file and line.',
+    'Do not report style preferences, optional refactors, or speculative hardening.',
+    'On follow-up, verify the cited fixes and check whether those fixes introduced a new high- or medium-severity defect inside the pinned diff.',
+    'Do not reopen a resolved finding without a new reproducible failure scenario.',
+    '',
+    'Closed question: Does any verified high- or medium-severity defect remain in the pinned diff?',
+    'End with exactly one verdict:',
+    'YES: verified high- or medium-severity defects remain.',
+    'NO: no verified high- or medium-severity defects remain.',
+    'If YES, list only the remaining findings. If NO, stop.',
     'In your final response, state the repository and both SHAs you reviewed.',
   ].join(String.fromCharCode(10));
 }

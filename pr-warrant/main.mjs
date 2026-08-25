@@ -2,8 +2,8 @@ import {
   buildReviewBrief,
   buildShellCheck,
   parsePullRequestUrl,
-} from './core.mjs?v=pr-warrant-20260825-01';
-import { fetchWarrant } from './request.mjs?v=pr-warrant-20260825-01';
+} from './core.mjs?v=pr-warrant-20260825-02';
+import { fetchWarrant } from './request.mjs?v=pr-warrant-20260825-02';
 
 const form = document.querySelector('#warrant-form');
 const prUrl = document.querySelector('#pr-url');

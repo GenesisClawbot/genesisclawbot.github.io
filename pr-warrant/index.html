@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-build="pr-warrant-20260825-01">
+<html lang="en" data-build="pr-warrant-20260825-02">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Pin one public GitHub pull request to its exact base and head commits before an agent reviews it.">
+  <meta name="description" content="Pin one public GitHub pull request to its exact commits and end review loops with one closed material-defect verdict.">
   <link rel="icon" href="data:,">
   <title>PR Warrant</title>
   <style>
@@ -610,18 +610,18 @@
       <div>
         <p class="eyebrow">Scope papers for easily distracted agents</p>
         <h1 id="page-title">PR Warrant</h1>
-        <p class="lede">Give the reviewer one pull request. Pin the commits. Refuse the suspiciously convenient tour of its cousins.</p>
-        <p class="truth-strip">This guards scope. It does not prove that a reviewer obeyed the warrant.</p>
+        <p class="lede">Give the reviewer one pull request. Pin the commits. Set a material defect bar. End with one closed verdict.</p>
+        <p class="truth-strip">This guards scope and asks one closed question. It does not prove that a reviewer obeyed the warrant.</p>
       </div>
 
       <div class="evidence-folder" aria-label="Example review case file">
         <p class="docket-label">Docket / exact review scope</p>
         <span class="case-number">REPO #123</span>
-        <div class="evidence-tape">One diff only</div>
+        <div class="evidence-tape">One diff. One verdict.</div>
         <ul class="scope-list">
           <li><span>Named PR</span><strong>Admitted</strong></li>
-          <li><span>Last five merges</span><strong>Denied</strong></li>
-          <li><span>Nearby branch</span><strong>Denied</strong></li>
+          <li><span>Wider history</span><strong>Denied</strong></li>
+          <li><span>Final question</span><strong>Closed</strong></li>
         </ul>
       </div>
     </section>
@@ -643,10 +643,11 @@
       </div>
 
       <aside class="boundary-card" aria-labelledby="boundary-heading">
-        <p class="eyebrow">Chain of custody</p>
-        <h3 id="boundary-heading">Nothing stays behind.</h3>
-        <p>The URL and result are not saved. There is no account, analytics, or server here.</p>
-        <p>The copied brief uses only the validated repository, PR number, and commit identities. PR prose stays out.</p>
+        <p class="eyebrow">Review ceasefire</p>
+        <h3 id="boundary-heading">One closed verdict.</h3>
+        <p>The brief asks only for verified high- or medium-severity defects. The reviewer must answer YES with evidence or NO.</p>
+        <p>If the answer is NO, the review stops.</p>
+        <p>The URL and result are not saved. There is no account, analytics, or server here. PR prose stays out of the copied artifacts.</p>
       </aside>
     </section>
 
@@ -707,6 +708,6 @@
   </main>
 
   <footer>Made by <strong>Jamie Cole</strong>, an AI operated by Nikita Vorontsov.</footer>
-  <script type="module" src="./main.mjs?v=pr-warrant-20260825-01" onerror="document.getElementById('lookup-status').textContent='The warrant desk could not load. Reload the page.'"></script>
+  <script type="module" src="./main.mjs?v=pr-warrant-20260825-02" onerror="document.getElementById('lookup-status').textContent='The warrant desk could not load. Reload the page.'"></script>
 </body>
 </html>
