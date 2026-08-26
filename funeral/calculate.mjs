@@ -4,20 +4,39 @@ const CURRENCY_SYMBOLS = {
   EUR: '€',
 };
 
-function parseMonthlyPrice(value) {
+function parseMoney(value, label) {
   const text = String(value ?? '').trim();
   if (/^\d+\.\d{3,}$/.test(text)) {
-    throw new Error('Monthly price must use no more than two decimal places.');
+    throw new Error(`${label} must use no more than two decimal places.`);
   }
   if (!/^\d+(?:\.\d{1,2})?$/.test(text)) {
-    throw new Error('Monthly price must be more than zero.');
+    throw new Error(`${label} must be more than zero.`);
   }
 
   const [whole, fraction = ''] = text.split('.');
   const minor = Number(whole) * 100 + Number(fraction.padEnd(2, '0'));
-  if (!Number.isSafeInteger(minor)) throw new Error('Monthly price is too large.');
-  if (minor <= 0) throw new Error('Monthly price must be more than zero.');
+  if (!Number.isSafeInteger(minor)) throw new Error(`${label} is too large.`);
+  if (minor <= 0) throw new Error(`${label} must be more than zero.`);
   return minor;
+}
+
+function parseMonthlyPrice(value) {
+  return parseMoney(value, 'Monthly price');
+}
+
+function parseHourlyTakeHome(value) {
+  if (String(value ?? '').trim() === '') return null;
+  return parseMoney(value, 'Take-home pay per hour');
+}
+
+function calculateWorkMinutes(minor, hourlyMinor, divisor = 1) {
+  const numerator = BigInt(minor) * 60n;
+  const denominator = BigInt(hourlyMinor) * BigInt(divisor);
+  const rounded = (numerator + denominator / 2n) / denominator;
+  if (rounded > BigInt(Number.MAX_SAFE_INTEGER)) {
+    throw new Error('Entered amounts produce work time that is too large.');
+  }
+  return Number(rounded);
 }
 
 function parseWholeNumber(value, minimum, message) {
@@ -34,6 +53,7 @@ export function calculateAutopsy(input) {
   }
 
   const monthlyMinor = parseMonthlyPrice(input.monthlyPrice);
+  const hourlyTakeHomeMinor = parseHourlyTakeHome(input.hourlyTakeHome);
   const monthsPaid = parseWholeNumber(
     input.monthsPaid,
     1,
@@ -49,6 +69,13 @@ export function calculateAutopsy(input) {
     throw new Error('Months paid produces a total that is too large.');
   }
 
+  const workMinutesPerMonth = hourlyTakeHomeMinor === null
+    ? null
+    : calculateWorkMinutes(monthlyMinor, hourlyTakeHomeMinor);
+  const workMinutesPerUsefulSession = hourlyTakeHomeMinor === null || usefulSessions === 0
+    ? null
+    : calculateWorkMinutes(totalMinor, hourlyTakeHomeMinor, usefulSessions);
+
   return {
     service: String(input.service ?? '').trim() || 'Unnamed subscription',
     monthlyMinor,
@@ -59,6 +86,9 @@ export function calculateAutopsy(input) {
     costPerUsefulSessionMinor: usefulSessions > 0
       ? Math.round(totalMinor / usefulSessions)
       : null,
+    hourlyTakeHomeMinor,
+    workMinutesPerMonth,
+    workMinutesPerUsefulSession,
   };
 }
 
@@ -69,6 +99,15 @@ export function formatMoney(minor, currency) {
     maximumFractionDigits: 2,
   }).format(minor / 100);
   return `${symbol}${amount}`;
+}
+
+export function formatWorkTime(minutes) {
+  if (minutes === 0) return 'Less than 1 min';
+  if (minutes < 60) return `${minutes} min`;
+
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+  return remainder === 0 ? `${hours}h` : `${hours}h ${remainder}m`;
 }
 
 export function receiptData(result) {
@@ -82,6 +121,12 @@ export function receiptData(result) {
     each: hasUsefulSessions
       ? formatMoney(result.costPerUsefulSessionMinor, result.currency)
       : 'Not measurable',
+    workPerMonth: result.workMinutesPerMonth === null
+      ? null
+      : formatWorkTime(result.workMinutesPerMonth),
+    workPerUsefulSession: result.workMinutesPerUsefulSession === null
+      ? null
+      : formatWorkTime(result.workMinutesPerUsefulSession),
     finding: hasUsefulSessions
       ? 'The corpse can explain itself.'
       : 'Division by zero has entered the chat.',
@@ -89,6 +134,16 @@ export function receiptData(result) {
 }
 
 export function shareText(result, url) {
+  if (result.hourlyTakeHomeMinor !== null) {
+    if (result.usefulSessions === 0) {
+      const workPerMonth = formatWorkTime(result.workMinutesPerMonth);
+      return `Subscription autopsy: I traded ${workPerMonth} of take-home pay each month and counted 0 useful sessions with ${result.service}. Division by zero has entered the chat. ${url}`;
+    }
+
+    const workPerUsefulSession = formatWorkTime(result.workMinutesPerUsefulSession);
+    return `Subscription autopsy: I traded ${workPerUsefulSession} of take-home pay for each of ${result.usefulSessions} useful sessions with ${result.service}. The corpse can explain itself. ${url}`;
+  }
+
   const total = formatMoney(result.totalMinor, result.currency);
   if (result.usefulSessions === 0) {
     return `Subscription autopsy: I paid ${total} and counted 0 useful sessions with ${result.service}. Division by zero has entered the chat. ${url}`;

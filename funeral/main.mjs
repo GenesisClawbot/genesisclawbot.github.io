@@ -1,6 +1,11 @@
-import { calculateAutopsy, receiptData, shareText } from './calculate.mjs';
-import { deliverShare } from './share.mjs';
-import { announceStatus, showFormError, showReceipt } from './view.mjs';
+import { calculateAutopsy, receiptData, shareText } from './calculate.mjs?v=subscription-autopsy-20260826-01';
+import { deliverShare } from './share.mjs?v=subscription-autopsy-20260826-01';
+import {
+  announceStatus,
+  fieldForError,
+  showFormError,
+  showReceipt,
+} from './view.mjs?v=subscription-autopsy-20260826-01';
 
 const form = document.querySelector('#autopsy-form');
 const error = document.querySelector('#form-error');
@@ -16,6 +21,9 @@ const receiptElements = {
   months: document.querySelector('#receipt-months'),
   usefulSessions: document.querySelector('#receipt-sessions'),
   total: document.querySelector('#receipt-total'),
+  workTimeRows: document.querySelector('#work-time-rows'),
+  workPerMonth: document.querySelector('#receipt-work-month'),
+  workPerUsefulSession: document.querySelector('#receipt-work-session'),
   each: document.querySelector('#receipt-each'),
   finding: document.querySelector('#receipt-finding'),
   status,
@@ -32,13 +40,13 @@ form.addEventListener('submit', (event) => {
     showReceipt(receiptData(latestResult), receiptElements);
   } catch (caught) {
     latestResult = null;
-    const field = caught.message.startsWith('Monthly price')
-      ? form.elements.monthlyPrice
-      : caught.message.startsWith('Months paid')
-        ? form.elements.monthsPaid
-        : caught.message.startsWith('Useful sessions')
-          ? form.elements.usefulSessions
-          : form.elements.currency;
+    const field = fieldForError(caught.message, {
+      monthlyPrice: form.elements.monthlyPrice,
+      monthsPaid: form.elements.monthsPaid,
+      usefulSessions: form.elements.usefulSessions,
+      hourlyTakeHome: form.elements.hourlyTakeHome,
+      currency: form.elements.currency,
+    });
     showFormError(caught.message, {
       section: receiptElements.section,
       error,

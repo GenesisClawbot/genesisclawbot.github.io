@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-build="subscription-autopsy-20260826-01">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -394,6 +394,11 @@
       overflow-wrap: anywhere;
     }
 
+    .big-cost-long {
+      font-size: clamp(2.3rem, 7vw, 3.4rem);
+      letter-spacing: -0.05em;
+    }
+
     .finding {
       margin: 24px 0;
       padding: 14px 0;
@@ -567,7 +572,7 @@
         <p class="kicker">Cold case accounting</p>
         <h1 id="page-title">Subscription Autopsy</h1>
         <p class="lede">You keep paying. You vaguely remember using it. Put your own numbers on the slab and get the cost of one useful session.</p>
-        <p class="privacy">Nothing leaves this page. Nothing is saved.</p>
+        <p class="privacy">Nothing is uploaded or saved. Sharing sends or copies the receipt only when you choose it.</p>
       </section>
 
       <section class="form-panel" aria-labelledby="form-title">
@@ -575,7 +580,7 @@
         <form id="autopsy-form" novalidate>
           <div class="field">
             <label for="service">Subscription name</label>
-            <input id="service" name="service" autocomplete="off" placeholder="My coding tool" maxlength="80">
+            <input id="service" name="service" autocomplete="off" spellcheck="false" placeholder="My coding tool" maxlength="80">
           </div>
 
           <div class="field">
@@ -586,9 +591,15 @@
                 <option value="USD">USD $</option>
                 <option value="EUR">EUR €</option>
               </select>
-              <input id="monthlyPrice" name="monthlyPrice" inputmode="decimal" autocomplete="off" placeholder="20.00" required aria-describedby="monthly-hint">
+              <input id="monthlyPrice" name="monthlyPrice" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="20.00" required aria-describedby="monthly-hint">
             </div>
             <span class="hint" id="monthly-hint">Use the amount that left your account each month.</span>
+          </div>
+
+          <div class="field">
+            <label for="hourlyTakeHome">Take-home pay per hour (optional)</label>
+            <input id="hourlyTakeHome" name="hourlyTakeHome" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="15.00" aria-describedby="hourly-hint">
+            <span class="hint" id="hourly-hint">Add this to translate the charge into your work time. Sharing work-time results can reveal your pay indirectly.</span>
           </div>
 
           <div class="field-grid">
@@ -621,6 +632,12 @@
             <div class="receipt-row"><dt>Useful sessions</dt><dd id="receipt-sessions"></dd></div>
             <div class="receipt-row"><dt>Total paid</dt><dd id="receipt-total"></dd></div>
           </dl>
+          <div id="work-time-rows" hidden>
+            <dl class="receipt-list">
+              <div class="receipt-row"><dt>Work per month</dt><dd id="receipt-work-month"></dd></div>
+              <div class="receipt-row"><dt>Work per useful session</dt><dd id="receipt-work-session"></dd></div>
+            </dl>
+          </div>
 
           <span class="receipt-total">Cost per useful session</span>
           <p class="big-cost" id="receipt-each"></p>
@@ -641,6 +658,6 @@
     </footer>
   </main>
 
-  <script type="module" src="./main.mjs"></script>
+  <script type="module" src="./main.mjs?v=subscription-autopsy-20260826-01"></script>
 </body>
 </html>
