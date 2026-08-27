@@ -33,7 +33,45 @@ test('declares every game and fallback control in ordinary DOM', () => {
   assert.match(html, /id="ship"[^>]*disabled/);
   assert.match(html, /role="status"[^>]*aria-live="polite"/);
   assert.match(html, /If this message stays here, the game did not start\./);
-  assert.match(html, /Finish 3 acceptance checks to ship\./);
+});
+
+test('briefing explains decisions, context, and the win condition before play starts', () => {
+  const howTo = html.indexOf('id="how-to-label"');
+  const start = html.indexOf('id="start"');
+  assert.ok(howTo > -1, 'the briefing needs a visible how-to-play heading');
+  assert.ok(howTo < start, 'the rules need to appear before the start control');
+  assert.match(html, /Approve applies the proposal's files and lines\. It spends the card's context cost\./);
+  assert.match(html, /Reject applies no work\. It spends 2 context on review\./);
+  assert.match(html, /Context is the finite fuse\. Pass all 3 acceptance checks\. Ship before it reaches 0\./);
+  assert.equal(html.match(/id="how-to-label"/g)?.length, 1);
+});
+
+test('keeps acceptance checks in the decision panel before the live proposal', () => {
+  const decisionPanel = html.indexOf('<section class="decision-panel"');
+  const checks = html.indexOf('id="checks-label"');
+  const proposal = html.indexOf('id="proposal"');
+  assert.ok(decisionPanel > -1);
+  assert.ok(checks > decisionPanel, 'acceptance checks need to be in the decision panel');
+  assert.ok(checks < proposal, 'acceptance checks need to precede the current proposal');
+});
+
+test('caps the machine scene to the viewport without cropping its stage art', () => {
+  assert.match(html, /\.machine-frame\s*\{[^}]*height:\s*clamp\([^)]*svh[^)]*\)/s);
+  assert.match(html, /\.machine-frame img\s*\{[^}]*height:\s*100%/s);
+  assert.match(html, /\.machine-frame img\s*\{[^}]*object-fit:\s*contain/s);
+});
+
+test('applies compact path styles to the live proposal', () => {
+  assert.match(html, /<ul id="proposal-paths" class="proposal-paths"><\/ul>/);
+});
+
+test('compacts the decision stack on laptop-height desktop viewports', () => {
+  const start = html.indexOf('@media (min-width: 761px) and (max-height: 900px)');
+  const end = html.indexOf('@media (max-width: 760px)', start);
+  const shortDesktop = html.slice(start, end);
+  assert.ok(start > -1 && end > start);
+  assert.match(shortDesktop, /\.checks-card ol\s*\{[^}]*grid-template-columns:\s*repeat\(3,/s);
+  assert.match(shortDesktop, /\.proposal-paths\s*\{[^}]*grid-template-columns:\s*repeat\(2,/s);
 });
 
 test('uses only the three deployed local fonts', () => {
@@ -120,6 +158,14 @@ test('controller handles reduced motion and all four machine assets', () => {
   assert.match(main, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
   assert.match(main, /addEventListener\('change'/);
   for (const name of imageNames) assert.match(main, new RegExp(`\\.\\/assets\\/${name.replace('.', '\\.')}`));
+});
+
+test('controller starts the machine crossfade only after the replacement loads', () => {
+  assert.match(main, /addEventListener\('load'/);
+  assert.match(main, /machineFrame\.dataset\.swap = 'active'/);
+  assert.match(html, /\[data-swap="active"\] #machine-current/);
+  assert.match(html, /\[data-swap="active"\] #machine-previous/);
+  assert.doesNotMatch(html, /\[data-motion="approve"\] #machine-(?:current|previous)/);
 });
 
 test('sound starts off and fails back to silence', () => {

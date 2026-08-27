@@ -89,7 +89,7 @@
       overflow: hidden;
     }
     .scene-panel, .decision-panel, .repair-scene, .status-grid, .ticket-block,
-    .proposal-card, .reveal-card, .result-card, .ship-wrap { min-width: 0; }
+    .how-to-card, .checks-card, .proposal-card, .reveal-card, .result-card, .ship-wrap { min-width: 0; }
     .scene-panel { padding: clamp(20px, 3vw, 40px); background: #efe8dc; }
     .decision-panel { padding: clamp(20px, 3vw, 40px); border-left: 1px solid var(--ink); }
     h1 { margin: 4px 0 8px; font-size: clamp(38px, 6vw, 72px); line-height: .92; letter-spacing: -.05em; }
@@ -107,15 +107,25 @@
     .warning-lamp { width: 14px; height: 14px; border: 1px solid var(--ink); border-radius: 50%; background: #c9c0b2; box-shadow: inset 0 0 0 3px var(--surface); }
     .fuse-track { position: relative; width: 24px; flex: 1; min-height: 190px; border: 1px solid var(--ink); background: #d7cfc1; overflow: hidden; }
     #context-fuse { position: absolute; inset: auto 0 0; height: 100%; background: var(--spruce); transform-origin: bottom; }
-    .machine-frame { position: relative; margin: 0; min-height: 300px; border: 1px solid var(--ink); background: var(--paper); overflow: hidden; }
-    .machine-frame img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-    #machine-previous { position: absolute; inset: 0; z-index: 1; }
+    .machine-frame { position: relative; height: clamp(240px, 48vh, 520px); height: clamp(240px, 48svh, 520px); min-height: 0; margin: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; border: 1px solid var(--ink); background: var(--paper); overflow: hidden; }
+    .machine-images { position: relative; min-height: 0; overflow: hidden; }
+    .machine-frame img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+    .machine-frame img[hidden] { display: none; }
+    #machine-previous { z-index: 1; }
     .machine-frame figcaption { padding: 10px 12px; border-top: 1px solid var(--ink); overflow-wrap: anywhere; }
     .status-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(140px, .7fr); gap: 12px; margin-top: 14px; }
     .status-grid section { border: 1px solid var(--ink); padding: 12px; background: rgb(255 253 248 / 74%); }
+    .status-grid section:only-child { grid-column: 1 / -1; }
     .status-grid h2 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
     .status-grid ol { margin: 0; padding-left: 22px; }
     .status-grid p { margin: 4px 0; }
+    .how-to-card, .checks-card { margin-bottom: 20px; padding: 14px 16px; border: 1px solid var(--ink); background: var(--paper); }
+    .how-to-card { box-shadow: inset 4px 0 0 var(--amber); }
+    .how-to-card h2, .checks-card h2 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+    .how-to-card ol, .checks-card ol { margin: 0; padding-left: 22px; }
+    .how-to-card li + li, .checks-card li + li { margin-top: 5px; }
+    .checks-card li strong { font-family: "Spline Sans Mono", monospace; font-size: 11px; }
+    [data-phase]:not([data-phase="briefing"]) .how-to-card { display: none; }
     .ticket-block, .proposal-card, .reveal-card, .result-card { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 20px; }
     .ticket-block h2, .proposal-card h2, .reveal-card h2 { margin: 6px 0 8px; font-size: clamp(24px, 3vw, 38px); line-height: 1.05; }
     .proposal-paths { padding: 10px 12px 10px 30px; background: var(--paper); border: 1px solid var(--line); font-family: "Spline Sans Mono", monospace; font-size: 12px; overflow-wrap: anywhere; }
@@ -144,20 +154,41 @@
     [data-motion="ship"] .ship-control { animation: pull-lever 400ms ease; }
     [data-motion="approve"] #context-fuse { transition: height 450ms ease; }
     [data-motion="approve"] #warning-lamp { animation: warning-lamp 450ms steps(2, end); }
-    [data-motion="approve"] #machine-current { animation: machine-in 450ms ease; }
-    [data-motion="approve"] #machine-previous { animation: machine-out 450ms ease; }
+    [data-swap="active"] #machine-current { animation: machine-in 450ms ease; }
+    [data-swap="active"] #machine-previous { animation: machine-out 450ms ease; }
     @keyframes stamp-card { 50% { transform: scale(.985); } }
     @keyframes chute-card { to { transform: translateY(8px); opacity: .72; } }
     @keyframes pull-lever { 50% { transform: translateY(7px); box-shadow: inset 0 0 0 rgb(32 27 21 / 20%); } }
     @keyframes machine-in { from { opacity: 0; } to { opacity: 1; } }
     @keyframes machine-out { from { opacity: 1; } to { opacity: 0; } }
     @keyframes warning-lamp { 50% { background: var(--amber); box-shadow: 0 0 0 5px rgb(143 100 0 / 18%), inset 0 0 0 3px var(--surface); } }
+    @media (min-width: 761px) and (max-height: 900px) {
+      .masthead { min-height: 56px; }
+      .scene-panel, .decision-panel { padding: 20px; }
+      h1 { font-size: 48px; }
+      .readout-row p { margin-block: 8px; }
+      .ticket-block, .proposal-card, .reveal-card, .result-card { padding-bottom: 12px; margin-bottom: 12px; }
+      .proposal-card { padding-bottom: 5px; }
+      .ticket-block h2, .proposal-card h2, .reveal-card h2 { margin: 4px 0 6px; font-size: 28px; }
+      .ticket-block > p:last-child, .proposal-card > p { margin-block: 8px; }
+      .how-to-card, .checks-card { margin-bottom: 12px; padding: 10px 12px; }
+      .how-to-card ol { font-size: 13px; line-height: 1.35; }
+      .how-to-card li + li { margin-top: 2px; }
+      .checks-card { padding: 8px 10px; }
+      .checks-card h2 { margin-bottom: 4px; }
+      .checks-card ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding-left: 18px; font-size: 11.5px; line-height: 1.3; }
+      .checks-card li + li { margin-top: 0; }
+      .proposal-paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 20px; margin-block: 8px; padding-block: 7px; }
+      .proposal-costs div { padding: 7px; }
+      .proposal-costs dd { margin-top: 2px; }
+      .decision-buttons { margin-top: 10px; }
+      .ship-wrap { margin-top: 12px; }
+    }
     @media (max-width: 760px) {
       .masthead, footer, .game-shell { width: min(100% - 24px, 680px); }
       .game-shell { grid-template-columns: minmax(0, 1fr); }
       .decision-panel { border-left: 0; border-top: 1px solid var(--ink); }
-      .machine-frame { min-height: 0; }
-      .machine-frame img { max-height: 280px; }
+      .machine-frame { height: min(280px, 48vh); height: min(280px, 48svh); }
       .status-grid { grid-template-columns: minmax(0, 1fr) minmax(128px, .6fr); }
     }
     @media (max-width: 420px) {
@@ -209,21 +240,15 @@
           <div class="fuse-track" aria-hidden="true"><span id="context-fuse"></span></div>
         </div>
         <figure id="machine-frame" class="machine-frame" data-stage="0">
-          <img id="machine-previous" alt="" width="1200" height="900" decoding="async" hidden>
-          <img id="machine-current" src="./assets/machine-stage-0.webp" alt="" width="1200" height="900" decoding="async">
+          <div class="machine-images">
+            <img id="machine-previous" alt="" width="1200" height="900" decoding="async" hidden>
+            <img id="machine-current" src="./assets/machine-stage-0.webp" alt="" width="1200" height="900" decoding="async">
+          </div>
           <figcaption id="machine-stage">Stage 0. A tiny patch bot waits at an empty repair bench.</figcaption>
         </figure>
       </div>
 
       <div class="status-grid">
-        <section aria-labelledby="checks-label">
-          <h2 id="checks-label">Acceptance checks</h2>
-          <ol id="checks">
-            <li>Not checked: reproduce</li>
-            <li>Not checked: repair</li>
-            <li>Not checked: regression</li>
-          </ol>
-        </section>
         <section aria-labelledby="blast-label">
           <h2 id="blast-label">Blast radius</h2>
           <p><strong id="files">0</strong> unique files</p>
@@ -239,11 +264,29 @@
         <p id="ticket-brief">At the failing width, the profile menu opens under the settings panel edge.</p>
       </div>
 
+      <section class="how-to-card" aria-labelledby="how-to-label">
+        <h2 id="how-to-label">How to play</h2>
+        <ol>
+          <li>Approve applies the proposal's files and lines. It spends the card's context cost.</li>
+          <li>Reject applies no work. It spends 2 context on review.</li>
+          <li>Context is the finite fuse. Pass all 3 acceptance checks. Ship before it reaches 0.</li>
+        </ol>
+      </section>
+
+      <section class="checks-card" aria-labelledby="checks-label">
+        <h2 id="checks-label">Acceptance checks</h2>
+        <ol id="checks">
+          <li>Not checked: reproduce</li>
+          <li>Not checked: repair</li>
+          <li>Not checked: regression</li>
+        </ol>
+      </section>
+
       <section id="proposal" class="proposal-card" aria-labelledby="proposal-heading" hidden>
         <p class="proposal-number">Proposal <span id="proposal-number">1</span></p>
         <h2 id="proposal-heading" tabindex="-1">Waiting for the agent</h2>
         <p id="proposal-pitch"></p>
-        <ul id="proposal-paths"></ul>
+        <ul id="proposal-paths" class="proposal-paths"></ul>
         <dl class="proposal-costs">
           <div><dt>Estimate</dt><dd><span id="proposal-lines">0</span> lines</dd></div>
           <div><dt>Context</dt><dd><span id="proposal-cost">0</span> points</dd></div>
@@ -278,8 +321,8 @@
 
       <button id="start" class="start-control" type="button" disabled>Start the repair</button>
       <div class="ship-wrap">
-        <button id="ship" class="ship-control" type="button" disabled>SHIP THE PATCH <span aria-hidden="true">S</span></button>
-        <p id="ship-condition">Finish 3 acceptance checks to ship.</p>
+        <button id="ship" class="ship-control" type="button" disabled aria-describedby="ship-condition">SHIP THE PATCH <span aria-hidden="true">S</span></button>
+        <p id="ship-condition">0 of 3 checks passed. Shipping is locked.</p>
       </div>
 
       <div id="challenge-fallback" class="challenge-fallback" hidden>

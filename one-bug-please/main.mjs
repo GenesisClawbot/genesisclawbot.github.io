@@ -80,9 +80,12 @@ let reducedMotion = true;
 let motionTimer;
 let machineTimer;
 let renderedMachineStage = null;
+let pendingMachineStage = null;
+let machineRequest = 0;
 let cues = {};
 let soundEnabled = false;
 let soundAvailable = true;
+let soundRequest = 0;
 
 function collectElements() {
   return Object.fromEntries(Object.entries(ELEMENT_IDS).map(([name, id]) => {
@@ -188,6 +191,7 @@ function renderChecks() {
 }
 
 function hidePreviousMachine() {
+  elements.machineFrame.dataset.swap = 'idle';
   elements.machinePrevious.hidden = true;
   elements.machinePrevious.removeAttribute('src');
 }
@@ -197,26 +201,51 @@ function renderMachine() {
   const machine = MACHINES[stage];
   elements.machineFrame.dataset.stage = String(stage);
   elements.machineStage.textContent = machine.sentence;
-  if (stage === renderedMachineStage) return;
+  if (stage === renderedMachineStage || stage === pendingMachineStage) return;
 
   window.clearTimeout(machineTimer);
   if (renderedMachineStage === null || reducedMotion) {
+    machineRequest += 1;
+    pendingMachineStage = null;
     hidePreviousMachine();
-  } else {
+    elements.machineCurrent.hidden = false;
+    elements.machineCurrent.setAttribute('src', machine.src);
+    renderedMachineStage = stage;
+    return;
+  }
+
+  hidePreviousMachine();
+  const request = machineRequest + 1;
+  machineRequest = request;
+  pendingMachineStage = stage;
+  const preload = new Image();
+  preload.addEventListener('load', () => {
+    if (request !== machineRequest || machineStage(state.scopeWeight) !== stage) return;
+    pendingMachineStage = null;
     const currentSource = elements.machineCurrent.getAttribute('src');
     if (currentSource) {
       elements.machinePrevious.hidden = false;
       elements.machinePrevious.setAttribute('src', currentSource);
     }
-  }
-
-  elements.machineCurrent.hidden = false;
-  elements.machineCurrent.setAttribute('src', machine.src);
-  renderedMachineStage = stage;
-
-  if (!reducedMotion && !elements.machinePrevious.hidden) {
-    machineTimer = window.setTimeout(hidePreviousMachine, 450);
-  }
+    elements.machineCurrent.hidden = false;
+    elements.machineCurrent.setAttribute('src', machine.src);
+    renderedMachineStage = stage;
+    elements.machineFrame.dataset.swap = 'idle';
+    void elements.machineFrame.offsetWidth;
+    elements.machineFrame.dataset.swap = 'active';
+    machineTimer = window.setTimeout(() => {
+      if (request !== machineRequest) return;
+      hidePreviousMachine();
+    }, 450);
+  }, { once: true });
+  preload.addEventListener('error', () => {
+    if (request !== machineRequest) return;
+    pendingMachineStage = null;
+    hidePreviousMachine();
+    elements.machineCurrent.hidden = true;
+    renderedMachineStage = stage;
+  }, { once: true });
+  preload.src = machine.src;
 }
 
 function renderProposal() {
@@ -284,11 +313,9 @@ function render() {
   if (phase === 'result') {
     elements.shipCondition.textContent = 'Run complete.';
   } else if (ready) {
-    elements.shipCondition.textContent = 'Ready. Pull the lever before the agent keeps going.';
+    elements.shipCondition.textContent = 'All 3 checks passed. Shipping is unlocked.';
   } else {
-    const remaining = Math.max(0, 3 - state.checks.length);
-    const noun = remaining === 1 ? 'check' : 'checks';
-    elements.shipCondition.textContent = `Finish ${remaining} acceptance ${noun} to ship.`;
+    elements.shipCondition.textContent = `${state.checks.length} of 3 checks passed. Shipping is locked.`;
   }
 }
 
@@ -301,11 +328,11 @@ function focusAfterTransition(previous, next) {
 }
 
 function announceTransition(previous, next) {
-  if (previous.phase === 'deciding' && next.lastReveal) {
+  if (next.phase === 'result') {
+    announce(`${outcomeTitle(next)}. ${next.context} context. ${next.touchedFiles.length} files. ${next.changedLines} lines.`);
+  } else if (previous.phase === 'deciding' && next.lastReveal) {
     const action = next.lastReveal.action === 'approve' ? 'Approved' : 'Rejected';
     announce(`${action}. ${next.lastReveal.verdict}. ${next.context} context. ${next.touchedFiles.length} files. ${next.changedLines} lines.`);
-  } else if (next.phase === 'result') {
-    announce(`${outcomeTitle(next)}. ${next.context} context. ${next.touchedFiles.length} files. ${next.changedLines} lines.`);
   } else if (previous.phase === 'briefing' && next.phase === 'deciding') {
     announce('Repair started. Review proposal 1.');
   }
@@ -345,15 +372,19 @@ function transition(reducer, motionName) {
   }, duration);
 }
 
-function isEditableTarget(target) {
+function isInteractiveTarget(target) {
   return target instanceof HTMLElement && (
-    target.matches('button, input, textarea, select')
+    Boolean(target.closest('button, input, textarea, select, a[href]'))
     || target.isContentEditable
   );
 }
 
 function setSound(enabled) {
   soundEnabled = soundAvailable && enabled;
+  if (!soundEnabled) {
+    soundRequest += 1;
+    for (const cue of Object.values(cues)) cue.pause();
+  }
   elements.sound.setAttribute('aria-pressed', String(soundEnabled));
   elements.sound.textContent = soundEnabled ? 'Sound on' : 'Sound off';
 }
@@ -385,8 +416,12 @@ function initializeAudio() {
 function playCue(name) {
   const cue = cues[name];
   if (!soundEnabled || !cue) return;
+  const request = soundRequest + 1;
+  soundRequest = request;
   cue.currentTime = 0;
-  cue.play().catch(disableSound);
+  cue.play().catch(() => {
+    if (request === soundRequest) disableSound();
+  });
 }
 
 async function shareChallenge() {
@@ -435,22 +470,26 @@ function bindControls() {
   elements.newTicket.addEventListener('click', playNewTicket);
 
   window.addEventListener('keydown', (event) => {
-    if (isEditableTarget(event.target)) return;
+    if (event.altKey || event.ctrlKey || event.metaKey || isInteractiveTarget(event.target)) return;
     switch (event.key) {
       case 'a':
       case 'A':
-        if (state.phase === 'deciding') elements.approve.click();
+        if (state.phase !== 'deciding') return;
+        elements.approve.click();
         break;
       case 'r':
       case 'R':
-        if (state.phase === 'deciding') elements.reject.click();
+        if (state.phase !== 'deciding') return;
+        elements.reject.click();
         break;
       case 'Enter':
-        if (state.phase === 'revealed') elements.next.click();
+        if (state.phase !== 'revealed') return;
+        elements.next.click();
         break;
       case 's':
       case 'S':
-        if (canShip(state)) elements.ship.click();
+        if (!canShip(state)) return;
+        elements.ship.click();
         break;
       default:
         return;
@@ -470,8 +509,11 @@ function boot() {
     motion.addEventListener('change', (event) => {
       reducedMotion = event.matches;
       if (reducedMotion) {
+        machineRequest += 1;
+        pendingMachineStage = null;
         window.clearTimeout(machineTimer);
         hidePreviousMachine();
+        renderMachine();
       }
     });
   }
