@@ -129,6 +129,7 @@ test('reject charges exactly two context and applies no patch data', () => {
   assert.deepEqual(rejected.checks, []);
   assert.equal(rejected.phase, 'revealed');
   assert.equal(rejected.lastReveal.verdict, 'NEEDED');
+  assert.match(rejected.lastReveal.text, /This run cannot ship now\.$/);
   assert.strictEqual(reject(rejected), rejected);
 });
 

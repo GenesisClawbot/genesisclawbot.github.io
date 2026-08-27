@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { buildChallenge } from './game.mjs';
 
 const elementIds = [
   'game-shell', 'boot-status', 'ticket-title', 'ticket-brief', 'seed', 'turn',
@@ -8,14 +9,14 @@ const elementIds = [
   'proposal-number', 'proposal-heading', 'proposal-pitch', 'proposal-paths',
   'proposal-lines', 'proposal-cost', 'approve', 'reject', 'reveal',
   'reveal-verdict', 'reveal-heading', 'reveal-copy', 'next', 'start', 'ship',
-  'ship-condition', 'share', 'sound', 'result', 'result-heading',
+  'ship-condition', 'share', 'sound', 'shortcuts', 'result', 'result-heading',
   'result-ticket', 'result-seed', 'result-files', 'result-lines', 'result-context',
   'result-scope', 'result-stage', 'new-ticket', 'challenge-fallback',
   'challenge-url', 'live-region',
 ];
 
 const buttonIds = new Set([
-  'approve', 'reject', 'next', 'start', 'ship', 'share', 'sound', 'new-ticket',
+  'approve', 'reject', 'next', 'start', 'ship', 'share', 'sound', 'shortcuts', 'new-ticket',
 ]);
 const imageIds = new Set(['machine-previous', 'machine-current']);
 let importNumber = 0;
@@ -109,7 +110,12 @@ class FakeElement {
   }
 }
 
-function installHarness({ reducedMotion = true } = {}) {
+function installHarness({
+  reducedMotion = true,
+  locationHref = 'http://127.0.0.1:4173/one-bug-please/?seed=2345-6789',
+  storedBootId = null,
+  navigatorValue = {},
+} = {}) {
   const prior = new Map();
   const install = (name, value) => {
     prior.set(name, Object.getOwnPropertyDescriptor(globalThis, name));
@@ -146,11 +152,15 @@ function installHarness({ reducedMotion = true } = {}) {
 
   const windowListeners = new Map();
   const timers = new Map();
+  const replacementNavigations = [];
   let motionListener;
   let nextTimer = 1;
   const location = {
-    href: 'http://127.0.0.1:4173/one-bug-please/?seed=2345-6789',
-    replace(value) { this.href = String(value); },
+    href: locationHref,
+    replace(value) {
+      replacementNavigations.push(String(value));
+      this.href = String(value);
+    },
     assign(value) { this.href = String(value); },
   };
   const window = {
@@ -192,6 +202,9 @@ function installHarness({ reducedMotion = true } = {}) {
       timers.delete(id);
     },
   };
+  if (storedBootId !== null) {
+    window.localStorage.values.set('one-bug-please-boot-id', String(storedBootId));
+  }
 
   const audios = [];
   class FakeAudio {
@@ -246,7 +259,7 @@ function installHarness({ reducedMotion = true } = {}) {
   install('HTMLElement', FakeElement);
   install('document', document);
   install('window', window);
-  install('navigator', {});
+  install('navigator', navigatorValue);
   install('Audio', FakeAudio);
   install('Image', FakeImage);
 
@@ -254,6 +267,7 @@ function installHarness({ reducedMotion = true } = {}) {
     elements,
     audios,
     pendingImages,
+    replacementNavigations,
     async boot() {
       importNumber += 1;
       await import(`./main.mjs?test=${importNumber}`);
@@ -303,9 +317,68 @@ async function withHarness(options, callback) {
   }
 }
 
-test('briefing ship status reports progress without repeating the rules', async () => {
+test('stale HTML boots when the newer boot query is already present', async () => {
+  const newerBootId = 'one-bug-please-20260827-02';
+  await withHarness({
+    locationHref: `http://127.0.0.1:4173/one-bug-please/?seed=2345-6789&boot=${newerBootId}`,
+    storedBootId: newerBootId,
+  }, async ({ elements, replacementNavigations }) => {
+    assert.deepEqual(replacementNavigations, []);
+    assert.equal(elements['boot-status'].textContent, 'Repair bench ready.');
+    assert.equal(elements.start.disabled, false);
+  });
+});
+
+test('briefing ship status reports the remaining acceptance checks', async () => {
   await withHarness({}, async ({ elements }) => {
-    assert.equal(elements['ship-condition'].textContent, '0 of 3 checks passed. Shipping is locked.');
+    assert.equal(elements['ship-condition'].textContent, 'Finish 3 acceptance checks to ship.');
+  });
+});
+
+test('ship-ready status uses the required lever instruction', async () => {
+  const challenge = buildChallenge('23456789');
+  const necessaryTitles = new Set(
+    challenge.deck.filter(({ kind }) => kind === 'necessary').map(({ title }) => title),
+  );
+
+  await withHarness({}, async ({ elements }) => {
+    elements.start.click();
+    for (let steps = 0; steps < 20 && elements.ship.disabled; steps += 1) {
+      if (elements['game-shell'].dataset.phase === 'deciding') {
+        const control = necessaryTitles.has(elements['proposal-heading'].textContent)
+          ? elements.approve
+          : elements.reject;
+        control.click();
+      } else {
+        elements.next.click();
+      }
+    }
+
+    assert.equal(elements.ship.disabled, false);
+    assert.equal(
+      elements['ship-condition'].textContent,
+      'Ready. Pull the lever before the agent keeps going.',
+    );
+  });
+});
+
+test('the shortcut control turns single-character shortcuts off for the session', async () => {
+  await withHarness({}, async ({ elements, key }) => {
+    elements.start.click();
+    elements.shortcuts.click();
+
+    assert.equal(elements.shortcuts.getAttribute('aria-pressed'), 'false');
+    assert.equal(elements.shortcuts.textContent, 'Shortcuts off');
+    const disabledEvent = key('r');
+    assert.equal(elements['game-shell'].dataset.phase, 'deciding');
+    assert.equal(elements.context.textContent, '100');
+    assert.equal(disabledEvent.prevented, false);
+
+    elements.shortcuts.click();
+    const enabledEvent = key('r');
+    assert.equal(elements['game-shell'].dataset.phase, 'revealed');
+    assert.equal(elements.context.textContent, '98');
+    assert.equal(enabledEvent.prevented, true);
   });
 });
 
@@ -337,6 +410,27 @@ test('Enter on a link remains browser navigation', async () => {
     assert.equal(elements['game-shell'].dataset.phase, 'revealed');
     assert.equal(elements.turn.textContent, '1 / 10');
     assert.equal(event.prevented, false);
+  });
+});
+
+test('a failed Web Share attempt falls back to the clipboard', async () => {
+  const clipboardWrites = [];
+  const navigatorValue = {
+    share: async () => { throw new Error('Share unavailable'); },
+    clipboard: {
+      async writeText(value) { clipboardWrites.push(value); },
+    },
+  };
+
+  await withHarness({ navigatorValue }, async ({ elements }) => {
+    elements.share.click();
+    await Promise.resolve();
+    await Promise.resolve();
+    await Promise.resolve();
+
+    assert.equal(clipboardWrites.length, 1);
+    assert.equal(elements['challenge-fallback'].hidden, true);
+    assert.equal(elements['boot-status'].textContent, 'Challenge copied.');
   });
 });
 

@@ -171,11 +171,12 @@ function currentProposal(state) {
 }
 
 function revealFor(proposal, action) {
+  const missedCheck = action === 'reject' && proposal.kind === 'necessary';
   return {
     proposalId: proposal.id,
     action,
     verdict: proposal.kind === 'necessary' ? 'NEEDED' : 'SCOPE CREEP',
-    text: proposal.reveal,
+    text: missedCheck ? `${proposal.reveal} This run cannot ship now.` : proposal.reveal,
   };
 }
 

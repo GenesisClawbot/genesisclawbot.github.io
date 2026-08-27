@@ -59,6 +59,7 @@ const ELEMENT_IDS = {
   shipCondition: 'ship-condition',
   share: 'share',
   sound: 'sound',
+  shortcuts: 'shortcuts',
   result: 'result',
   resultHeading: 'result-heading',
   resultTicket: 'result-ticket',
@@ -86,6 +87,7 @@ let cues = {};
 let soundEnabled = false;
 let soundAvailable = true;
 let soundRequest = 0;
+let shortcutsEnabled = true;
 
 function collectElements() {
   return Object.fromEntries(Object.entries(ELEMENT_IDS).map(([name, id]) => {
@@ -114,18 +116,18 @@ function resolveSeed() {
 
 function hardReload(nextBootId) {
   const url = new URL(window.location.href);
-  if (url.searchParams.get('boot') === nextBootId) return;
+  if (url.searchParams.get('boot') === nextBootId) return false;
   url.searchParams.set('boot', nextBootId);
   elements.bootStatus.textContent = 'Updating the repair bench.';
   window.location.replace(url);
+  return true;
 }
 
 function installBootGuard() {
   try {
     const latestBootId = window.localStorage.getItem(BOOT_STORAGE_KEY);
     if (latestBootId && latestBootId > BOOT_ID) {
-      hardReload(latestBootId);
-      return false;
+      if (hardReload(latestBootId)) return false;
     }
     if (!latestBootId || BOOT_ID > latestBootId) {
       window.localStorage.setItem(BOOT_STORAGE_KEY, BOOT_ID);
@@ -313,9 +315,10 @@ function render() {
   if (phase === 'result') {
     elements.shipCondition.textContent = 'Run complete.';
   } else if (ready) {
-    elements.shipCondition.textContent = 'All 3 checks passed. Shipping is unlocked.';
+    elements.shipCondition.textContent = 'Ready. Pull the lever before the agent keeps going.';
   } else {
-    elements.shipCondition.textContent = `${state.checks.length} of 3 checks passed. Shipping is locked.`;
+    const remaining = 3 - state.checks.length;
+    elements.shipCondition.textContent = `Finish ${remaining} acceptance checks to ship.`;
   }
 }
 
@@ -379,6 +382,12 @@ function isInteractiveTarget(target) {
   );
 }
 
+function setShortcuts(enabled) {
+  shortcutsEnabled = enabled;
+  elements.shortcuts.setAttribute('aria-pressed', String(shortcutsEnabled));
+  elements.shortcuts.textContent = shortcutsEnabled ? 'Shortcuts on' : 'Shortcuts off';
+}
+
 function setSound(enabled) {
   soundEnabled = soundAvailable && enabled;
   if (!soundEnabled) {
@@ -431,18 +440,21 @@ async function shareChallenge() {
   try {
     if (typeof navigator.share === 'function') {
       elements.bootStatus.textContent = 'Share sheet opened. Nothing is sent until you choose a destination.';
-      await navigator.share({ title: 'One Bug, Please', text });
-      elements.bootStatus.textContent = 'Share sheet closed.';
-      return;
+      try {
+        await navigator.share({ title: 'One Bug, Please', text });
+        elements.bootStatus.textContent = 'Share sheet closed.';
+        return;
+      } catch (error) {
+        if (error?.name === 'AbortError') {
+          elements.bootStatus.textContent = 'Share cancelled.';
+          return;
+        }
+      }
     }
     if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
     await navigator.clipboard.writeText(text);
     elements.bootStatus.textContent = 'Challenge copied.';
-  } catch (error) {
-    if (error?.name === 'AbortError') {
-      elements.bootStatus.textContent = 'Share cancelled.';
-      return;
-    }
+  } catch {
     elements.challengeFallback.hidden = false;
     elements.challengeUrl.value = url;
     elements.challengeUrl.focus();
@@ -466,11 +478,12 @@ function bindControls() {
   elements.next.addEventListener('click', () => transition(nextProposal, 'next'));
   elements.ship.addEventListener('click', () => transition(ship, 'ship'));
   elements.sound.addEventListener('click', () => setSound(!soundEnabled));
+  elements.shortcuts.addEventListener('click', () => setShortcuts(!shortcutsEnabled));
   elements.share.addEventListener('click', () => { void shareChallenge(); });
   elements.newTicket.addEventListener('click', playNewTicket);
 
   window.addEventListener('keydown', (event) => {
-    if (event.altKey || event.ctrlKey || event.metaKey || isInteractiveTarget(event.target)) return;
+    if (!shortcutsEnabled || event.altKey || event.ctrlKey || event.metaKey || isInteractiveTarget(event.target)) return;
     switch (event.key) {
       case 'a':
       case 'A':
@@ -524,8 +537,10 @@ function boot() {
   }
 
   bindControls();
+  setShortcuts(true);
   render();
   elements.share.disabled = false;
+  elements.shortcuts.disabled = false;
   elements.bootStatus.textContent = 'Repair bench ready.';
 }
 

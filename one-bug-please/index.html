@@ -90,6 +90,9 @@
     }
     .scene-panel, .decision-panel, .repair-scene, .status-grid, .ticket-block,
     .how-to-card, .checks-card, .proposal-card, .reveal-card, .result-card, .ship-wrap { min-width: 0; }
+    .game-shell > *, .repair-scene > *, .machine-frame > *, .status-grid > *,
+    .checks-card ol > *, .proposal-paths > *, .proposal-costs > *, .result-grid > *,
+    .decision-buttons > * { min-width: 0; }
     .scene-panel { padding: clamp(20px, 3vw, 40px); background: #efe8dc; }
     .decision-panel { padding: clamp(20px, 3vw, 40px); border-left: 1px solid var(--ink); }
     h1 { margin: 4px 0 8px; font-size: clamp(38px, 6vw, 72px); line-height: .92; letter-spacing: -.05em; }
@@ -215,6 +218,7 @@
     <a class="wordmark" href="/">JAMIE COLE</a>
     <div class="header-actions">
       <button id="sound" type="button" aria-pressed="false" disabled>Sound off</button>
+      <button id="shortcuts" type="button" aria-pressed="true" disabled>Shortcuts on</button>
       <button id="share" type="button" disabled>Share challenge</button>
     </div>
   </header>
@@ -298,7 +302,7 @@
       </section>
 
       <section id="reveal" class="reveal-card" hidden aria-labelledby="reveal-heading">
-        <p id="reveal-verdict" class="stamp">NEEDED</p>
+        <p id="reveal-verdict" class="stamp"></p>
         <h2 id="reveal-heading" tabindex="-1">Decision recorded</h2>
         <p id="reveal-copy"></p>
         <button id="next" type="button" disabled>Next proposal <span aria-hidden="true">Enter</span></button>
@@ -322,7 +326,7 @@
       <button id="start" class="start-control" type="button" disabled>Start the repair</button>
       <div class="ship-wrap">
         <button id="ship" class="ship-control" type="button" disabled aria-describedby="ship-condition">SHIP THE PATCH <span aria-hidden="true">S</span></button>
-        <p id="ship-condition">0 of 3 checks passed. Shipping is locked.</p>
+        <p id="ship-condition">Finish 3 acceptance checks to ship.</p>
       </div>
 
       <div id="challenge-fallback" class="challenge-fallback" hidden>

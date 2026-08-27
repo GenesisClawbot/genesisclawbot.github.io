@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 const route = new URL('.', import.meta.url);
 const html = await readFile(new URL('index.html', route), 'utf8');
 const main = await readFile(new URL('main.mjs', route), 'utf8').catch(() => '');
+const game = await readFile(new URL('game.mjs', route), 'utf8').catch(() => '');
 
 const ids = [
   'game-shell', 'boot-status', 'ticket-title', 'ticket-brief', 'seed', 'turn',
@@ -13,7 +14,7 @@ const ids = [
   'proposal-number', 'proposal-heading', 'proposal-pitch', 'proposal-paths',
   'proposal-lines', 'proposal-cost', 'approve', 'reject', 'reveal',
   'reveal-verdict', 'reveal-heading', 'reveal-copy', 'next', 'start', 'ship',
-  'ship-condition', 'share', 'sound', 'result', 'result-heading',
+  'ship-condition', 'share', 'sound', 'shortcuts', 'result', 'result-heading',
   'result-ticket', 'result-seed', 'result-files', 'result-lines', 'result-context',
   'result-scope', 'result-stage', 'new-ticket', 'challenge-fallback',
   'challenge-url', 'live-region',
@@ -33,6 +34,24 @@ test('declares every game and fallback control in ordinary DOM', () => {
   assert.match(html, /id="ship"[^>]*disabled/);
   assert.match(html, /role="status"[^>]*aria-live="polite"/);
   assert.match(html, /If this message stays here, the game did not start\./);
+});
+
+test('does not expose verdicts or internal fields before the player decides', () => {
+  const staticVerdict = html.match(/<p id="reveal-verdict" class="stamp">([^<]*)<\/p>/);
+  const staticReveal = html.match(/<p id="reveal-copy">([^<]*)<\/p>/);
+  const proposalStart = html.indexOf('<section id="proposal"');
+  const proposalEnd = html.indexOf('</section>', proposalStart);
+  const proposal = html.slice(proposalStart, proposalEnd);
+
+  assert.ok(staticVerdict, 'the reveal verdict element must exist');
+  assert.ok(staticReveal, 'the reveal copy element must exist');
+  assert.equal(staticVerdict[1], '');
+  assert.equal(staticReveal[1], '');
+  assert.doesNotMatch(proposal, /NEEDED|SCOPE CREEP|\bkind\b|checkId|scopeWeight/);
+});
+
+test('static ship status uses the required remaining-check instruction', () => {
+  assert.match(html, /<p id="ship-condition">Finish 3 acceptance checks to ship\.<\/p>/);
 });
 
 test('briefing explains decisions, context, and the win condition before play starts', () => {
@@ -95,8 +114,29 @@ test('includes responsive and reduced-motion contracts', () => {
   assert.match(html, /min-width: 0/);
 });
 
+test('sets min-width zero on every direct grid child', () => {
+  const zeroWidthSelectors = [...html.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .filter(([, , body]) => /min-width:\s*0/.test(body))
+    .flatMap(([, selectors]) => selectors.split(',').map((selector) => selector.trim()));
+  const gridChildSelectors = [
+    '.game-shell > *',
+    '.repair-scene > *',
+    '.machine-frame > *',
+    '.status-grid > *',
+    '.checks-card ol > *',
+    '.proposal-paths > *',
+    '.proposal-costs > *',
+    '.result-grid > *',
+    '.decision-buttons > *',
+  ];
+
+  for (const selector of gridChildSelectors) {
+    assert.ok(zeroWidthSelectors.includes(selector), `${selector} needs min-width: 0`);
+  }
+});
+
 test('contains no third-party runtime, analytics, fetch, or em dash', () => {
-  const source = `${html}\n${main}`;
+  const source = `${html}\n${main}\n${game}`;
   assert.doesNotMatch(source, /<script[^>]+https?:\/\//i);
   assert.doesNotMatch(source, /\bfetch\s*\(/);
   assert.doesNotMatch(source, /google-analytics|gtag\(|plausible|posthog|segment/i);
@@ -123,7 +163,7 @@ test('bundles production image and optional sound files locally', async () => {
 });
 
 test('references every machine image and sound cue from local source', () => {
-  const source = `${html}\n${main}`;
+  const source = `${html}\n${main}\n${game}`;
   for (const name of [...imageNames, ...soundNames]) {
     assert.match(source, new RegExp(`\\.\\/assets\\/${name.replace('.', '\\.')}`));
   }
