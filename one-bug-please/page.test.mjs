@@ -19,10 +19,11 @@ const ids = [
   'challenge-url', 'live-region',
 ];
 
-test('carries the release marker, boot id, and versioned module', () => {
+test('carries the release marker, boot id, versioned module, and explicit favicon', () => {
   assert.match(html, /one-bug-please-20260827-01/);
   assert.match(html, /data-boot-id="one-bug-please-20260827-01"/);
   assert.match(html, /\.\/main\.mjs\?v=one-bug-please-20260827-01/);
+  assert.match(html, /<link rel="icon" href="data:,">/);
 });
 
 test('declares every game and fallback control in ordinary DOM', () => {
