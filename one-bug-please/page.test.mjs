@@ -64,3 +64,82 @@ test('contains no third-party runtime, analytics, fetch, or em dash', () => {
   assert.doesNotMatch(source, /—/);
   assert.doesNotMatch(source, /\.\.\/index\.html/);
 });
+
+const imageNames = Array.from({ length: 4 }, (_, index) => `machine-stage-${index}.webp`);
+const soundNames = ['approve.mp3', 'reject.mp3', 'ship.mp3'];
+
+test('bundles production image and optional sound files locally', async () => {
+  for (const name of imageNames) {
+    const bytes = await readFile(new URL(`assets/${name}`, route));
+    assert.ok(bytes.length > 10_000, `${name} is too small to be a production image`);
+    assert.ok(bytes.length <= 450_000, `${name} exceeds the route image budget`);
+    assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF');
+    assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP');
+  }
+  for (const name of soundNames) {
+    const bytes = await readFile(new URL(`assets/${name}`, route));
+    assert.ok(bytes.length > 1_000, `${name} is too small to be a production cue`);
+    assert.ok(bytes.length <= 80_000, `${name} exceeds the cue budget`);
+  }
+});
+
+test('references every machine image and sound cue from local source', () => {
+  const source = `${html}\n${main}`;
+  for (const name of [...imageNames, ...soundNames]) {
+    assert.match(source, new RegExp(`\\.\\/assets\\/${name.replace('.', '\\.')}`));
+  }
+});
+
+test('controller versions its pure import and handles seed URL replacement', () => {
+  assert.match(main, /from '\.\/game\.mjs\?v=one-bug-please-20260827-01'/);
+  assert.match(main, /crypto\.getRandomValues/);
+  assert.match(main, /history\.replaceState/);
+  assert.match(main, /searchParams\.get\('seed'\)/);
+});
+
+test('controller binds decisions, ship, shortcuts, focus, and live output', () => {
+  assert.match(main, /addEventListener\('click'/);
+  assert.match(main, /addEventListener\('keydown'/);
+  assert.match(main, /case 'a':/i);
+  assert.match(main, /case 'r':/i);
+  assert.match(main, /case 's':/i);
+  assert.match(main, /case 'Enter':/);
+  assert.match(main, /\.focus\(\)/);
+  assert.match(main, /requestAnimationFrame/);
+});
+
+test('controller guards stale builds and blocked storage', () => {
+  assert.match(main, /one-bug-please-boot-id/);
+  assert.match(main, /localStorage/);
+  assert.match(main, /addEventListener\('storage'/);
+  assert.match(main, /catch \{/);
+});
+
+test('controller handles reduced motion and all four machine assets', () => {
+  assert.match(main, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
+  assert.match(main, /addEventListener\('change'/);
+  for (const name of imageNames) assert.match(main, new RegExp(`\\.\\/assets\\/${name.replace('.', '\\.')}`));
+});
+
+test('sound starts off and fails back to silence', () => {
+  assert.match(html, /id="sound"[^>]*aria-pressed="false"/);
+  assert.match(main, /new Audio\('\.\/assets\/approve\.mp3'\)/);
+  assert.match(main, /new Audio\('\.\/assets\/reject\.mp3'\)/);
+  assert.match(main, /new Audio\('\.\/assets\/ship\.mp3'\)/);
+  assert.match(main, /\.play\(\)\.catch/);
+  assert.match(main, /Sound unavailable\. Continuing in silence\./);
+});
+
+test('sharing uses Web Share, clipboard fallback, cancellation, and selectable URL', () => {
+  assert.match(main, /navigator\.share/);
+  assert.match(main, /navigator\.clipboard\.writeText/);
+  assert.match(main, /Share sheet opened\. Nothing is sent until you choose a destination\./);
+  assert.match(main, /Share cancelled\./);
+  assert.match(main, /challengeFallback\.hidden = false/);
+  assert.match(main, /challengeUrl\.select\(\)/);
+});
+
+test('new ticket removes the old seed before canonical boot', () => {
+  assert.match(main, /searchParams\.delete\('seed'\)/);
+  assert.match(main, /location\.assign/);
+});

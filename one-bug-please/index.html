@@ -144,10 +144,12 @@
     [data-motion="approve"] #context-fuse { transition: height 450ms ease; }
     [data-motion="approve"] #warning-lamp { animation: warning-lamp 450ms steps(2, end); }
     [data-motion="approve"] #machine-current { animation: machine-in 450ms ease; }
+    [data-motion="approve"] #machine-previous { animation: machine-out 450ms ease; }
     @keyframes stamp-card { 50% { transform: scale(.985); } }
     @keyframes chute-card { to { transform: translateY(8px); opacity: .72; } }
     @keyframes pull-lever { 50% { transform: translateY(7px); box-shadow: inset 0 0 0 rgb(32 27 21 / 20%); } }
     @keyframes machine-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes machine-out { from { opacity: 1; } to { opacity: 0; } }
     @keyframes warning-lamp { 50% { background: var(--amber); box-shadow: 0 0 0 5px rgb(143 100 0 / 18%), inset 0 0 0 3px var(--surface); } }
     @media (max-width: 760px) {
       .masthead, footer, .game-shell { width: min(100% - 24px, 680px); }
