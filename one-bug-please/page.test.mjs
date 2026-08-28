@@ -16,14 +16,14 @@ const ids = [
   'reveal-verdict', 'reveal-heading', 'reveal-copy', 'next', 'start', 'ship',
   'ship-condition', 'share', 'sound', 'shortcuts', 'result', 'result-heading',
   'result-ticket', 'result-seed', 'result-files', 'result-lines', 'result-context',
-  'result-scope', 'result-stage', 'new-ticket', 'challenge-fallback',
+  'result-scope', 'result-stage', 'result-share', 'new-ticket', 'challenge-fallback',
   'challenge-url', 'live-region',
 ];
 
 test('carries the release marker, boot id, versioned module, and explicit favicon', () => {
-  assert.match(html, /one-bug-please-20260827-01/);
-  assert.match(html, /data-boot-id="one-bug-please-20260827-01"/);
-  assert.match(html, /\.\/main\.mjs\?v=one-bug-please-20260827-01/);
+  assert.match(html, /one-bug-please-20260828-01/);
+  assert.match(html, /data-boot-id="one-bug-please-20260828-01"/);
+  assert.match(html, /\.\/main\.mjs\?v=one-bug-please-20260828-01/);
   assert.match(html, /<link rel="icon" href="data:,">/);
 });
 
@@ -170,7 +170,7 @@ test('references every machine image and sound cue from local source', () => {
 });
 
 test('controller versions its pure import and handles seed URL replacement', () => {
-  assert.match(main, /from '\.\/game\.mjs\?v=one-bug-please-20260827-01'/);
+  assert.match(main, /from '\.\/game\.mjs\?v=one-bug-please-20260828-01'/);
   assert.match(main, /crypto\.getRandomValues/);
   assert.match(main, /history\.replaceState/);
   assert.match(main, /searchParams\.get\('seed'\)/);
@@ -215,6 +215,20 @@ test('sound starts off and fails back to silence', () => {
   assert.match(main, /new Audio\('\.\/assets\/ship\.mp3'\)/);
   assert.match(main, /\.play\(\)\.catch/);
   assert.match(main, /Sound unavailable\. Continuing in silence\./);
+});
+
+test('puts the challenge action beside the final score before replay', () => {
+  const resultStart = html.indexOf('<section id="result"');
+  const resultEnd = html.indexOf('</section>', resultStart);
+  const result = html.slice(resultStart, resultEnd);
+  const challenge = result.indexOf('id="result-share"');
+  const replay = result.indexOf('id="new-ticket"');
+
+  assert.ok(challenge > -1, 'the result card needs its own challenge action');
+  assert.ok(challenge < replay, 'challenge needs to remain the primary result action');
+  assert.match(result, /id="result-share"[^>]*disabled/);
+  assert.match(main, /resultShare: 'result-share'/);
+  assert.match(main, /elements\.resultShare\.addEventListener\('click'/);
 });
 
 test('sharing uses Web Share, clipboard fallback, cancellation, and selectable URL', () => {

@@ -11,12 +11,12 @@ const elementIds = [
   'reveal-verdict', 'reveal-heading', 'reveal-copy', 'next', 'start', 'ship',
   'ship-condition', 'share', 'sound', 'shortcuts', 'result', 'result-heading',
   'result-ticket', 'result-seed', 'result-files', 'result-lines', 'result-context',
-  'result-scope', 'result-stage', 'new-ticket', 'challenge-fallback',
+  'result-scope', 'result-stage', 'result-share', 'new-ticket', 'challenge-fallback',
   'challenge-url', 'live-region',
 ];
 
 const buttonIds = new Set([
-  'approve', 'reject', 'next', 'start', 'ship', 'share', 'sound', 'shortcuts', 'new-ticket',
+  'approve', 'reject', 'next', 'start', 'ship', 'share', 'sound', 'shortcuts', 'result-share', 'new-ticket',
 ]);
 const imageIds = new Set(['machine-previous', 'machine-current']);
 let importNumber = 0;
@@ -133,7 +133,7 @@ function installHarness({
     },
   };
   document.documentElement = new FakeElement('html', document);
-  document.documentElement.dataset.bootId = 'one-bug-please-20260827-01';
+  document.documentElement.dataset.bootId = 'one-bug-please-20260828-01';
 
   const elements = {};
   for (const id of elementIds) {
@@ -318,7 +318,7 @@ async function withHarness(options, callback) {
 }
 
 test('stale HTML boots when the newer boot query is already present', async () => {
-  const newerBootId = 'one-bug-please-20260827-02';
+  const newerBootId = 'one-bug-please-20260828-02';
   await withHarness({
     locationHref: `http://127.0.0.1:4173/one-bug-please/?seed=2345-6789&boot=${newerBootId}`,
     storedBootId: newerBootId,

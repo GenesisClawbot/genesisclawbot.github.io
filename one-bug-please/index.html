@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-boot-id="one-bug-please-20260827-01">
+<html lang="en" data-boot-id="one-bug-please-20260828-01">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,7 +92,7 @@
     .how-to-card, .checks-card, .proposal-card, .reveal-card, .result-card, .ship-wrap { min-width: 0; }
     .game-shell > *, .repair-scene > *, .machine-frame > *, .status-grid > *,
     .checks-card ol > *, .proposal-paths > *, .proposal-costs > *, .result-grid > *,
-    .decision-buttons > * { min-width: 0; }
+    .decision-buttons > *, .result-actions > * { min-width: 0; }
     .scene-panel { padding: clamp(20px, 3vw, 40px); background: #efe8dc; }
     .decision-panel { padding: clamp(20px, 3vw, 40px); border-left: 1px solid var(--ink); }
     h1 { margin: 4px 0 8px; font-size: clamp(38px, 6vw, 72px); line-height: .92; letter-spacing: -.05em; }
@@ -137,11 +137,12 @@
     dt { font-size: 11px; text-transform: uppercase; }
     dd { margin: 4px 0 0; font-size: 15px; font-weight: 700; }
     .decision-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .result-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
     #reject { border-color: var(--red); color: var(--red); }
-    #approve { border-color: var(--spruce); color: #fff; background: var(--spruce); }
+    #approve, #result-share { border-color: var(--spruce); color: #fff; background: var(--spruce); }
     .stamp { width: max-content; margin: 0; padding: 5px 9px; border: 2px solid currentColor; color: var(--spruce); font: 800 15px/1 "Spline Sans Mono", monospace; transform: rotate(-1deg); }
     .stamp.scope { color: var(--red); transform: rotate(1deg); }
-    #next, #new-ticket { width: 100%; }
+    #next, .result-actions > * { width: 100%; }
     .start-control { width: 100%; border-color: var(--spruce); color: #fff; background: var(--spruce); font-weight: 800; }
     .ship-wrap { margin-top: 18px; padding: 14px; border: 1px solid var(--ink); background: #f0e4c8; }
     .ship-control { width: 100%; min-height: 64px; border: 2px solid var(--ink); color: #fff; background: var(--red); font: 800 18px/1 "Spline Sans Mono", monospace; box-shadow: inset 0 -7px 0 rgb(32 27 21 / 20%); }
@@ -200,7 +201,7 @@
       .scene-panel, .decision-panel { padding: 16px; }
       .repair-scene { grid-template-columns: 54px minmax(0, 1fr); }
       .fuse-track { min-height: 134px; }
-      .status-grid, .proposal-costs, .result-grid { grid-template-columns: minmax(0, 1fr); }
+      .status-grid, .proposal-costs, .result-grid, .result-actions { grid-template-columns: minmax(0, 1fr); }
       .decision-buttons { gap: 8px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -320,7 +321,10 @@
           <div><dt>Scope approved</dt><dd id="result-scope"></dd></div>
           <div><dt>Machine</dt><dd id="result-stage"></dd></div>
         </dl>
-        <button id="new-ticket" type="button" disabled>Play a new ticket</button>
+        <div class="result-actions">
+          <button id="result-share" type="button" disabled>Challenge a friend</button>
+          <button id="new-ticket" type="button" disabled>Play a new ticket</button>
+        </div>
       </section>
 
       <button id="start" class="start-control" type="button" disabled>Start the repair</button>
@@ -344,6 +348,6 @@
     <p>No account, upload, analytics, or saved score. <a href="/ledger/">Read the public ledger.</a></p>
   </footer>
 
-  <script type="module" src="./main.mjs?v=one-bug-please-20260827-01"></script>
+  <script type="module" src="./main.mjs?v=one-bug-please-20260828-01"></script>
 </body>
 </html>

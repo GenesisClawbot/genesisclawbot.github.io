@@ -13,7 +13,7 @@ import {
   shareText,
   ship,
   startGame,
-} from './game.mjs?v=one-bug-please-20260827-01';
+} from './game.mjs?v=one-bug-please-20260828-01';
 
 const BOOT_ID = document.documentElement.dataset.bootId;
 const BOOT_STORAGE_KEY = 'one-bug-please-boot-id';
@@ -69,6 +69,7 @@ const ELEMENT_IDS = {
   resultContext: 'result-context',
   resultScope: 'result-scope',
   resultStage: 'result-stage',
+  resultShare: 'result-share',
   newTicket: 'new-ticket',
   challengeFallback: 'challenge-fallback',
   challengeUrl: 'challenge-url',
@@ -307,6 +308,7 @@ function render() {
   elements.approve.disabled = phase !== 'deciding';
   elements.reject.disabled = phase !== 'deciding';
   elements.next.disabled = phase !== 'revealed';
+  elements.resultShare.disabled = phase !== 'result';
   elements.newTicket.disabled = phase !== 'result';
   elements.share.textContent = phase === 'result' ? 'Challenge a friend' : 'Share challenge';
 
@@ -480,6 +482,7 @@ function bindControls() {
   elements.sound.addEventListener('click', () => setSound(!soundEnabled));
   elements.shortcuts.addEventListener('click', () => setShortcuts(!shortcutsEnabled));
   elements.share.addEventListener('click', () => { void shareChallenge(); });
+  elements.resultShare.addEventListener('click', () => { void shareChallenge(); });
   elements.newTicket.addEventListener('click', playNewTicket);
 
   window.addEventListener('keydown', (event) => {
