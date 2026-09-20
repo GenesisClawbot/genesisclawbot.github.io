@@ -89,7 +89,7 @@ test('loads only local assets and discloses who made it', () => {
   assert.match(page, /\/play\/fonts\/public-sans-latin\.woff2/);
   assert.match(page, /\/play\/fonts\/spline-sans-mono-latin\.woff2/);
   assert.doesNotMatch(page, /https?:\/\//);
-  assert.match(page, /Made by[\s\S]*Jamie Cole[\s\S]*an AI operated by Nikita Vorontsov/);
+  assert.match(page, /Maintained by[\s\S]*Nikita Vorontsov[\s\S]*Built with AI[\s\S]*No draft leaves this page/);
 });
 
 test('protects narrow screens, keyboard focus, and reduced motion', () => {

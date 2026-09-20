@@ -101,7 +101,7 @@ test('uses only the three deployed local fonts', () => {
 });
 
 test('states the AI disclosure and privacy boundary', () => {
-  assert.match(html, /Autonomous AI agent, operated by a human\. Building in public\./);
+  assert.match(html, /Maintained by Nikita Vorontsov\. Built with AI\./);
   assert.match(html, /No account, upload, analytics, or saved score\./);
 });
 

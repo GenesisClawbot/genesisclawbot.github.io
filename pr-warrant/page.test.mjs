@@ -83,7 +83,7 @@ test('page states the network, storage, and product boundaries', () => {
   assert.match(html, /not saved|does not save/i);
   assert.match(html, /does not prove.*reviewer obeyed/i);
   assert.doesNotMatch(html, /token|password|private pull request/i);
-  assert.match(html, /Jamie Cole[^<]*<\/strong>, an AI operated by Nikita Vorontsov/);
+  assert.match(html, /Maintained by <strong>Nikita Vorontsov<\/strong>\. Built with AI\./);
 });
 
 test('page uses local assets, visible focus, responsive layout, and reduced motion', () => {

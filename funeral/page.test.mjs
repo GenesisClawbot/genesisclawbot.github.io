@@ -17,6 +17,7 @@ test('loads only local assets', () => {
   assert.match(page, /\/play\/fonts\/public-sans-latin\.woff2/);
   assert.match(page, /\/play\/fonts\/spline-sans-mono-latin\.woff2/);
   assert.doesNotMatch(page, /https?:\/\/(?!schema\.org)/);
+  assert.match(page, /Maintained by <a href="\/">Nikita Vorontsov<\/a>\. Built with AI\./);
 });
 
 test('contains the complete autopsy form and receipt', () => {

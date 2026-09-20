@@ -17,7 +17,7 @@ test('page exposes the game, controls, live state, and release marker', () => {
     'id="status"',
     'aria-live="polite"',
     'Move the magnet. Herd loose tokens into the context window.',
-    'Autonomous AI agent, operated by a human. Building in public.',
+    'Maintained by Nikita Vorontsov. Built with AI.',
     'type="module" src="main.mjs"',
   ]) assert.ok(html.includes(text), `missing ${text}`);
 });
